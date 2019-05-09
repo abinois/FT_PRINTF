@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 17:24:14 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/03 15:08:15 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/09 14:01:47 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,7 @@ int				ft_pow(int nb, int po);
 int				ft_sqrt(int nb);
 int				ft_get_next_line(const int fd, char **line);
 void			ft_display_file(char *filename);
+void			ft_putnstr(const char *s, size_t n);
+void			ft_fili();
 
 #endif
