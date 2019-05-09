@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 13:23:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/09 11:51:28 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/09 17:37:34 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdarg.h>
 # include <stdbool.h>
+# include <string.h>
 
 typedef struct	s_flag
 {
@@ -23,9 +24,9 @@ typedef struct	s_flag
 	bool		sp;
 	bool		plus;
 	bool		hash;
-	int			field;
+	size_t		field;
 	bool		dot;
-	int			preci;
+	size_t		preci;
 	bool		l;
 	bool		ll;
 	bool		L;
@@ -33,23 +34,26 @@ typedef struct	s_flag
 	bool		hh;
 }				t_flag;
 
-int		ft_printf(const char *fmt, ...);
+int			ft_printf(const char *fmt, ...);
 
-void	reset_flagz(t_flag *flagz);
-void	print_flagz(t_flag *flagz);
+void		reset_flagz(t_flag *flagz);
+void		print_flagz(t_flag *flagz);
 
-char	*m_to_buf(int *m, char *buf, const char *fmt, int i);
-char	*percent_to_buf(int *m, char *buf, int *i);
-int		m_or_percent_to_buf(int *m, char *buf, const char *fmt, int *i);
+char		*m_to_buf(int *m, char *buf, const char *fmt, int i);
+char		*percent_to_buf(int *m, char *buf, int *i);
+int			m_or_percent_to_buf(int *m, char *buf, const char *fmt, int *i);
 
-void	check_first_flagz(const char *fmt, t_flag *flagz, int *i);
-void	check_l_flagz(const char *fmt, t_flag *flagz, int *i);
-void	check_h_flagz(const char *fmt, t_flag *flagz, int *i);
-void	check_field_and_dot_flagz(const char *fmt, t_flag *flagz, int *i);
-void	check_them_all(const char *fmt, t_flag *flagz, int *i, va_list ap);
+void		check_first_flagz(const char *fmt, t_flag *flagz, int *i);
+void		check_l_flagz(const char *fmt, t_flag *flagz, int *i);
+void		check_h_flagz(const char *fmt, t_flag *flagz, int *i);
+void		check_field_and_dot_flagz(const char *fmt, t_flag *flagz, int *i);
+void		check_them_all(const char *fmt, t_flag *flagz, int *i, va_list ap);
 
-int		check_conv1(const char *fmt, t_flag *flagz, int *i, va_list ap);
-int		check_conv2(const char *fmt, t_flag *flagz, int *i, va_list ap);
-int		check_conv3(const char *fmt, t_flag *flagz, int *i, va_list ap);
+int			check_conv1(const char *fmt, t_flag flagz, int *i, va_list ap);
+int			check_conv2(const char *fmt, t_flag flagz, int *i, va_list ap);
+int			check_conv3(const char *fmt, t_flag flagz, int *i, va_list ap);
 
+long long	check_d_i_flagz(t_flag flagz, va_list ap);
+char		*malloc_str_d_i(t_flag flagz, va_list ap, const char *fmt);
+char		*fill_string(t_flag flagz, long long number, size_t final_len);
 #endif

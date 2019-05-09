@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 17:15:31 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/09 15:42:28 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/09 18:11:59 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,14 @@ int		ft_printf(const char *fmt, ...)
 	va_start(ap, fmt);
 	while (fmt[i])
 		if (fmt[i++] == '%')
+		{
 			if (m_or_percent_to_buf(&m, buf, fmt, &i) == -1)
 				return (-1);
 			if (m == 0)
 				check_them_all(fmt, &flagz, &i, ap);
 			else
 				m = 0;
+		}
 		else
 			m++;
 	if (!(buf = m_to_buf(&m, buf, fmt, i)))
@@ -51,7 +53,7 @@ int		main(int argc, char **argv)
 	(void)argc;
 	(void)argv;
 
-	char				*str = "lol";
+//	char				*str = "lol";
 //	char				c = 'a';
 //	int					d = 10;
 //	long				l = 2147483648;
@@ -62,11 +64,11 @@ int		main(int argc, char **argv)
 //	unsigned int		ui = 10;
 //	unsigned long		ul = 10;
 //	unsigned long long	ull = 10;
-	long	adress;
+//	long	adress;
 
-	adress = (long)&str;
-//	ft_printf("Bonjour monsieur%% le commissaire.");
-	printf("%p\n", str);
-	printf("%ld\n", adress);
+//	adress = (long)&str;
+//	ft_printf("%+ 10.15d", d);
+//	printf("%p\n", str);
+	printf("%-10d\n", -42);
 	return (0);
 }
