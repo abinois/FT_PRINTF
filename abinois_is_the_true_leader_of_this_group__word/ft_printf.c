@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 17:15:31 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/09 11:55:12 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/09 15:42:28 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+/*
 int		ft_printf(const char *fmt, ...)
 {
 	va_list 	ap;
@@ -43,13 +44,14 @@ int		ft_printf(const char *fmt, ...)
 	ft_putendl(buf);
 	return (1);
 }
+*/
 
 int		main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
 
-//	char				*str = "lol";
+	char				*str = "lol";
 //	char				c = 'a';
 //	int					d = 10;
 //	long				l = 2147483648;
@@ -60,8 +62,11 @@ int		main(int argc, char **argv)
 //	unsigned int		ui = 10;
 //	unsigned long		ul = 10;
 //	unsigned long long	ull = 10;
+	long	adress;
 
-	ft_printf("Bonjour monsieur%% le commissaire.");
-//	printf("%-010d\n", 10);
+	adress = (long)&str;
+//	ft_printf("Bonjour monsieur%% le commissaire.");
+	printf("%p\n", str);
+	printf("%ld\n", adress);
 	return (0);
 }
