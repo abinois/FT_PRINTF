@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:28:27 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/08 18:30:41 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/09 11:06:39 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,6 @@ void	reset_flagz(t_flag *flagz)
 	flagz->L = false;
 	flagz->h = false;
 	flagz->hh = false;
-	flagz->f = false;
-	flagz->d = false;
-	flagz->i = false;
-	flagz->o = false;
-	flagz->u = false;
-	flagz->x = false;
-	flagz->X = false;
-	flagz->c = false;
-	flagz->s = false;
-	flagz->p = false;
 }
 
 void	print_flagz(t_flag *flagz)
@@ -81,35 +71,5 @@ void	print_flagz(t_flag *flagz)
 	ft_putchar('\n');
 	ft_putstr("hh = ");
 	ft_putnbr(flagz->hh);
-	ft_putchar('\n');
-	ft_putstr("f = ");
-	ft_putnbr(flagz->f);
-	ft_putchar('\n');
-	ft_putstr("d = ");
-	ft_putnbr(flagz->d);
-	ft_putchar('\n');
-	ft_putstr("i = ");
-	ft_putnbr(flagz->i);
-	ft_putchar('\n');
-	ft_putstr("o = ");
-	ft_putnbr(flagz->o);
-	ft_putchar('\n');
-	ft_putstr("u = ");
-	ft_putnbr(flagz->u);
-	ft_putchar('\n');
-	ft_putstr("x = ");
-	ft_putnbr(flagz->x);
-	ft_putchar('\n');
-	ft_putstr("X = ");
-	ft_putnbr(flagz->X);
-	ft_putchar('\n');
-	ft_putstr("c = ");
-	ft_putnbr(flagz->c);
-	ft_putchar('\n');
-	ft_putstr("s = ");
-	ft_putnbr(flagz->s);
-	ft_putchar('\n');
-	ft_putstr("p = ");
-	ft_putnbr(flagz->p);
 	ft_putchar('\n');
 }

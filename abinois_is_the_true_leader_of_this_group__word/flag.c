@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 16:16:20 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/08 20:02:16 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/09 11:04:40 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	check_dot_flag(const char *fmt, t_flag *flagz, int *i)
 	}
 }
 
-void	check_preci_flag(const char *fmt, t_flag *flagz, int *i)
+void	check_field_flag(const char *fmt, t_flag *flagz, int *i)
 {
 	if (fmt[*i] >= '0' && fmt[*i] <= '9' && fmt[*i])
 	{

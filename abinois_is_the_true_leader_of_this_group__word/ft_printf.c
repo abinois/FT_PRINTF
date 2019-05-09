@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 17:15:31 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/08 19:09:17 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/09 11:06:27 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,27 +33,22 @@ int		ft_printf(const char *fmt, ...)
 	{
 		if (fmt[i++] == '%')
 		{
-			if (m)
-				if (!(buf = m_to_buf(&m, buf, fmt, i - 1)))
-					return (-1);
-			if (fmt[i] == '%')
-			{
-				if (!(buf = percent_to_buf(&m, buf, &i)))
-					return (-1);
-			}
-			else
+			if (m_or_percent_to_buf(&m, buf, fmt, &i) == -1)
+				return (-1);
+			if (m == 0)
 			{
 				reset_flagz(&flagz);
 				while ((fmt[i] == '0' || fmt[i] == '-' || fmt[i] == ' '
 					|| fmt[i] == '+' || fmt[i] == '#') && fmt[i])
 					check_first_flagz(fmt, &flagz, &i);
-				check_preci_flag(fmt, &flagz, &i);
+				check_field_flag(fmt, &flagz, &i);
 				check_dot_flag(fmt, &flagz, &i);
 				check_l_flagz(fmt, &flagz, &i);
 				check_h_flagz(fmt, &flagz, &i);
 				check_conv1(fmt, &flagz, &i);
-				print_flagz(&flagz);
 			}
+			else
+				m = 0;
 		}
 		else
 			m++;
