@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 14:37:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/09 10:55:26 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/09 22:08:10 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,16 @@ char	*m_to_buf(int *m, char *buf, const char *fmt, int i)
 	if (!buf && !(buf = ft_strnew(0)))
 		return (NULL);
 	if (!(tmpsub = ft_strsub(fmt, i - *m, *m)))
+	{
+		ft_memdel((void**)&buf);
 		return (NULL);
+	}
 	if (!(tmpjoin = ft_strjoin(buf, tmpsub)))
+	{
+		ft_memdel((void**)&buf);
+		ft_memdel((void**)&tmpsub);
 		return (NULL);
+	}
 	ft_memdel((void**)&buf);
 	ft_memdel((void**)&tmpsub);
 	*m = 0;
@@ -39,7 +46,10 @@ char	*percent_to_buf(int *m, char *buf, int *i)
 	if (!buf && !(buf = ft_strnew(0)))
 		return (NULL);
 	if (!(tmpjoin = ft_strjoin(buf, percent)))
+	{
+		ft_memdel((void**)&buf);
 		return (NULL);
+	}
 	ft_memdel((void**)&buf);
 	*m = -1;
 	(*i)++;
@@ -58,4 +68,20 @@ int		m_or_percent_to_buf(int *m, char *buf, const char *fmt, int *i)
 		return (1);
 	}
 	return (0);
+}
+
+char	*arg_to_buf(char *arg, char *buf)
+{
+	char	*tmpjoin;
+
+	if (!buf && !(buf = ft_strnew(0)))
+		return (NULL);
+	if (!(tmpjoin = ft_strjoin(buf, arg)))
+	{
+		ft_memdel((void**)&buf);
+		return (NULL);
+	}
+	ft_memdel((void**)&arg);
+	ft_memdel((void**)&buf);
+	return (tmpjoin);
 }

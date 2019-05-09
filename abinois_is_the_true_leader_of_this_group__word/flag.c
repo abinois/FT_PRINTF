@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 16:16:20 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/09 17:00:17 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/09 22:08:21 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	check_field_and_dot_flagz(const char *fmt, t_flag *flagz, int *i)
 	}
 }
 
-void	check_them_all(const char *fmt, t_flag *flagz, int *i, va_list ap)
+char	*check_all(const char *fmt, t_flag *flagz, int *i, va_list ap)
 {
 	reset_flagz(flagz);
 	while ((fmt[*i] == '0' || fmt[*i] == '-' || fmt[*i] == ' ' || fmt[*i] == '+'
@@ -100,5 +100,5 @@ void	check_them_all(const char *fmt, t_flag *flagz, int *i, va_list ap)
 	check_field_and_dot_flagz(fmt, flagz, i);
 	check_l_flagz(fmt, flagz, i);
 	check_h_flagz(fmt, flagz, i);
-	check_conv1(fmt, *flagz, i, ap);
+	return (check_conv1(fmt, *flagz, i, ap));
 }

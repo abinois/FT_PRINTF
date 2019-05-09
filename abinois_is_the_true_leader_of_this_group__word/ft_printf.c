@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 17:15:31 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/09 18:11:59 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/09 23:04:10 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-/*
 int		ft_printf(const char *fmt, ...)
 {
 	va_list 	ap;
@@ -35,7 +34,10 @@ int		ft_printf(const char *fmt, ...)
 			if (m_or_percent_to_buf(&m, buf, fmt, &i) == -1)
 				return (-1);
 			if (m == 0)
-				check_them_all(fmt, &flagz, &i, ap);
+			{
+				if (!(buf = arg_to_buf(check_all(fmt, &flagz, &i, ap), buf)))
+					return (-1);
+			}
 			else
 				m = 0;
 		}
@@ -43,10 +45,9 @@ int		ft_printf(const char *fmt, ...)
 			m++;
 	if (!(buf = m_to_buf(&m, buf, fmt, i)))
 		return (-1);
-	ft_putendl(buf);
+	ft_putstr(buf);
 	return (1);
 }
-*/
 
 int		main(int argc, char **argv)
 {
@@ -65,10 +66,11 @@ int		main(int argc, char **argv)
 //	unsigned long		ul = 10;
 //	unsigned long long	ull = 10;
 //	long	adress;
+//	short				h = 5;
 
 //	adress = (long)&str;
-//	ft_printf("%+ 10.15d", d);
+	ft_printf("%-10hhd\n", 127);
 //	printf("%p\n", str);
-	printf("%-10d\n", -42);
+	printf("%-10hhd\n", 127);
 	return (0);
 }
