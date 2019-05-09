@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 17:06:59 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/09 11:06:33 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/09 12:24:25 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,12 @@
 #include <stdarg.h>
 #include <stdbool.h>
 
-char	*malloc_new_string(t_flag flagz, va_list ap, char *fmt)
+
+/*
+** will malloc a new string if input is of type d or i
+*/
+
+char	*malloc_new_str_d_i(t_flag flagz, va_list ap, char *fmt)
 {
 	long		number;
 	char		*result_itoa;
@@ -32,6 +37,10 @@ char	*malloc_new_string(t_flag flagz, va_list ap, char *fmt)
 		final_len = flagz.field;
 	if (flagz.preci + itoa_len > flagz.field)
 		final_len = flagz.preci + itoa_len;
-	if (result < 0 && flagz.field == true)
+	if (result < 0 && flagz.plus == true)
 		final_len++;
 }
+
+/*
+** will malloc a new string if input is of type f
+*/
