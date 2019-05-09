@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 13:23:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/09 11:06:36 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/09 11:51:28 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ int		m_or_percent_to_buf(int *m, char *buf, const char *fmt, int *i);
 void	check_first_flagz(const char *fmt, t_flag *flagz, int *i);
 void	check_l_flagz(const char *fmt, t_flag *flagz, int *i);
 void	check_h_flagz(const char *fmt, t_flag *flagz, int *i);
-void	check_dot_flag(const char *fmt, t_flag *flagz, int *i);
-void	check_field_flag(const char *fmt, t_flag *flagz, int *i);
+void	check_field_and_dot_flagz(const char *fmt, t_flag *flagz, int *i);
+void	check_them_all(const char *fmt, t_flag *flagz, int *i, va_list ap);
 
-int		check_conv1(const char *fmt, t_flag *flagz, int *i);
-int		check_conv2(const char *fmt, t_flag *flagz, int *i);
-int		check_conv3(const char *fmt, t_flag *flagz, int *i);
+int		check_conv1(const char *fmt, t_flag *flagz, int *i, va_list ap);
+int		check_conv2(const char *fmt, t_flag *flagz, int *i, va_list ap);
+int		check_conv3(const char *fmt, t_flag *flagz, int *i, va_list ap);
 
 #endif

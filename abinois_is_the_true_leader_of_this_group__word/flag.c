@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 16:16:20 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/09 11:04:40 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/09 11:52:43 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,81 +16,89 @@
 
 void	check_first_flagz(const char *fmt, t_flag *flagz, int *i)
 {
-	if (fmt[*i] == '0' && fmt[*i])
+	if (fmt[*i] == '0')
 		flagz->zer = true;
 	else if (fmt[*i] == '-')
 	{
 		flagz->minus = true;
 		flagz->zer = false;
 	}
-	else if (fmt[*i] == ' ' && fmt[*i])
+	else if (fmt[*i] == ' ')
 		flagz->sp = true;
 	else if (fmt[*i] == '+')
 	{
 		flagz->plus = true;
 		flagz->sp = false;
 	}
-	else if (fmt[*i] == '#' && fmt[*i])
+	else if (fmt[*i] == '#')
 		flagz->hash = true;
-	*i++;
+	(*i)++;
 }
 
 void	check_l_flagz(const char *fmt, t_flag *flagz, int *i)
 {
-	if (fmt[*i] == 'L' && fmt[*i])
+	if (fmt[*i] == 'L')
 	{
 		flagz->L = true;
-		*i++;
+		(*i)++;
 	}
-	else if (fmt[*i] == 'l' && fmt[*i])
+	else if (fmt[*i] == 'l')
 	{
 		flagz->l = true;
-		*i++;
-		if (fmt[*i] == 'l' && fmt[*i])
+		(*i)++;
+		if (fmt[*i] == 'l')
 		{
 			flagz->l = false;
 			flagz->ll = true;
-			*i++;
+			(*i)++;
 		}
 	}
 }
 
 void	check_h_flagz(const char *fmt, t_flag *flagz, int *i)
 {
-	if (fmt[*i] == 'h' && fmt[*i])
+	if (fmt[*i] == 'h')
 	{
 		flagz->h = true;
-		*i++;
-		if (fmt[*i] == 'h' && fmt[*i])
+		(*i)++;
+		if (fmt[*i] == 'h')
 		{
 			flagz->h = false;
 			flagz->hh = true;
-			*i++;
+			(*i)++;
 		}
 	}
 }
 
-void	check_dot_flag(const char *fmt, t_flag *flagz, int *i)
+void	check_field_and_dot_flagz(const char *fmt, t_flag *flagz, int *i)
 {
-	if (fmt[*i] == '.' && fmt[*i])
+	if (fmt[*i] >= '0' && fmt[*i] <= '9')
+	{
+		flagz->field = ft_atoi(fmt + *i);
+		while (fmt[*i] >= '0' && fmt[*i] <= '9')
+			(*i)++;
+	}
+	if (fmt[*i] == '.')
 	{
 		flagz->dot = true;
-		*i++;
-		if (fmt[*i] >= '0' && fmt[*i] <= 9 && fmt[*i])
+		(*i)++;
+		if (fmt[*i] >= '0' && fmt[*i] <= '9')
 		{
-			flagz->preci = ft_atoi(fmt + i);
-			while (fmt[*i] >= '0' && fmt[*i] <= '9' && fmt[*i])
-				*i++;
+			flagz->preci = ft_atoi(fmt + *i);
+			while (fmt[*i] >= '0' && fmt[*i] <= '9')
+				(*i)++;
 		}
 	}
 }
 
-void	check_field_flag(const char *fmt, t_flag *flagz, int *i)
+void	check_them_all(const char *fmt, t_flag *flagz, int *i, va_list ap)
 {
-	if (fmt[*i] >= '0' && fmt[*i] <= '9' && fmt[*i])
-	{
-		flagz->field = ft_atoi(fmt + i);
-		while (fmt[*i] >= '0' && fmt[*i] <= '9' && fmt[*i])
-			*i++;
-	}
+	reset_flagz(flagz);
+	while ((fmt[*i] == '0' || fmt[*i] == '-' || fmt[*i] == ' ' || fmt[*i] == '+'
+		|| fmt[*i] == '#') && fmt[*i])
+		check_first_flagz(fmt, flagz, i);
+	check_field_and_dot_flagz(fmt, flagz, i);
+	check_l_flagz(fmt, flagz, i);
+	check_h_flagz(fmt, flagz, i);
+	check_conv1(fmt, flagz, i, ap);
 }

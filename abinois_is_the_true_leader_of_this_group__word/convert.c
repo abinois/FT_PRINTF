@@ -6,14 +6,14 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:31:29 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/09 11:06:30 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/09 11:53:18 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
+#include <stdarg.h>
 #include "ft_printf.h"
 
-int		check_conv1(const char *fmt, t_flag *flagz, int *i)
+int		check_conv1(const char *fmt, t_flag *flagz, int *i, va_list ap)
 {
 	if (fmt[*i] == 'f')
 	{
@@ -33,10 +33,10 @@ int		check_conv1(const char *fmt, t_flag *flagz, int *i)
 		(*i)++;
 		return (1);
 	}
-	return (check_conv2(fmt, flagz, i));
+	return (check_conv2(fmt, flagz, i, ap));
 }
 
-int		check_conv2(const char *fmt, t_flag *flagz, int *i)
+int		check_conv2(const char *fmt, t_flag *flagz, int *i, va_list ap)
 {
 	if (fmt[*i] == 'u')
 	{
@@ -56,16 +56,10 @@ int		check_conv2(const char *fmt, t_flag *flagz, int *i)
 		(*i)++;
 		return (1);
 	}
-	else if (fmt[*i] == 'c')
-	{
-		// > fonction check_c_flasgs + va_arg int
-		(*i)++;
-		return (1);
-	}
-	return (check_conv3(fmt, flagz, i));
+	return (check_conv3(fmt, flagz, i, ap));
 }
 
-int		check_conv3(const char *fmt, t_flag *flagz, int *i)
+int		check_conv3(const char *fmt, t_flag *flagz, int *i, va_list ap)
 {
 	if (fmt[*i] == 's')
 	{
@@ -76,6 +70,12 @@ int		check_conv3(const char *fmt, t_flag *flagz, int *i)
 	else if (fmt[*i] == 'p')
 	{
 		// > fonction check_p_flags + va_arg void *
+		(*i)++;
+		return (1);
+	}
+	else if (fmt[*i] == 'c')
+	{
+		// > fonction check_c_flasgs + va_arg int
 		(*i)++;
 		return (1);
 	}
