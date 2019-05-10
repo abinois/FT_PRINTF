@@ -6,11 +6,11 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 17:15:31 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/09 23:04:10 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/10 11:44:06 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+#include "../libft/libft.h"
 #include "ft_printf.h"
 #include <stdarg.h>
 #include <stdbool.h>
@@ -69,8 +69,10 @@ int		main(int argc, char **argv)
 //	short				h = 5;
 
 //	adress = (long)&str;
-	ft_printf("%-10hhd\n", 127);
+	ft_putstr("_____ ft_printf _____\n");
+	ft_printf("%-+10.6hhi\n", 'a');
 //	printf("%p\n", str);
-	printf("%-10hhd\n", 127);
+	ft_putstr("_____ printf _____\n");
+	printf("%-+10.6hhi\n", 'a');
 	return (0);
 }

@@ -6,12 +6,12 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 17:06:59 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/09 23:04:12 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/10 11:44:31 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft/libft.h"
+#include "../libft/libft.h"
 #include <stdarg.h>
 #include <stdbool.h>
 #include <stdlib.h>
@@ -21,42 +21,40 @@
 ** will malloc a new string if input is of type d or i
 */
 
+char		*put_sign(t_flag flagz, long long nb, char *res, size_t *c)
+{
+	if (nb < 0)
+		res[(*c)++] = '-';
+	else if (flagz.plus == true && nb >= 0)
+		res[(*c)++] = '+';
+	else if (flagz.sp == true && nb >= 0)
+		res[(*c)++] = ' ';
+	return (res);
+}
+
 char		*fill_string(t_flag flagz, long long nb, size_t len, char *lltoa)
 {
 	char	*res;
-	size_t	i;
 	size_t	len_nb;
 	size_t	c;
 
 	len_nb = nb >= 0 ? ft_strlen(lltoa) : ft_strlen(lltoa) - 1;
-	i = 0;
+	lltoa += nb < 0 ? 1 : 0;
 	c = 0;
 	if (!(res = (char *)malloc(sizeof(char) * (len + 1))))
 		return (NULL);
 	res[len] = '\0';
-	if (flagz.minus == true && nb < 0)
-		res[i++] = '-'; 
-	else if (flagz.minus == true && flagz.plus == true && nb >= 0)
-		res[0] = '+'; 
-	else if (flagz.minus == true && flagz.sp == true && nb >= 0)
-		res[0] = ' ';
-	if (flagz.minus == true && flagz.preci > len_nb)
+	if (flagz.minus == true)
 	{
-		while (c <= flagz.preci - len_nb)
-			res[++c] = '0';
-		while (lltoa[i])
-			res[c++] = lltoa[i++];
-	}
-	if (flagz.minus == true && flagz.preci < len_nb)
-	{
-		c = 1;
-		while (lltoa[i])
-			res[c++] = lltoa[i++];
-	}
-	if (flagz.minus == true && flagz.field > flagz.preci)
-	{
-		while (c < len)
-			res[c++] = ' ';
+		res = put_sign(flagz, nb, res, &c);
+		if (flagz.preci > len_nb)
+			while (len_nb++ < flagz.preci)
+				res[c++] = '0';
+		while (*lltoa)
+			res[c++] = *lltoa++;
+		if (flagz.field > flagz.preci)
+			while (c < len)
+				res[c++] = ' ';
 	}
 	return (res);
 }
@@ -72,7 +70,7 @@ long long	check_d_i_flagz(t_flag flagz, va_list ap)
 	if (flagz.h == true)
 		return ((number = (short)va_arg(ap, int)));
 	if (flagz.hh == true)
-		return ((number = (unsigned char)va_arg(ap, int)));
+		return ((number = (char)va_arg(ap, int)));
 	return ((number = va_arg(ap, int)));
 }
 
