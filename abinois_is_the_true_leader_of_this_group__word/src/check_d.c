@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 17:06:59 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/10 17:42:58 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/10 19:25:59 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char		*malloc_str_d_i(t_flag flagz, va_list ap)
 	len = ft_strlen(lltoa);
 	if (flagz.field > len)
 		len = flagz.field;
-	if (flagz.preci >= flagz.field)
+	if (flagz.preci >= flagz.field && flagz.preci > len)
 		len = nb < 0 ? flagz.preci + 1 : flagz.preci;
 	if (nb > 0 && (flagz.plus == true || flagz.sp == true) && flagz.field < len)
 		len++;

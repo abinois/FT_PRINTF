@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 17:15:31 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/10 17:42:48 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/10 19:26:11 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,25 +54,12 @@ int		main(int argc, char **argv)
 	(void)argc;
 	(void)argv;
 
-//	char				*str = "lol";
-//	char				c = 'a';
-//	int					d = 10;
-//	long				l = 2147483648;
-//	long long			ll = 2147483648;
-//	float				f = 4.5;
-//	double				dou = 42.0;
-//	long double			londou = 42.0;
-//	unsigned int		ui = 10;
-//	unsigned long		ul = 10;
-//	unsigned long long	ull = 10;
-//	long	adress;
-//	short				h = 5;
+	char	*str = "ptr";
 
-//	adress = (long)&str;
+
 	ft_putstr("_____ ft_printf _____\n");
-	ft_printf("%-lld\n", 9223372036854775809);
-//	printf("\n", str);
+	ft_printf("%-30.25lli\n", 9223372036854775808);
 	ft_putstr("_____ printf _____\n");
-	printf("%lld\n", 9223372036854775809);
+	printf("%-30.25lli\n", 9223372036854775808);
 	return (0);
 }

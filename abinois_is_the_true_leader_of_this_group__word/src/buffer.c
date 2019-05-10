@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 14:37:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/10 17:43:03 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/10 19:26:04 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*arg_to_buf(char *arg, char **buf)
 {
 	char	*tmpjoin;
 
-	if (!(*buf) && !(*buf = ft_strnew(1)))
+	if (!(*buf) && !(*buf = ft_strnew(0)))
 		return (NULL);
 	if (!(tmpjoin = ft_strjoin(*buf, arg)))
 	{
