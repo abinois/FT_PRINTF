@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 17:15:31 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/10 11:44:06 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/10 17:42:48 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ int		ft_printf(const char *fmt, ...)
 	while (fmt[i])
 		if (fmt[i++] == '%')
 		{
-			if (m_or_percent_to_buf(&m, buf, fmt, &i) == -1)
+			if (m_or_percent_to_buf(&m, &buf, fmt, &i) == -1)
 				return (-1);
 			if (m == 0)
 			{
-				if (!(buf = arg_to_buf(check_all(fmt, &flagz, &i, ap), buf)))
+				if (!(buf = arg_to_buf(check_all(fmt, &flagz, &i, ap), &buf)))
 					return (-1);
 			}
 			else
@@ -70,9 +70,9 @@ int		main(int argc, char **argv)
 
 //	adress = (long)&str;
 	ft_putstr("_____ ft_printf _____\n");
-	ft_printf("%-+10.6hhi\n", 'a');
-//	printf("%p\n", str);
+	ft_printf("%-lld\n", 9223372036854775809);
+//	printf("\n", str);
 	ft_putstr("_____ printf _____\n");
-	printf("%-+10.6hhi\n", 'a');
+	printf("%lld\n", 9223372036854775809);
 	return (0);
 }

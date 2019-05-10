@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 13:23:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/10 11:44:28 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/10 16:26:52 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void		print_flagz(t_flag *flagz);
 
 char		*m_to_buf(int *m, char *buf, const char *fmt, int i);
 char		*percent_to_buf(int *m, char *buf, int *i);
-int			m_or_percent_to_buf(int *m, char *buf, const char *fmt, int *i);
-char		*arg_to_buf(char *arg, char *buf);
+int			m_or_percent_to_buf(int *m, char **buf, const char *fmt, int *i);
+char		*arg_to_buf(char *arg, char **buf);
 
 void		check_first_flagz(const char *fmt, t_flag *flagz, int *i);
 void		check_l_flagz(const char *fmt, t_flag *flagz, int *i);
