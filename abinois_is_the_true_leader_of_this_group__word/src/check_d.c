@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 17:06:59 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/10 19:25:59 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/10 22:37:35 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,30 +32,57 @@ char		*put_sign(t_flag flagz, long long nb, char *res, size_t *c)
 	return (res);
 }
 
-char		*fill_string(t_flag flagz, long long nb, size_t len, char *lltoa)
+char	*put_lltoa(char *lltoa, char * res, size_t *c)
+{
+	while (*lltoa)
+		res[(*c)++] = *lltoa++;
+	return (res);
+}
+
+char		*fill_string(t_flag flagz, long long nb, size_t lmax, char *lltoa)
 {
 	char	*res;
-	size_t	len_nb;
+	size_t	l_nb;
+	size_t	len;
 	size_t	c;
 
-	len_nb = nb >= 0 ? ft_strlen(lltoa) : ft_strlen(lltoa) - 1;
+	len = ft_strlen(lltoa);
+	l_nb = nb >= 0 ? len : len - 1;
 	lltoa += nb < 0 ? 1 : 0;
 	c = 0;
-	if (!(res = (char *)malloc(sizeof(char) * (len + 1))))
+	if (!(res = (char *)malloc(sizeof(char) * (lmax + 1))))
 		return (NULL);
-	res[len] = '\0';
+	res[lmax] = '\0';
 	if (flagz.minus == true)
 	{
 		res = put_sign(flagz, nb, res, &c);
-		if (flagz.preci > len_nb)
-			while (len_nb++ < flagz.preci)
+		if (flagz.preci > l_nb)
+			while (l_nb++ < flagz.preci)
 				res[c++] = '0';
-		while (*lltoa)
-			res[c++] = *lltoa++;
+		res = put_lltoa(lltoa, res, &c);
 		if (flagz.field > flagz.preci)
-			while (c < len)
+			while (c < lmax)
 				res[c++] = ' ';
 	}
+	else if (flagz.zer == true && flagz.dot == false)
+	{
+		res = put_sign(flagz, nb, res, &c);
+		if (flagz.field > l_nb)
+			while (l_nb++ < (c > 0) ? flagz.field - 1 : flagz.field)
+				res[c++] = '0';
+		res = put_lltoa(lltoa, res, &c);
+	}
+	else
+		if (flagz.field > l_nb && flagz.field > flagz.preci)
+			while (c < flagz.field - (flagz.preci > l_nb ? flagz.preci : l_nb))
+				res[c++] = ' ';
+		if (nb < 0 || flagz.plus == true || flagz.sp == true)
+			c--;
+		res = put_sign(flagz, nb, res, &c);
+		if (flagz.preci > l_nb)
+			while (l_nb++ < flagz.preci)
+				res[c++] = '0';
+		res = put_lltoa(lltoa, res, &c);
 	return (res);
 }
 

@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 13:23:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/10 19:26:07 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/10 22:37:38 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ char		*check_conv3(const char *fmt, t_flag flagz, int *i, va_list ap);
 
 long long	check_d_i_flagz(t_flag flagz, va_list ap);
 char		*malloc_str_d_i(t_flag flagz, va_list ap);
-char		*fill_string(t_flag flagz, long long nb, size_t len, char *lltoa);
+char		*fill_string(t_flag flagz, long long nb, size_t lmax, char *lltoa);
 char		*put_sign(t_flag flagz, long long nb, char *res, size_t *i);
+char		*put_lltoa(char *lltoa, char *res, size_t *c);
 
 #endif
