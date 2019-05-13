@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 17:15:31 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/13 19:32:59 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/13 20:23:03 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 int		ft_printf(const char *fmt, ...)
 {
 	va_list 	ap;
-	t_flag		flagz;
+	t_flag		F;
 	int			m;
 	int			i;
 	char		*buf;
@@ -35,7 +35,7 @@ int		ft_printf(const char *fmt, ...)
 				return (-1);
 			if (m == 0)
 			{
-				if (!(buf = arg_to_buf(check_all(fmt, &flagz, &i, ap), &buf)))
+				if (!(buf = arg_to_buf(check_all(fmt, &F, &i, ap), &buf)))
 					return (-1);
 			}
 			else
@@ -55,8 +55,8 @@ int		main(int argc, char **argv)
 	(void)argv;
 
 	ft_putstr("_____ ft_printf _____\n");
-	ft_printf("%0- 2c\n", 'a');
+	ft_printf("%0 +-15i\n", 12);
 	ft_putstr("_____ printf _____\n");
-	printf("%0- 2c\n", 'a');
+	printf("%0 +-15i\n", 12);
 	return (0);
 }

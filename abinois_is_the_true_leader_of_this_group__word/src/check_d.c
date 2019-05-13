@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 17:06:59 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/13 18:53:58 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/13 20:13:14 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,18 @@
 ** will malloc a new string if input is of type d or i
 */
 
-char		*put_sign(t_flag flagz, long long nb, char *res, size_t *c)
+char		*put_sign(t_flag F, long long nb, char *res, size_t *c)
 {
 	if (nb < 0)
 		res[(*c)++] = '-';
-	else if (flagz.plus == true && nb >= 0)
+	else if (F.plus && nb >= 0)
 		res[(*c)++] = '+';
-	else if (flagz.sp == true && nb >= 0)
+	else if (F.sp && nb >= 0)
 		res[(*c)++] = ' ';
 	return (res);
 }
 
-char		*fill_string(t_flag flagz, long long nb, size_t lmax, char *lltoa)
+char		*fill_string(t_flag F, long long nb, size_t lmax, char *lltoa)
 {
 	char	*res;
 	size_t	l_nb;
@@ -46,71 +46,71 @@ char		*fill_string(t_flag flagz, long long nb, size_t lmax, char *lltoa)
 	if (!(res = (char *)malloc(sizeof(char) * (lmax + 1))))
 		return (NULL);
 	res[lmax] = '\0';
-	if (flagz.minus == true)
+	if (F.minus)
 	{
-		res = put_sign(flagz, nb, res, &c);
-		if (flagz.preci > l_nb)
-			while (l_nb++ < flagz.preci)
+		res = put_sign(F, nb, res, &c);
+		if (F.preci > l_nb)
+			while (l_nb++ < F.preci)
 				res[c++] = '0';
 		res = put_toa(lltoa, res, &c);
-		if (flagz.field > flagz.preci)
+		if (F.field > F.preci)
 			while (c < lmax)
 				res[c++] = ' ';
 	}
-	else if (flagz.zer == true && flagz.dot == false)
+	else if (F.zer && !(F.dot))
 	{
-		res = put_sign(flagz, nb, res, &c);
-		if (flagz.field > l_nb)
-			while (l_nb++ < (c > 0) ? flagz.field - 1 : flagz.field)
+		res = put_sign(F, nb, res, &c);
+		if (F.field > l_nb)
+			while (l_nb++ < (c > 0) ? F.field - 1 : F.field)
 				res[c++] = '0';
 		res = put_toa(lltoa, res, &c);
 	}
 	else
 	{
-		if (flagz.field > l_nb && flagz.field > flagz.preci)
-			while (c < flagz.field - (flagz.preci > l_nb ? flagz.preci : l_nb))
+		if (F.field > l_nb && F.field > F.preci)
+			while (c < F.field - (F.preci > l_nb ? F.preci : l_nb))
 				res[c++] = ' ';
-		if ((nb < 0 || flagz.plus == true || flagz.sp == true) && c != 0)
+		if ((nb < 0 || F.plus || F.sp) && c != 0)
 			c--;
-		res = put_sign(flagz, nb, res, &c);
-		if (flagz.preci > l_nb)
-			while (l_nb++ < flagz.preci)
+		res = put_sign(F, nb, res, &c);
+		if (F.preci > l_nb)
+			while (l_nb++ < F.preci)
 				res[c++] = '0';
 		res = put_toa(lltoa, res, &c);
 	}
 	return (res);
 }
 
-long long	check_d_i_flagz(t_flag flagz, va_list ap)
+long long	check_d_i_flagz(t_flag F, va_list ap)
 {
 	long long	number;
 
-	if (flagz.l == true)
+	if (F.l)
 		return ((number = va_arg(ap, long)));
-	if (flagz.ll == true)
+	if (F.ll)
 		return ((number = va_arg(ap, long long)));
-	if (flagz.h == true)
+	if (F.h)
 		return ((number = (short)va_arg(ap, int)));
-	if (flagz.hh == true)
+	if (F.hh)
 		return ((number = (char)va_arg(ap, int)));
 	return ((number = va_arg(ap, int)));
 }
 
-char		*malloc_str_d_i(t_flag flagz, va_list ap)
+char		*malloc_str_d_i(t_flag F, va_list ap)
 {
 	long long	nb;
 	char		*lltoa;
 	char		*result;
 	size_t		len;
 
-	nb = check_d_i_flagz(flagz, ap);
+	nb = check_d_i_flagz(F, ap);
 	lltoa = ft_lltoa(nb);
 	len = ft_strlen(lltoa);
-	if (flagz.field > len)
-		len = flagz.field;
-	if (flagz.preci >= flagz.field && flagz.preci > len)
-		len = nb < 0 ? flagz.preci + 1 : flagz.preci;
-	if (nb > 0 && (flagz.plus == true || flagz.sp == true) && flagz.field < len)
+	if (F.field > len)
+		len = F.field;
+	if (F.preci >= F.field && F.preci > len)
+		len = nb < 0 ? F.preci + 1 : F.preci;
+	if (nb > 0 && (F.plus || F.sp) && F.field < len)
 		len++;
-	return ((result = fill_string(flagz, nb, len, lltoa)));
+	return ((result = fill_string(F, nb, len, lltoa)));
 }

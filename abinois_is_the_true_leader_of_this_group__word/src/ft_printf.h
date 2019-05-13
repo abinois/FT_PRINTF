@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 13:23:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/13 19:33:02 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/13 20:23:31 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 # define UI		unsigned int
 # define ULL	unsigned long long
+# define F		flagz
 
 typedef struct	s_flag
 {
