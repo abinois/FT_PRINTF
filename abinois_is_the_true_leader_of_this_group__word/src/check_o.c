@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 14:50:25 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/13 15:44:29 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/13 18:26:49 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,23 @@ char		*fill_str_o(t_flag flagz, unsigned int nb, size_t lmax, char *toa)
 		if (flagz.preci > l_nb)
 			while (l_nb++ < flagz.preci)
 				res[c++] = '0';
+		if (flagz.hash == true && c == 0)
+			res[c++] = '0';
 		res = put_toa(toa, res, &c);
 		if (flagz.field > flagz.preci)
 			while (c < lmax)
 				res[c++] = ' ';
 	}
+	/*
 	else if (flagz.zer == true && flagz.dot == false)
 	{
 		if (flagz.field > l_nb)
 			while (l_nb++ < flagz.field)
 				res[c++] = '0';
+		if (flagz.hash == true && c == 0)
+			res[c++] = '0';
+		else if (flagz.hash == true)
+			res[c - 1] = '0';
 		res = put_toa(toa, res, &c);
 	}
 	else
@@ -59,6 +66,31 @@ char		*fill_str_o(t_flag flagz, unsigned int nb, size_t lmax, char *toa)
 		if (flagz.preci > l_nb)
 			while (l_nb++ < flagz.preci)
 				res[c++] = '0';
+		if (flagz.hash == true && c == 0)
+			res[c++] = '0';
+		else if (flagz.hash == true)
+			res[c - 1] = '0';
+		res = put_toa(toa, res, &c);
+	}
+	*/
+	else
+	{
+		if (flagz.zer == true && flagz.dot == false && flagz.field > l_nb)
+			while (l_nb++ < flagz.field)
+				res[c++] = '0';
+		else
+		{
+			if (flagz.field > l_nb && flagz.field > flagz.preci)
+				while (c < flagz.field - (flagz.preci > l_nb ? flagz.preci : l_nb))
+					res[c++] = ' ';
+			if (flagz.preci > l_nb)
+				while (l_nb++ < flagz.preci)
+					res[c++] = '0';
+		}
+		if (flagz.hash == true && c == 0)
+			res[c++] = '0';
+		else if (flagz.hash == true)
+			res[c - 1] = '0';
 		res = put_toa(toa, res, &c);
 	}
 	return (res);
@@ -93,5 +125,7 @@ char		*malloc_str_o(t_flag flagz, va_list ap)
 		lmax = flagz.field;
 	if (flagz.preci >= flagz.field && flagz.preci > lmax)
 		lmax = flagz.preci;
+	if (flagz.hash && flagz.preci <= ft_strlen(toa) >= flagz.field)
+		lmax++;
 	return ((result = fill_str_o(flagz, nb, lmax, toa)));
 }
