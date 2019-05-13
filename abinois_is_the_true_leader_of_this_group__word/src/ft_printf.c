@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 17:15:31 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/13 15:25:38 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/13 15:44:20 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int		main(int argc, char **argv)
 	(void)argv;
 
 	ft_putstr("_____ ft_printf _____\n");
-	ft_printf("%o\n", 9);
+	ft_printf("% o\n", 9);
 	ft_putstr("_____ printf _____\n");
-	printf("%o\n", 9);
+	printf("% o\n", 9);
 	return (0);
 }

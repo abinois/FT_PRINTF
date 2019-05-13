@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 14:50:25 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/13 15:39:04 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/13 15:44:29 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ char		*fill_str_o(t_flag flagz, unsigned int nb, size_t lmax, char *toa)
 		if (flagz.field > l_nb && flagz.field > flagz.preci)
 			while (c < flagz.field - (flagz.preci > l_nb ? flagz.preci : l_nb))
 				res[c++] = ' ';
-		if (flagz.plus == true || flagz.sp == true)
-			c--;
 		if (flagz.preci > l_nb)
 			while (l_nb++ < flagz.preci)
 				res[c++] = '0';
@@ -65,10 +63,6 @@ char		*fill_str_o(t_flag flagz, unsigned int nb, size_t lmax, char *toa)
 	}
 	return (res);
 }
-
-/*
-** TO DO
-*/ 
 
 unsigned int	check_o_flagz(t_flag flagz, va_list ap)
 {
@@ -84,10 +78,6 @@ unsigned int	check_o_flagz(t_flag flagz, va_list ap)
 		return ((number = (unsigned char)va_arg(ap, unsigned int)));
 	return ((number = va_arg(ap, unsigned int)));
 }
-
-/*
-** TO DO 
-*/
 
 char		*malloc_str_o(t_flag flagz, va_list ap)
 {
