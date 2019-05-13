@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 10:05:37 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/13 15:44:08 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/13 19:33:05 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*put_toa(char *toa, char *res, size_t *c)
 	return (res);
 }
 
-char		*fill_str_u(t_flag flagz, ULL nb, size_t lmax, char *toa)
+char		*fill_str_u(t_flag flagz, size_t lmax, char *toa)
 {
 	char	*res;
 	size_t	l_nb;
@@ -80,9 +80,9 @@ ULL	check_u_flagz(t_flag flagz, va_list ap)
 	if (flagz.ll == true)
 		return ((number = va_arg(ap, ULL)));
 	if (flagz.h == true)
-		return ((number = (unsigned short)va_arg(ap, unsigned int)));
+		return ((number = (unsigned short)va_arg(ap, UI)));
 	if (flagz.hh == true)
-		return ((number = (unsigned char)va_arg(ap, unsigned int)));
+		return ((number = (unsigned char)va_arg(ap, UI)));
 	return ((number = va_arg(ap, unsigned int)));
 }
 
@@ -100,5 +100,5 @@ char		*malloc_str_u(t_flag flagz, va_list ap)
 		lmax = flagz.field;
 	if (flagz.preci >= flagz.field && flagz.preci > lmax)
 		lmax = flagz.preci;
-	return ((result = fill_str_u(flagz, nb, lmax, toa)));
+	return ((result = fill_str_u(flagz, lmax, toa)));
 }

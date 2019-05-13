@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 14:50:25 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/13 18:26:49 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/13 18:56:05 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 ** THIS IS CHECK_O.C
 */
 
-char		*fill_str_o(t_flag flagz, unsigned int nb, size_t lmax, char *toa)
+char		*fill_str_o(t_flag flagz, size_t lmax, char *toa)
 {
 	char	*res;
 	size_t	l_nb;
@@ -127,5 +127,5 @@ char		*malloc_str_o(t_flag flagz, va_list ap)
 		lmax = flagz.preci;
 	if (flagz.hash && flagz.preci <= ft_strlen(toa) >= flagz.field)
 		lmax++;
-	return ((result = fill_str_o(flagz, nb, lmax, toa)));
+	return ((result = fill_str_o(flagz, lmax, toa)));
 }

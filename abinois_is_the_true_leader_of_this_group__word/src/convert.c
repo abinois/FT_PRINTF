@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:31:29 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/13 16:58:17 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/13 19:33:34 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ char	*check_conv3(const char *fmt, t_flag flagz, int *i, va_list ap)
 	if (fmt[*i] == 's')
 	{
 		// > fonction check_s_flags + va_arg char *
-		malloc_str_d_i(flagz, ap);
 		(*i)++;
 		return (NULL);
 	}
@@ -73,9 +72,8 @@ char	*check_conv3(const char *fmt, t_flag flagz, int *i, va_list ap)
 	}
 	else if (fmt[*i] == 'c')
 	{
-		// > fonction check_c_flasgs + va_arg int
 		(*i)++;
-		return (NULL);
+		return (malloc_str_c(flagz, ap));
 	}
 	return (NULL);
 }
