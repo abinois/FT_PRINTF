@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 13:23:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/13 20:23:31 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/13 21:49:07 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,14 @@ char		*put_sign(t_flag flagz, long long nb, char *res, size_t *i);
 
 ULL			check_u_flagz(t_flag flagz, va_list ap);
 char		*malloc_str_u(t_flag flagz, va_list ap);
-char		*fill_str_u(t_flag flagz, size_t lmax, char *llutoa);
+char		*fill_str_u(t_flag flagz, size_t lmax, char *toa, char *res);
 char		*put_toa(char *toa, char *res, size_t *c);
 
-UI			check_o_flagz(t_flag flagz, va_list ap);
 char		*malloc_str_o(t_flag flagz, va_list ap);
-char		*fill_str_o(t_flag flagz, size_t lmax, char *toa);
+char		*fill_str_o(t_flag flagz, size_t lmax, char *toa, char *res);
 
 char		*malloc_str_c(t_flag flagz, va_list ap);
+
+char		*malloc_str_xX(t_flag F, va_list ap);
+char		*fill_str_xX(t_flag F, size_t lmax, char *toa, char *res);
 #endif

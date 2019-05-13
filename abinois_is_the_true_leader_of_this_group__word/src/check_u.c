@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 10:05:37 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/13 20:18:08 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/13 21:04:17 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,13 @@ char	*put_toa(char *toa, char *res, size_t *c)
 	return (res);
 }
 
-char		*fill_str_u(t_flag F, size_t lmax, char *toa)
+char		*fill_str_u(t_flag F, size_t lmax, char *toa, char *res)
 {
-	char	*res;
 	size_t	l_nb;
-	size_t	len;
 	size_t	c;
 
-	len = ft_strlen(toa);
-	l_nb = len;
+	l_nb = ft_strlen(toa);
 	c = 0;
-	if (!(res = (char *)malloc(sizeof(char) * (lmax + 1))))
-		return (NULL);
-	res[lmax] = '\0';
 	if (F.minus)
 	{
 		if (F.preci > l_nb)
@@ -83,14 +77,14 @@ ULL	check_u_flagz(t_flag F, va_list ap)
 		return ((number = (unsigned short)va_arg(ap, UI)));
 	if (F.hh)
 		return ((number = (unsigned char)va_arg(ap, UI)));
-	return ((number = va_arg(ap, unsigned int)));
+	return ((number = va_arg(ap, UI)));
 }
 
 char		*malloc_str_u(t_flag F, va_list ap)
 {
 	ULL			nb;
 	char		*toa;
-	char		*result;
+	char		*res;
 	size_t		lmax;
 
 	nb = check_u_flagz(F, ap);
@@ -98,7 +92,10 @@ char		*malloc_str_u(t_flag F, va_list ap)
 	lmax = ft_strlen(toa);
 	if (F.field > lmax)
 		lmax = F.field;
-	if (F.preci >= F.field && F.preci > lmax)
+	if (lmax < F.preci >= F.field)
 		lmax = F.preci;
-	return ((result = fill_str_u(F, lmax, toa)));
+	if (!(res = (char *)malloc(sizeof(char) * (lmax + 1))))
+		return (NULL);
+	res[lmax] = '\0';
+	return ((res = fill_str_u(F, lmax, toa, res)));
 }
