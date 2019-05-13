@@ -6,18 +6,19 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 13:23:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/13 16:29:52 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/13 19:33:02 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# define ULL	unsigned long long
-# define UI		unsigned int
 
 # include <stdarg.h>
 # include <stdbool.h>
 # include <string.h>
+
+# define UI		unsigned int
+# define ULL	unsigned long long
 
 typedef struct	s_flag
 {
@@ -63,10 +64,12 @@ char		*put_sign(t_flag flagz, long long nb, char *res, size_t *i);
 
 ULL			check_u_flagz(t_flag flagz, va_list ap);
 char		*malloc_str_u(t_flag flagz, va_list ap);
-char		*fill_str_u(t_flag flagz, ULL nb, size_t lmax, char *llutoa);
+char		*fill_str_u(t_flag flagz, size_t lmax, char *llutoa);
 char		*put_toa(char *toa, char *res, size_t *c);
 
 UI			check_o_flagz(t_flag flagz, va_list ap);
 char		*malloc_str_o(t_flag flagz, va_list ap);
-char		*fill_str_o(t_flag flagz, UI nb, size_t lmax, char *toa);
+char		*fill_str_o(t_flag flagz, size_t lmax, char *toa);
+
+char		*malloc_str_c(t_flag flagz, va_list ap);
 #endif
