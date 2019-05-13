@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_u.c                                          :+:      :+:    :+:   */
+/*   check_o.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/13 10:05:37 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/13 15:35:53 by edillenb         ###   ########.fr       */
+/*   Created: 2019/05/13 14:50:25 by edillenb          #+#    #+#             */
+/*   Updated: 2019/05/13 15:39:04 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,10 @@
 #include <string.h>
 
 /*
-** THIS IS CHECK_U.C
+** THIS IS CHECK_O.C
 */
 
-char	*put_toa(char *toa, char *res, size_t *c)
-{
-	while (*toa)
-		res[(*c)++] = *toa++;
-	return (res);
-}
-
-char		*fill_str_u(t_flag flagz, ULL nb, size_t lmax, char *toa)
+char		*fill_str_o(t_flag flagz, unsigned int nb, size_t lmax, char *toa)
 {
 	char	*res;
 	size_t	l_nb;
@@ -73,9 +66,13 @@ char		*fill_str_u(t_flag flagz, ULL nb, size_t lmax, char *toa)
 	return (res);
 }
 
-ULL	check_u_flagz(t_flag flagz, va_list ap)
+/*
+** TO DO
+*/ 
+
+unsigned int	check_o_flagz(t_flag flagz, va_list ap)
 {
-	ULL	number;
+	unsigned int	number;
 
 	if (flagz.l == true)
 		return ((number = va_arg(ap, unsigned long)));
@@ -88,19 +85,23 @@ ULL	check_u_flagz(t_flag flagz, va_list ap)
 	return ((number = va_arg(ap, unsigned int)));
 }
 
-char		*malloc_str_u(t_flag flagz, va_list ap)
+/*
+** TO DO 
+*/
+
+char		*malloc_str_o(t_flag flagz, va_list ap)
 {
-	ULL			nb;
-	char		*toa;
-	char		*result;
-	size_t		lmax;
+	unsigned int	nb;
+	char			*toa;
+	char			*result;
+	size_t			lmax;
 
 	nb = check_u_flagz(flagz, ap);
-	toa = ft_llutoa(nb);
+	toa = ft_uioctaltoa(nb);
 	lmax = ft_strlen(toa);
 	if (flagz.field > lmax)
 		lmax = flagz.field;
 	if (flagz.preci >= flagz.field && flagz.preci > lmax)
 		lmax = flagz.preci;
-	return ((result = fill_str_u(flagz, nb, lmax, toa)));
+	return ((result = fill_str_o(flagz, nb, lmax, toa)));
 }

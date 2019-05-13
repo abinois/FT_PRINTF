@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 17:06:59 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/13 12:34:31 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/13 14:30:43 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char		*fill_string(t_flag flagz, long long nb, size_t lmax, char *lltoa)
 		if (flagz.field > l_nb && flagz.field > flagz.preci)
 			while (c < flagz.field - (flagz.preci > l_nb ? flagz.preci : l_nb))
 				res[c++] = ' ';
-		if (nb < 0 || flagz.plus == true || flagz.sp == true)
+		if ((nb < 0 || flagz.plus == true || flagz.sp == true) && c != 0)
 			c--;
 		res = put_sign(flagz, nb, res, &c);
 		if (flagz.preci > l_nb)

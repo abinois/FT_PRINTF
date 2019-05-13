@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_llutoa.c                                        :+:      :+:    :+:   */
+/*   ft_uioctaltoa.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/09 14:42:09 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/13 15:21:50 by edillenb         ###   ########.fr       */
+/*   Created: 2019/05/13 14:46:14 by edillenb          #+#    #+#             */
+/*   Updated: 2019/05/13 14:49:43 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-char			*ft_llutoa(unsigned long long nbr)
+char			*ft_uioctaltoa(unsigned int nbr)
 {
-	unsigned long long	res;
+	unsigned int		res;
 	char				*tab;
 	int					n;
 
 	res = nbr;
 	n = 1;
-	while (res > 9)
+	while (res > 7)
 	{
 		n++;
-		res /= 10;
+		res /= 8;
 	}
 	if (!(tab = (char*)malloc(sizeof(*tab) * n + 1)))
 		return (NULL);
 	tab[n] = '\0';
 	while (n-- > 0)
 	{
-		tab[n] = nbr % 10 + '0';
-		nbr /= 10;
+		tab[n] = nbr % 8 + '0';
+		nbr /= 8;
 	}
 	return (tab);
 }
