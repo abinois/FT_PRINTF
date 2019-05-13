@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:59:33 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/13 19:13:14 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/13 19:31:54 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char			*ft_uihexatoa(unsigned int nbr)
 	char				*tab;
 	int					n;
 
-	base = "0123456789ABCDEF";
+	base = "0123456789abcdef";
 	res = nbr;
 	n = 1;
 	while (res > 15)
