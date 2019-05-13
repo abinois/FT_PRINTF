@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 17:24:14 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/13 14:48:46 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/13 19:08:54 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ void			ft_fili(const char *file, size_t line);
 char			*ft_llutoa(unsigned long long nbr);
 char			*ft_lltoa(long long nbr);
 char			*ft_uioctaltoa(unsigned int nbr);
+char			*ft_uihexatoa(unsigned int nbr);
 
 #endif
