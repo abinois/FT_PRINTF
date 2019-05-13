@@ -6,12 +6,13 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 13:23:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/10 22:37:38 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/13 12:35:09 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
+# define ULL unsigned long long
 
 # include <stdarg.h>
 # include <stdbool.h>
@@ -58,6 +59,9 @@ long long	check_d_i_flagz(t_flag flagz, va_list ap);
 char		*malloc_str_d_i(t_flag flagz, va_list ap);
 char		*fill_string(t_flag flagz, long long nb, size_t lmax, char *lltoa);
 char		*put_sign(t_flag flagz, long long nb, char *res, size_t *i);
-char		*put_lltoa(char *lltoa, char *res, size_t *c);
 
+ULL			check_u_flagz(t_flag flagz, va_list ap);
+char		*malloc_str_u(t_flag flagz, va_list ap);
+char		*fill_str_u(t_flag flagz, ULL nb, size_t lmax, char *lltuoa);
+char		*put_toa(char *llutoa, char *res, size_t *c);
 #endif

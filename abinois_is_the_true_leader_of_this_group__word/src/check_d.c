@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 17:06:59 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/10 22:37:35 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/13 12:34:31 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,6 @@ char		*put_sign(t_flag flagz, long long nb, char *res, size_t *c)
 	return (res);
 }
 
-char	*put_lltoa(char *lltoa, char * res, size_t *c)
-{
-	while (*lltoa)
-		res[(*c)++] = *lltoa++;
-	return (res);
-}
-
 char		*fill_string(t_flag flagz, long long nb, size_t lmax, char *lltoa)
 {
 	char	*res;
@@ -59,7 +52,7 @@ char		*fill_string(t_flag flagz, long long nb, size_t lmax, char *lltoa)
 		if (flagz.preci > l_nb)
 			while (l_nb++ < flagz.preci)
 				res[c++] = '0';
-		res = put_lltoa(lltoa, res, &c);
+		res = put_toa(lltoa, res, &c);
 		if (flagz.field > flagz.preci)
 			while (c < lmax)
 				res[c++] = ' ';
@@ -70,9 +63,10 @@ char		*fill_string(t_flag flagz, long long nb, size_t lmax, char *lltoa)
 		if (flagz.field > l_nb)
 			while (l_nb++ < (c > 0) ? flagz.field - 1 : flagz.field)
 				res[c++] = '0';
-		res = put_lltoa(lltoa, res, &c);
+		res = put_toa(lltoa, res, &c);
 	}
 	else
+	{
 		if (flagz.field > l_nb && flagz.field > flagz.preci)
 			while (c < flagz.field - (flagz.preci > l_nb ? flagz.preci : l_nb))
 				res[c++] = ' ';
@@ -82,7 +76,8 @@ char		*fill_string(t_flag flagz, long long nb, size_t lmax, char *lltoa)
 		if (flagz.preci > l_nb)
 			while (l_nb++ < flagz.preci)
 				res[c++] = '0';
-		res = put_lltoa(lltoa, res, &c);
+		res = put_toa(lltoa, res, &c);
+	}
 	return (res);
 }
 
