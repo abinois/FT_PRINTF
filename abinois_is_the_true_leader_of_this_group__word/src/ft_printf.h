@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 13:23:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/14 17:22:33 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/14 17:54:17 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,7 @@ char		*fill_str_xX(t_flag F, size_t lmax, char *toa, char *res);
 
 char		*llhexatoa(ULL nbr);
 char		*malloc_str_p(t_flag F, va_list ap);
+
+char		*malloc_str_s(t_flag F, va_list ap);
+char		*fill_str_s(t_flag F, size_t lmax, char *toa, char *res);
 #endif
