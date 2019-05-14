@@ -6,7 +6,11 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:52:39 by abinois           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/05/14 17:22:54 by edillenb         ###   ########.fr       */
+=======
+/*   Updated: 2019/05/14 17:09:43 by abinois          ###   ########.fr       */
+>>>>>>> 45772f2ce9a05b0846d0fd6fd4e4a0aacf57ba6f
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +46,10 @@ char	*llhexatoa(ULL nbr)
 	}
 	return (tab);
 }
+<<<<<<< HEAD
+=======
+*/
+>>>>>>> 45772f2ce9a05b0846d0fd6fd4e4a0aacf57ba6f
 
 char	*malloc_str_p(t_flag F, va_list ap)
 {
