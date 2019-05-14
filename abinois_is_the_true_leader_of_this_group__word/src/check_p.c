@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:52:39 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/14 16:18:12 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/14 17:09:43 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,6 @@ char	*voidtohexaa(void *nbr)
 }
 */
 
-/*
-   void	*check_p_flagz(t_flag F, va_list ap)
-   {
-   void	*number;
-
-   if (F.l)
-   return ((number = va_arg(ap, unsigned long)));
-   if (F.ll)
-   return ((number = va_arg(ap, ULL)));
-   if (F.h)
-   return ((number = (unsigned short)va_arg(ap, UI)));
-   if (F.hh)
-   return ((number = (unsigned char)va_arg(ap, UI)));
-   return ((number = va_arg(ap, UI)));
-   }
-   */
-
 char	*malloc_str_p(t_flag F, va_list ap)
 {
 	void	*nb;
@@ -77,8 +60,7 @@ char	*malloc_str_p(t_flag F, va_list ap)
 		lmax = F.field;
 	if (F.preci >= F.field && F.preci > ft_strlen(toa))
 		lmax = F.preci;
-	if (F.hash && F.preci <= ft_strlen(toa) && F.field <= ft_strlen(toa))
-		lmax += 2;
+	lmax += 2;
 	if (!(res = (char *)malloc(sizeof(char) * (lmax + 1))))
 		return (NULL);
 	return ((res = fill_str_xX(F, lmax, toa, res)));
