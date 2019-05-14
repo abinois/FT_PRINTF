@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 17:15:31 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/14 12:02:54 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/14 16:03:41 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,12 @@ int		main(int argc, char **argv)
 	(void)argc;
 	(void)argv;
 
+	char	*a = "123456";
+//	void	*ptr = &a;
+
 	ft_putstr("_____ ft_printf _____\n");
-	ft_printf("%#X\n", 12);
+	ft_printf("%p\n", a);
 	ft_putstr("_____ printf _____\n");
-	printf("%#X\n", 12);
+	printf("%p\n", a);
 	return (0);
 }

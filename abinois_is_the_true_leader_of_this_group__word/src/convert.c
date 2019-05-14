@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:31:29 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/14 12:00:22 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/14 15:34:52 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ char	*check_conv3(const char *fmt, t_flag F, int *i, va_list ap)
 	}
 	else if (fmt[*i] == 'p')
 	{
-		// > fonction check_p_flags + va_arg void *
+		F.hash = true;
 		(*i)++;
-		return (NULL);
+		return (malloc_str_p(F, ap));
 	}
 	else if (fmt[*i] == 'c')
 	{
