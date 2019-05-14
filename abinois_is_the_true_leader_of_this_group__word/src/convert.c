@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:31:29 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/14 11:23:03 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/14 12:00:22 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*check_conv2(const char *fmt, t_flag F, int *i, va_list ap)
 	else if (fmt[*i] == 'X')
 	{
 		(*i)++;
-		return (ft_toupper(malloc_str_xX(F, ap)));
+		return (ft_str_up(malloc_str_xX(F, ap)));
 	}
 	return (check_conv3(fmt, F, i, ap));
 }

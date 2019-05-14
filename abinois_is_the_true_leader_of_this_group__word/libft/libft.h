@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 17:24:14 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/13 20:00:20 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/14 11:55:39 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,6 @@ char			*ft_llutoa(unsigned long long nbr);
 char			*ft_lltoa(long long nbr);
 char			*ft_octatoa(unsigned int nbr);
 char			*ft_hexatoa(unsigned int nbr);
+char			*ft_str_up(char *s);
 
 #endif
