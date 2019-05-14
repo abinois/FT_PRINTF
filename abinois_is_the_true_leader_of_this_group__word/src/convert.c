@@ -6,12 +6,13 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:31:29 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/13 21:49:11 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/14 11:23:03 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "ft_printf.h"
+#include "../libft/libft.h"
 
 char	*check_conv1(const char *fmt, t_flag F, int *i, va_list ap)
 {
@@ -48,9 +49,8 @@ char	*check_conv2(const char *fmt, t_flag F, int *i, va_list ap)
 	}
 	else if (fmt[*i] == 'X')
 	{
-		// > fonction check_X_flags + va_arg unsigned int
 		(*i)++;
-		return (NULL);
+		return (ft_toupper(malloc_str_xX(F, ap)));
 	}
 	return (check_conv3(fmt, F, i, ap));
 }

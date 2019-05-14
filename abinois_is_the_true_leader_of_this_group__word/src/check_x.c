@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 20:29:23 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/14 11:11:08 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/14 11:23:09 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,10 @@ char	*fill_str_xX(t_flag F, size_t lmax, char *toa, char *res)
 				while (c < F.field - (F.preci > l_nb ? F.preci : l_nb))
 					res[c++] = ' ';
 			if (F.hash && c > 0)
+			{
 				c -= 2;
-			res = put_toa("0x", res, &c);
+				res = put_toa("0x", res, &c);
+			}
 			if (F.preci > l_nb)
 				while (l_nb++ < F.preci)
 					res[c++] = '0';
