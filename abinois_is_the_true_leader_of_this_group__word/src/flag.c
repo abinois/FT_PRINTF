@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 16:16:20 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/13 20:20:11 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/15 10:31:31 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../libft/libft.h"
 #include <stdbool.h>
 
-void	check_first_flagz(const char *fmt, t_flag *F, int *i)
+void	check_first_flagz(const char *fmt, t_flag *flagz, int *i)
 {
 	if (fmt[*i] == '0')
 		F->zer = true;
@@ -35,11 +35,11 @@ void	check_first_flagz(const char *fmt, t_flag *F, int *i)
 	(*i)++;
 }
 
-void	check_l_flagz(const char *fmt, t_flag *F, int *i)
+void	check_l_flagz(const char *fmt, t_flag *flagz, int *i)
 {
 	if (fmt[*i] == 'L')
 	{
-		F->L = true;
+		F->bigl = true;
 		(*i)++;
 	}
 	else if (fmt[*i] == 'l')
@@ -55,7 +55,7 @@ void	check_l_flagz(const char *fmt, t_flag *F, int *i)
 	}
 }
 
-void	check_h_flagz(const char *fmt, t_flag *F, int *i)
+void	check_h_flagz(const char *fmt, t_flag *flagz, int *i)
 {
 	if (fmt[*i] == 'h')
 	{
@@ -70,7 +70,7 @@ void	check_h_flagz(const char *fmt, t_flag *F, int *i)
 	}
 }
 
-void	check_field_and_dot_flagz(const char *fmt, t_flag *F, int *i)
+void	check_field_dot_flagz(const char *fmt, t_flag *flagz, int *i)
 {
 	if (fmt[*i] >= '0' && fmt[*i] <= '9')
 	{
@@ -91,13 +91,13 @@ void	check_field_and_dot_flagz(const char *fmt, t_flag *F, int *i)
 	}
 }
 
-char	*check_all(const char *fmt, t_flag *F, int *i, va_list ap)
+char	*check_all(const char *fmt, t_flag *flagz, int *i, va_list ap)
 {
 	reset_flagz(F);
 	while ((fmt[*i] == '0' || fmt[*i] == '-' || fmt[*i] == ' ' || fmt[*i] == '+'
 		|| fmt[*i] == '#') && fmt[*i])
 		check_first_flagz(fmt, F, i);
-	check_field_and_dot_flagz(fmt, F, i);
+	check_field_dot_flagz(fmt, F, i);
 	check_l_flagz(fmt, F, i);
 	check_h_flagz(fmt, F, i);
 	return (check_conv1(fmt, *F, i, ap));

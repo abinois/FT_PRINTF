@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:33:17 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/14 17:52:37 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/15 10:19:27 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 ** THIS IS CHECK_S.C
 */
 
-char		*fill_str_s(t_flag F, size_t lmax, char *toa, char *res)
+char	*fill_str_s(t_flag flagz, size_t lmax, char *toa, char *res)
 {
 	size_t	l_nb;
 	size_t	c;
@@ -39,14 +39,14 @@ char		*fill_str_s(t_flag F, size_t lmax, char *toa, char *res)
 	{
 		if (F.field > l_nb)
 			while (c < F.field - l_nb)
-				res[c++] = ' ';
+				res[c++] = F.zer ? '0' : ' ';
 		while (l_nb--)
 			res[c++] = *toa++;
 	}
 	return (res);
 }
 
-char		*malloc_str_s(t_flag F, va_list ap)
+char	*malloc_str_s(t_flag flagz, va_list ap)
 {
 	char		*toa;
 	char		*res;
@@ -62,10 +62,10 @@ char		*malloc_str_s(t_flag F, va_list ap)
 	return ((res = fill_str_s(F, lmax, toa, res)));
 }
 
-char	*malloc_str_c(t_flag F, va_list ap)
+char	*malloc_str_c(t_flag flagz, va_list ap)
 {
 	char	c;
-	size_t 	lmax;
+	size_t	lmax;
 	char	*res;
 	size_t	i;
 

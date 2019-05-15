@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 20:29:23 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/14 11:58:28 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/15 13:45:42 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
-char	*fill_str_xX(t_flag F, size_t lmax, char *toa, char *res)
+char	*fill_str_x(t_flag flagz, size_t lmax, char *toa, char *res)
 {
 	size_t	l_nb;
 	size_t	c;
@@ -27,10 +27,7 @@ char	*fill_str_xX(t_flag F, size_t lmax, char *toa, char *res)
 	{
 		if (F.hash)
 			res = put_toa("0x", res, &c);
-		if (F.preci > l_nb)
-			while (l_nb++ < F.preci)
-				res[c++] = '0';
-		res = put_toa(toa, res, &c);
+		res = put_toa(toa, put_zer(F.preci, res, &c, l_nb), &c);
 		if (F.field > F.preci)
 			while (c < lmax)
 				res[c++] = ' ';
@@ -41,7 +38,7 @@ char	*fill_str_xX(t_flag F, size_t lmax, char *toa, char *res)
 		{
 			if (F.hash)
 				res = put_toa("0x", res, &c);
-			while (c < F.field - (F.hash ? l_nb - 2 : l_nb))
+			while (c < F.field - l_nb)
 				res[c++] = '0';
 		}
 		else
@@ -49,36 +46,38 @@ char	*fill_str_xX(t_flag F, size_t lmax, char *toa, char *res)
 			if (F.field > F.preci && F.field > l_nb)
 				while (c < F.field - (F.preci > l_nb ? F.preci : l_nb))
 					res[c++] = ' ';
-			if (F.hash && c > 0)
-				c -= 2;
 			if (F.hash)
+			{
+				if (c >= 2)
+					c -= 2;
+				else
+					c -= c; 
 				res = put_toa("0x", res, &c);
-			if (F.preci > l_nb)
-				while (l_nb++ < F.preci)
-					res[c++] = '0';
+			}
+			res = put_zer(F.preci, res, &c, l_nb);
 		}
 		res = put_toa(toa, res, &c);
 	}
 	return (res);
 }
 
-char	*malloc_str_xX(t_flag F, va_list ap)
+char	*malloc_str_xp(t_flag flagz, va_list ap, char conv)
 {
-	UI		nb;
+	ULL		nb;
 	char	*toa;
-	char	*result;
+	char	*res;
 	size_t	lmax;
 
-	nb = check_u_flagz(F, ap);
-	toa = ft_hexatoa(nb);
+	nb = check_u_flagz(F, ap, conv);
+	toa = llhexatoa(nb);
 	lmax = ft_strlen(toa);
+	if ((conv == 'x' && F.hash) || conv == 'p')
+		lmax += 2;
+	if (F.preci > lmax)
+		lmax = F.preci;
 	if (F.field > lmax)
 		lmax = F.field;
-	if (F.preci >= F.field && F.preci > ft_strlen(toa))
-		lmax = F.preci;
-	if (F.hash && F.preci <= ft_strlen(toa) && F.field <= ft_strlen(toa))
-		lmax += 2;
-	if (!(result = (char *)malloc(sizeof(char) * (lmax + 1))))
+	if (!(res = (char *)malloc(sizeof(char) * (lmax + 1))))
 		return (NULL);
-	return ((result = fill_str_xX(F, lmax, toa, result)));
+	return ((res = fill_str_x(F, lmax, toa, res)));
 }

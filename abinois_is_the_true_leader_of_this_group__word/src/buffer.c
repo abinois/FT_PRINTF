@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 14:37:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/13 20:10:23 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/15 10:14:05 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*percent_to_buf(int *m, char *buf, int *i)
 	return (tmpjoin);
 }
 
-int		m_or_percent_to_buf(int *m, char **buf, const char *fmt, int *i)
+int		m_or_percent(int *m, char **buf, const char *fmt, int *i)
 {
 	if (*m)
 		if (!(*buf = m_to_buf(m, *buf, fmt, *i - 1)))

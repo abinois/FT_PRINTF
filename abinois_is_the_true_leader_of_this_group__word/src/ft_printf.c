@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 17:15:31 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/14 17:49:38 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/15 13:45:05 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 int		ft_printf(const char *fmt, ...)
 {
-	va_list 	ap;
-	t_flag		F;
+	va_list		ap;
+	t_flag		flagz;
 	int			m;
 	int			i;
 	char		*buf;
@@ -31,7 +31,7 @@ int		ft_printf(const char *fmt, ...)
 	while (fmt[i])
 		if (fmt[i++] == '%')
 		{
-			if (m_or_percent_to_buf(&m, &buf, fmt, &i) == -1)
+			if (m_or_percent(&m, &buf, fmt, &i) == -1)
 				return (-1);
 			if (m == 0)
 			{
@@ -51,14 +51,13 @@ int		ft_printf(const char *fmt, ...)
 
 int		main(int argc, char **argv)
 {
+
+	char *a = "18446744073709551614";
 	(void)argc;
 	(void)argv;
-
-	char	*a = "123456";
-
 	ft_putstr("_____ ft_printf _____\n");
-	ft_printf("%-100.8s\n", a);
+	ft_printf("%-5.7x\n", 123456);
 	ft_putstr("_____ printf _____\n");
-	printf("%-100.8s\n", a);
+	printf("%-5.7x\n", 123456);
 	return (0);
 }
