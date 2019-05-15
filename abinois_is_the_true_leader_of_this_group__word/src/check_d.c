@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 17:06:59 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/15 12:03:09 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/15 18:00:54 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ char		*fill_str(t_flag flagz, long long nb, size_t lmax, char *lltoa)
 	if (F.minus)
 	{
 		res = put_sign(F, nb, res, &c);
-		res = put_zer(F.preci, res, &c, l_nb);
-		res = put_toa(lltoa, res, &c);
+		res = put_toa(lltoa, put_zer(F.preci, res, &c, l_nb), &c);
 		if (F.field > F.preci)
 			while (c < lmax)
 				res[c++] = ' ';
@@ -49,19 +48,15 @@ char		*fill_str(t_flag flagz, long long nb, size_t lmax, char *lltoa)
 		res = put_sign(F, nb, res, &c);
 		if (c == 1)
 			F.field--;
-		res = put_zer(F.field, res, &c, l_nb);
-		res = put_toa(lltoa, res, &c);
+		res = put_toa(lltoa, put_zer(F.preci, res, &c, l_nb), &c);
 	}
 	else
 	{
 		if (F.field > l_nb && F.field > F.preci)
 			while (c < F.field - (F.preci > l_nb ? F.preci : l_nb))
 				res[c++] = ' ';
-		if ((nb < 0 || F.plus || F.sp) && c != 0)
-			c--;
 		res = put_sign(F, nb, res, &c);
-		res = put_zer(F.preci, res, &c, l_nb);
-		res = put_toa(lltoa, res, &c);
+		res = put_toa(lltoa, put_zer(F.preci, res, &c, l_nb), &c);
 	}
 	return (res);
 }

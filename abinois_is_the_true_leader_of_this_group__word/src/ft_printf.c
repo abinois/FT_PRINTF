@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 17:15:31 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/15 16:28:01 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/15 18:04:01 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdarg.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int		ft_printf(const char *fmt, ...)
 {
@@ -46,18 +47,19 @@ int		ft_printf(const char *fmt, ...)
 	if (!(buf = m_to_buf(&m, buf, fmt, i)))
 		return (-1);
 	ft_putstr(buf);
+	free(buf);
 	return (1);
 }
 
 int		main(int argc, char **argv)
 {
 
-	unsigned int a = 2147483648;
+	int a = -2147483648;
 	(void)argc;
 	(void)argv;
 	ft_putstr("_____ ft_printf _____\n");
-	ft_printf("%#5.o\n", a);
+	ft_printf("%.25d\n%d\n", a, a);
 	ft_putstr("_____ printf _____\n");
-	printf("%#5.o\n", a);
+	printf("%.25d\n%d\n", a, a);
 	return (0);
 }

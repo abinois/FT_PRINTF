@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:28:27 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/15 13:45:32 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/15 18:01:41 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void		reset_flagz(t_flag *flagz)
 	flagz->bigl = false;
 	flagz->h = false;
 	flagz->hh = false;
+	flagz->conv = 'r';
 }
 
 char		*put_toa(char *toa, char *res, size_t *c)
@@ -40,6 +41,9 @@ char		*put_toa(char *toa, char *res, size_t *c)
 
 char		*put_sign(t_flag flagz, long long nb, char *res, size_t *c)
 {
+	if (!(F.minus) && (!(F.zer) || F.dot) && ((nb < 0 || F.plus || F.sp)
+			&& *c != 0))
+		(*c)--;
 	if (nb < 0)
 		res[(*c)++] = '-';
 	else if (F.plus && nb >= 0)
