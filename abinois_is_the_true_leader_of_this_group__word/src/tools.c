@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:28:27 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/15 19:17:59 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/15 19:25:43 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,21 @@
 
 void		reset_flagz(t_flag *flagz)
 {
-	flagz->zer = false;
-	flagz->minus = false;
-	flagz->sp = false;
-	flagz->plus = false;
-	flagz->hash = false;
-	flagz->field = 0;
-	flagz->dot = false;
-	flagz->preci = 0;
-	flagz->l = false;
-	flagz->ll = false;
-	flagz->bigl = false;
-	flagz->h = false;
-	flagz->hh = false;
-	flagz->conv = 'r';
+	F->zer = false;
+	F->minus = false;
+	F->sp = false;
+	F->plus = false;
+	F->hash = false;
+	F->field = 0;
+	F->dot = false;
+	F->preci = 0;
+	F->l = false;
+	F->ll = false;
+	F->bigl = false;
+	F->h = false;
+	F->hh = false;
+	F->conv = 'r';
+	F->nb = 0;
 }
 
 char		*p_toa(char *toa, char *res, size_t *c)
