@@ -6,15 +6,15 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 14:46:14 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/13 20:04:55 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/15 15:09:42 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-char			*ft_octatoa(unsigned int nbr)
+char			*ft_octatoa(unsigned long long nbr)
 {
-	unsigned int		res;
+	unsigned long long	res;
 	char				*tab;
 	int					n;
 

@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 17:15:31 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/15 13:45:05 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/15 16:28:01 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ int		ft_printf(const char *fmt, ...)
 int		main(int argc, char **argv)
 {
 
-	char *a = "18446744073709551614";
+	unsigned int a = 2147483648;
 	(void)argc;
 	(void)argv;
 	ft_putstr("_____ ft_printf _____\n");
-	ft_printf("%-5.7x\n", 123456);
+	ft_printf("%#5.o\n", a);
 	ft_putstr("_____ printf _____\n");
-	printf("%-5.7x\n", 123456);
+	printf("%#5.o\n", a);
 	return (0);
 }

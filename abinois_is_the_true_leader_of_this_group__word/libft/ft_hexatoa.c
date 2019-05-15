@@ -6,16 +6,16 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:59:33 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/14 14:53:47 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/15 15:17:44 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-char			*ft_hexatoa(unsigned int nbr)
+char			*ft_hexatoa(unsigned long long nbr)
 {
 	char				*base;
-	unsigned int		res;
+	unsigned long long	res;
 	char				*tab;
 	int					n;
 

@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:31:29 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/15 12:35:03 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/15 15:52:54 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ char		*check_conv1(const char *fmt, t_flag flagz, int *i, va_list ap)
 	}
 	else if (fmt[*i] == 'o')
 	{
+		F.conv = 'o';
 		(*i)++;
-		return (malloc_str_o(F, ap, 'o'));
+		return (malloc_str_ou(F, ap));
 	}
 	return (check_conv2(fmt, F, i, ap));
 }
@@ -38,18 +39,21 @@ char		*check_conv2(const char *fmt, t_flag flagz, int *i, va_list ap)
 {
 	if (fmt[*i] == 'u')
 	{
+		F.conv = 'u';
 		(*i)++;
-		return (malloc_str_u(F, ap, 'u'));
+		return (malloc_str_ou(F, ap));
 	}
 	else if (fmt[*i] == 'x')
 	{
+		F.conv = 'x';
 		(*i)++;
-		return (malloc_str_xp(F, ap, 'x'));
+		return (malloc_str_xp(F, ap));
 	}
 	else if (fmt[*i] == 'X')
 	{
+		F.conv = 'x';
 		(*i)++;
-		return (ft_str_up(malloc_str_xp(F, ap, 'x')));
+		return (ft_str_up(malloc_str_xp(F, ap)));
 	}
 	return (check_conv3(fmt, F, i, ap));
 }
@@ -63,9 +67,10 @@ char		*check_conv3(const char *fmt, t_flag flagz, int *i, va_list ap)
 	}
 	else if (fmt[*i] == 'p')
 	{
+		F.conv = 'p';
 		F.hash = true;
 		(*i)++;
-		return (malloc_str_xp(F, ap, 'p'));
+		return (malloc_str_xp(F, ap));
 	}
 	else if (fmt[*i] == 'c')
 	{
@@ -90,11 +95,11 @@ long long	check_d_i_flagz(t_flag flagz, va_list ap)
 	return ((number = va_arg(ap, int)));
 }
 
-ULL			check_u_flagz(t_flag flagz, va_list ap, char conv)
+ULL			check_poux_flagz(t_flag flagz, va_list ap)
 {
 	ULL	number;
 
-	if (conv == 'p')
+	if (F.conv == 'p')
 		return ((number = va_arg(ap, ULL)));
 	if (F.l)
 		return ((number = va_arg(ap, unsigned long)));
