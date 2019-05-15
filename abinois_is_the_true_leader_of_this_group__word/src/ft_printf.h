@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 13:23:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/15 16:28:03 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/15 19:21:57 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,29 @@
 
 typedef struct	s_flag
 {
-	bool	zer;
-	bool	minus;
-	bool	sp;
-	bool	plus;
-	bool	hash;
-	size_t	field;
-	bool	dot;
-	size_t	preci;
-	bool	l;
-	bool	ll;
-	bool	bigl;
-	bool	h;
-	bool	hh;
-	char	conv;
+	bool		zer;
+	bool		minus;
+	bool		sp;
+	bool		plus;
+	bool		hash;
+	size_t		field;
+	bool		dot;
+	size_t		preci;
+	bool		l;
+	bool		ll;
+	bool		bigl;
+	bool		h;
+	bool		hh;
+	char		conv;
+	long long	nb;
 }				t_flag;
 
 int				ft_printf(const char *fmt, ...);
 // tools.c    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void			reset_flagz(t_flag *flagz);
-char			*put_sign(t_flag flagz, long long nb, char *res, size_t *i);
-char			*put_toa(char *toa, char *res, size_t *c);
-char			*put_zer(size_t flag, char *res, size_t *c, size_t l_nb);
+char			*p_sign(t_flag *flagz, char *res, size_t *i);
+char			*p_toa(char *toa, char *res, size_t *c);
+char			*p_zer(size_t flag, char *res, size_t *c, size_t l_nb);
 char			*llhexatoa(ULL nbr);
 // buffer.c   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 char			*m_to_buf(int *m, char *buf, const char *fmt, int i);
@@ -64,8 +65,8 @@ char			*check_conv3(const char *fmt, t_flag flagz, int *i, va_list ap);
 long long		check_d_i_flagz(t_flag flagz, va_list ap);
 ULL				check_poux_flagz(t_flag flagz, va_list ap);
 // check_d.c  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-char			*malloc_str_d_i(t_flag flagz, va_list ap);
-char			*fill_str(t_flag flagz, long long nb, size_t lmax, char *lltoa);
+char			*malloc_str_d(t_flag flagz, va_list ap);
+char			*fill_str_d(t_flag flagz, size_t lmax, char *toa, char *res);
 // check_ou.c - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 char			*put_hash(char *res, size_t *c, t_flag flagz, size_t l_nb);
 char			*fill_str_ou(t_flag flagz, size_t lmax, char *toa, char *res);

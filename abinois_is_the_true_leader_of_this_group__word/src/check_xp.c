@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 20:29:23 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/15 16:29:02 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/15 18:35:12 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*fill_nomin_xp(t_flag flagz, size_t l_nb, char *res, size_t *c)
 	if (F.zer && !(F.dot) && F.field > l_nb)
 	{
 		if (F.hash)
-			res = put_toa("0x", res, c);
+			res = p_toa("0x", res, c);
 		while (*c < F.field - l_nb)
 			res[(*c)++] = '0';
 	}
@@ -35,9 +35,9 @@ char	*fill_nomin_xp(t_flag flagz, size_t l_nb, char *res, size_t *c)
 				(*c) -= 2;
 			else
 				(*c) -= *c;
-			res = put_toa("0x", res, c);
+			res = p_toa("0x", res, c);
 		}
-		res = put_zer(F.preci, res, c, l_nb);
+		res = p_zer(F.preci, res, c, l_nb);
 	}
 	return (res);
 }
@@ -53,8 +53,8 @@ char	*fill_str_xp(t_flag flagz, size_t lmax, char *toa, char *res)
 	if (F.minus)
 	{
 		if (F.hash)
-			res = put_toa("0x", res, &c);
-		res = put_toa(toa, put_zer(F.preci, res, &c, l_nb), &c);
+			res = p_toa("0x", res, &c);
+		res = p_toa(toa, p_zer(F.preci, res, &c, l_nb), &c);
 		if (F.field > F.preci)
 			while (c < lmax)
 				res[c++] = ' ';
@@ -62,7 +62,7 @@ char	*fill_str_xp(t_flag flagz, size_t lmax, char *toa, char *res)
 	else
 	{
 		fill_nomin_xp(F, l_nb, res, &c);
-		res = put_toa(toa, res, &c);
+		res = p_toa(toa, res, &c);
 	}
 	return (res);
 }

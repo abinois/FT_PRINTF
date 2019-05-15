@@ -6,13 +6,14 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:28:27 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/15 18:01:41 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/15 19:17:59 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdbool.h>
 #include <stdlib.h>
+#include "../libft/libft.h"
 
 void		reset_flagz(t_flag *flagz)
 {
@@ -32,28 +33,30 @@ void		reset_flagz(t_flag *flagz)
 	flagz->conv = 'r';
 }
 
-char		*put_toa(char *toa, char *res, size_t *c)
+char		*p_toa(char *toa, char *res, size_t *c)
 {
 	while (*toa)
 		res[(*c)++] = *toa++;
 	return (res);
 }
 
-char		*put_sign(t_flag flagz, long long nb, char *res, size_t *c)
+char		*p_sign(t_flag *flagz, char *res, size_t *c)
 {
-	if (!(F.minus) && (!(F.zer) || F.dot) && ((nb < 0 || F.plus || F.sp)
+	if (!(F->minus) && (!(F->zer) || F->dot) && ((F->nb < 0 || F->plus || F->sp)
 			&& *c != 0))
 		(*c)--;
-	if (nb < 0)
+	if (F->nb < 0)
 		res[(*c)++] = '-';
-	else if (F.plus && nb >= 0)
+	else if (F->plus && F->nb >= 0)
 		res[(*c)++] = '+';
-	else if (F.sp && nb >= 0)
+	else if (F->sp && F->nb >= 0)
 		res[(*c)++] = ' ';
+	if (!(F->minus) && F->zer && !(F->dot) && *c == 1)
+		F->field--;
 	return (res);
 }
 
-char		*put_zer(size_t flag, char *res, size_t *c, size_t l_nb)
+char		*p_zer(size_t flag, char *res, size_t *c, size_t l_nb)
 {
 	if (flag > l_nb)
 		while (l_nb++ < flag)

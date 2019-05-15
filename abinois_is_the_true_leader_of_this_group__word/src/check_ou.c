@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 14:50:25 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/15 16:30:22 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/15 18:34:32 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 
 char		*put_hash(char *res, size_t *c, t_flag flagz, size_t l_nb)
 {
-	res = put_zer(F.preci, res, c, l_nb);
+	res = p_zer(F.preci, res, c, l_nb);
 	if (F.conv == 'o')
 	{
 		if (F.hash && *c == 0)
@@ -48,19 +48,19 @@ char		*fill_str_ou(t_flag flagz, size_t lmax, char *toa, char *res)
 	c = 0;
 	if (F.minus)
 	{
-		res = put_toa(toa, put_hash(res, &c, F, l_nb), &c);
+		res = p_toa(toa, put_hash(res, &c, F, l_nb), &c);
 		if (F.field > F.preci)
 			while (c < lmax)
 				res[c++] = ' ';
 	}
 	else if (F.zer && !(F.dot))
-		res = put_toa(toa, put_zer(F.field, res, &c, l_nb), &c);
+		res = p_toa(toa, p_zer(F.field, res, &c, l_nb), &c);
 	else
 	{
 		if (F.field > l_nb && F.field > F.preci)
 			while (c < F.field - (F.preci > l_nb ? F.preci : l_nb))
 				res[c++] = ' ';
-		res = put_toa(toa, put_hash(res, &c, F, l_nb), &c);
+		res = p_toa(toa, put_hash(res, &c, F, l_nb), &c);
 	}
 	return (res);
 }
