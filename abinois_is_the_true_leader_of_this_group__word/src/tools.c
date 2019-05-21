@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:28:27 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/15 19:25:43 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/21 12:13:37 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,12 @@ void		reset_flagz(t_flag *flagz)
 
 char		*p_toa(char *toa, char *res, size_t *c)
 {
-	while (*toa)
-		res[(*c)++] = *toa++;
+	size_t	i;
+
+	i = *toa == '-' ? 1 : 0;
+	while (toa[i])
+		res[(*c)++] = toa[i++];
+	ft_memdel((void**)&toa);
 	return (res);
 }
 
