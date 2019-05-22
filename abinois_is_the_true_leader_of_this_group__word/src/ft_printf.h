@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 13:23:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/15 19:21:57 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/22 18:09:15 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,7 @@ char			*fill_nomin_xp(t_flag flagz, size_t l_nb, char *res, size_t *c);
 char			*malloc_str_c(t_flag flagz, va_list ap);
 char			*malloc_str_s(t_flag flagz, va_list ap);
 char			*fill_str_s(t_flag flagz, size_t lmax, char *toa, char *res);
+// check_f.c
+char			*ldbltobinary(long double dbl);
+long double		check_f_flagz(t_flag flagz, va_list ap);
 #endif
