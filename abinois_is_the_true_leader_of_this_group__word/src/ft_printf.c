@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 17:15:31 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/22 18:19:57 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/22 18:48:21 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,14 @@ int		ft_printf(const char *fmt, ...)
 int		main(int argc, char **argv)
 {
 
-	long double	a = 0.51;
-	char		*str;
+//	long double	a = 0.51;
+//	char		*str;
 	(void)argc;
 	(void)argv;
-	str = ldbltobinary(a);
+//	str = ldbltobinary(a);
 	ft_putstr("_____ ft_printf _____\n");
-	ft_printf("%s\n", "Salut");
+	ft_printf("%-15.8s\n", "Salut");
 	ft_putstr("_____ printf _____\n");
-	printf("%Lf\n", a);
+	printf("%-15.8s\n", "Salut");
 	return (0);
 }

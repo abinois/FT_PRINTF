@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:33:17 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/21 12:13:46 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/22 18:49:37 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,26 @@
 
 char	*fill_str_s(t_flag flagz, size_t lmax, char *toa, char *res)
 {
-	size_t	l_nb;
+	size_t	l_toa;
 	size_t	c;
 
-	l_nb = F.preci < ft_strlen(toa) ? F.preci : ft_strlen(toa);
+	l_toa = ft_strlen(toa);
+	if (F.dot)
+		l_toa = F.preci < l_toa ? F.preci : l_toa;
 	c = 0;
 	if (F.minus)
 	{
-		while (l_nb--)
+		while (l_toa--)
 			res[c++] = *toa++;
 		while (c < lmax)
 			res[c++] = ' ';
 	}
 	else
 	{
-		if (F.field > l_nb)
-			while (c < F.field - l_nb)
+		if (F.field > l_toa)
+			while (c < F.field - l_toa)
 				res[c++] = F.zer ? '0' : ' ';
-		while (l_nb--)
+		while (l_toa--)
 			res[c++] = *toa++;
 	}
 	return (res);
@@ -53,7 +55,9 @@ char	*malloc_str_s(t_flag flagz, va_list ap)
 	size_t		lmax;
 
 	toa = va_arg(ap, char*);
-	lmax = F.preci < ft_strlen(toa) ? F.preci : ft_strlen(toa);
+	lmax = ft_strlen(toa);
+	if (F.dot)
+		lmax = F.preci < lmax ? F.preci : lmax;
 	if (F.field > lmax)
 		lmax = F.field;
 	if (!(res = (char *)malloc(sizeof(char) * (lmax + 1))))
