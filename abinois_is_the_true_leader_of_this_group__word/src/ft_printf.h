@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 13:23:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/22 18:09:15 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/23 12:45:49 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,19 @@
 # include <stdarg.h>
 # include <stdbool.h>
 # include <string.h>
+# include <stdint.h>
 
 # define UI		unsigned int
 # define ULL	unsigned long long
 # define F		flagz
+
+typedef struct	s_float
+{
+	char		*mantissa;
+	bool		sign;
+	uint16_t	expo;
+	char		*result;
+}				t_float;
 
 typedef struct	s_flag
 {
@@ -80,6 +89,7 @@ char			*malloc_str_c(t_flag flagz, va_list ap);
 char			*malloc_str_s(t_flag flagz, va_list ap);
 char			*fill_str_s(t_flag flagz, size_t lmax, char *toa, char *res);
 // check_f.c
-char			*ldbltobinary(long double dbl);
+char			*get_mantissa(long double dbl);
 long double		check_f_flagz(t_flag flagz, va_list ap);
+uint16_t		get_exponent(long double dbl);
 #endif

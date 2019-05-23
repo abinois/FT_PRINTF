@@ -1,12 +1,11 @@
-/* ************************************************************************** */
-/*                                                                            */
+/* ************************************************************************** */ /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 17:15:31 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/22 18:48:21 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/23 12:12:43 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +28,9 @@ int		ft_printf(const char *fmt, ...)
 	m = 0;
 	buf = NULL;
 	va_start(ap, fmt);
-	while (fmt[i])
-		if (fmt[i++] == '%')
-		{
+	while (fmt[i]) 
+		if (fmt[i++] == '%') 
+		{ 
 			if (m_or_percent(&m, &buf, fmt, &i) == -1)
 				return (-1);
 			if (m == 0)
@@ -54,11 +53,13 @@ int		ft_printf(const char *fmt, ...)
 int		main(int argc, char **argv)
 {
 
-//	long double	a = 0.51;
-//	char		*str;
+	long double	a = 4.125;
+	char		*str;
 	(void)argc;
 	(void)argv;
-//	str = ldbltobinary(a);
+	str = get_mantissa(a);
+	printf("%hd", get_exponent(a));
+	printf("%s\n", str);
 	ft_putstr("_____ ft_printf _____\n");
 	ft_printf("%-15.8s\n", "Salut");
 	ft_putstr("_____ printf _____\n");
