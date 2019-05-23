@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 13:23:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/23 15:57:57 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/23 17:48:47 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,6 @@ uint16_t		get_exponent(long double dbl);
 char			*allocplus(char *buf, char ret, int *x);
 char			*str_add(char *s1, char *s2);
 void			move_to_the_end(int *i, int *j, char *s1, char *s2);
+char			*str_times_two(char *str);
 
 #endif
