@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 16:39:36 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/24 18:20:26 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/24 19:13:19 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,17 +88,14 @@ char	*over_63(t_float *infloat, char *res, int x, int i)
 	x = 1;
 	while (--i >= 0)
 	{
-		ft_putstrclr(res, "magenta");
-		ft_putchar('\n');
 		if ((infloat->mantissa)[i] == '1')
 		{
 			while (x-- > 0)
-			{
 				if (!(buffer = str_times_two(buffer)))
 					return (NULL);
-			}
 			if (!(res = str_add(buffer, res)))
 				return (NULL);
+			x = 1;
 		}
 		else
 			x++;
@@ -143,9 +140,7 @@ char		*get_float(t_flag flagz, va_list ap)
 		return (NULL);
 	nb = check_f_flagz(F, ap);
 	infloat->mantissa = get_mantissa(nb);
-	printf("mantissa  = %s\n", infloat->mantissa);
 	infloat->expo = get_exponent(nb);
-	printf("expo  = %hu\n", infloat->expo);
 	infloat->sign = nb >= 0 ? false : true;
 	infloat->result = deci_float(infloat);
 	return (infloat->result);

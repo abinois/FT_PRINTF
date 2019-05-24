@@ -54,7 +54,7 @@ int		ft_printf(const char *fmt, ...)
 int		main(int argc, char **argv)
 {
 
-	long double	a = 5674736738768371468418381.0;
+	long double	a = LDBL_MAX * 2;
 	(void)argc;
 	(void)argv;
 	ft_putstr("_____ ft_printf _____\n");
