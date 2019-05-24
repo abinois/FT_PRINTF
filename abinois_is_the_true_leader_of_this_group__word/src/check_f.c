@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 16:39:36 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/24 13:05:26 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/24 14:14:13 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,28 +92,51 @@ char	*positive_part_of_float(t_float *float_data)
 	uint16_t	i;
 	uint16_t	x;
 
-	x = 1;
+	x = -1;
 	i = 0;
-	while (expo - i > 0 && float_data->mantissa[i])
+	while (expo - i > 0 && (float_data->mantissa)[i])
 		i++;
-	if (expo - i <= 64)
-		buffer = ft_lltoa(ft_pow(2, expo - i));
-	if (!(result = ft_strnew(100)))
+	if (!(result = (char*)malloc(sizeof(char) * 2)))
 		return (NULL);
-	if (!(buffer = ft_strnew(100)))
-		return (NULL);
-	while (expo_cpy < float_data->expo)
+	result = (expo - i) == 0 ? "1\0" : "0\0"; 
+	while (i && expo - i <= 64)
 	{
-		if (float_data->mantissa[expo_cpy] == '1')
+		if ((float_data->mantissa)[i] == '1')
+			if (!(result = str_add(result, ft_llutoa(ft_pow(2, expo - i)))))
+				return (NULL);
+		i--;
+	}
+	if (expo - i <= expo && expo - i > 64)
+		if (!(result = over_64(float_data, result, x, i)))
+			return (NULL);
+	return (result);
+}
+
+char	*over_64(t_float *float_data, char *result, uint16_t x, uint16_t i)
+{
+	char	*buffer;
+
+	if (!(buffer = (char*)malloc(sizeof(char) * 2)))
+		return (NULL);
+	buffer = "1\0";
+	while (++x <= expo - i)
+		if (!(buffer = str_times_two(buffer)))
+			return (NULL);
+	x = 1;
+	i--;
+	while (expo - i <= expo && expo - i > 64)
+	{
+		if ((float_data->mantissa)[i--] == '1')
 		{
-			if (expo_cpy == 0)
-				buffer[100] = '1';
-			while (x-- > 0)
-				if (!(buffer = str_times_two(new)))
+			while (x--)
+				if (!(buffer = str_times_two(buffer)))
 					return (NULL);
-			x = 1;
+			if (!(result = str_add(buffer, result)))
+				return (NULL);
 		}
 		else
 			x++;
 	}
+	free(buffer); 
+	return (result)
 }
