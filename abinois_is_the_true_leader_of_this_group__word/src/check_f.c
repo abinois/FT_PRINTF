@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 16:39:36 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/24 14:14:13 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/24 18:20:26 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,71 +72,82 @@ uint16_t	get_exponent(long double dbl)
 	return (*nb);
 }
 
-char		*get_float(long double dbl, t_flag flagz, va_list ap)
-{
-	long double	nb;
-	t_float		*float_data;
-
-	nb = check_f_flagz(F, ap);
-	float_data->mantissa = get_mantissa(nb);
-	float_data->expo = get_exponent(nb);
-	float_data->sign = dbl >= 0 ? false : true;
-	return (float_data->result);
-}
-
-
-char	*positive_part_of_float(t_float *float_data)
-{
-	char		*result;
-	char		*buffer;
-	uint16_t	i;
-	uint16_t	x;
-
-	x = -1;
-	i = 0;
-	while (expo - i > 0 && (float_data->mantissa)[i])
-		i++;
-	if (!(result = (char*)malloc(sizeof(char) * 2)))
-		return (NULL);
-	result = (expo - i) == 0 ? "1\0" : "0\0"; 
-	while (i && expo - i <= 64)
-	{
-		if ((float_data->mantissa)[i] == '1')
-			if (!(result = str_add(result, ft_llutoa(ft_pow(2, expo - i)))))
-				return (NULL);
-		i--;
-	}
-	if (expo - i <= expo && expo - i > 64)
-		if (!(result = over_64(float_data, result, x, i)))
-			return (NULL);
-	return (result);
-}
-
-char	*over_64(t_float *float_data, char *result, uint16_t x, uint16_t i)
+char	*over_63(t_float *infloat, char *res, int x, int i)
 {
 	char	*buffer;
 
 	if (!(buffer = (char*)malloc(sizeof(char) * 2)))
 		return (NULL);
 	buffer = "1\0";
-	while (++x <= expo - i)
+	while (++x <= (int)infloat->expo - i)
 		if (!(buffer = str_times_two(buffer)))
 			return (NULL);
+	if ((infloat->mantissa)[i] == '1')
+		if (!(res = str_add(buffer, res)))
+			return (NULL);
 	x = 1;
-	i--;
-	while (expo - i <= expo && expo - i > 64)
+	while (--i >= 0)
 	{
-		if ((float_data->mantissa)[i--] == '1')
+		ft_putstrclr(res, "magenta");
+		ft_putchar('\n');
+		if ((infloat->mantissa)[i] == '1')
 		{
-			while (x--)
+			while (x-- > 0)
+			{
 				if (!(buffer = str_times_two(buffer)))
 					return (NULL);
-			if (!(result = str_add(buffer, result)))
+			}
+			if (!(res = str_add(buffer, res)))
 				return (NULL);
 		}
 		else
 			x++;
 	}
 	free(buffer); 
-	return (result)
+	return (res);
 }
+
+char	*deci_float(t_float *infloat)
+{
+	char		*res;
+	char		*buffer;
+	int	i;
+	int	x;
+
+	x = 0;
+	i = 0;
+	while ((int)infloat->expo - i > 0 && i < 63)
+		i++;
+	if (!(res = (char*)malloc(sizeof(char) * 2)))
+		return (NULL);
+	res = "0\0"; 
+	while (i >= 0 && (int)infloat->expo - i <= 63)
+	{
+		if ((infloat->mantissa)[i] == '1')
+			if (!(res = str_add(res, ft_llutoa(ft_pow(2, (int)infloat->expo - i)))))
+				return (NULL);
+		i--;
+	}
+	if (i >= 0 && (int)infloat->expo - i > 63)	
+		if (!(res = over_63(infloat, res, x, i)))
+			return (NULL);
+	return (res);
+}
+
+char		*get_float(t_flag flagz, va_list ap)
+{
+	long double	nb;
+	t_float		*infloat;
+
+	if (!(infloat = (t_float *)malloc(sizeof(t_float))))
+		return (NULL);
+	nb = check_f_flagz(F, ap);
+	infloat->mantissa = get_mantissa(nb);
+	printf("mantissa  = %s\n", infloat->mantissa);
+	infloat->expo = get_exponent(nb);
+	printf("expo  = %hu\n", infloat->expo);
+	infloat->sign = nb >= 0 ? false : true;
+	infloat->result = deci_float(infloat);
+	return (infloat->result);
+}
+

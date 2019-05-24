@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 13:46:22 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/24 12:47:01 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/24 18:20:22 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +115,4 @@ char	*str_times_two(char *str)
 	}
 //	ft_memdel((void**)&str);
 	return (new);
-}
-
-int		main()
-{
-	printf("%s", str_times_two("199"));
-	return (0);
 }

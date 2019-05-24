@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 17:24:14 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/15 15:17:15 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/24 15:43:32 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <string.h>
 # define BUFF_SIZE_GNL 545
+# define ULL unsigned long long
 
 typedef struct	s_list
 {
@@ -86,7 +87,7 @@ void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 size_t			ft_lst_size(t_list *alst);
 t_list			**ft_lst_rev(t_list **alst);
-int				ft_pow(int nb, int po);
+ULL				ft_pow(ULL nb, int po);
 int				ft_sqrt(int nb);
 int				ft_get_next_line(const int fd, char **line);
 void			ft_display_file(char *filename);

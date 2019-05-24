@@ -6,13 +6,13 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 14:08:20 by abinois           #+#    #+#             */
-/*   Updated: 2019/04/16 08:49:41 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/24 15:41:59 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_pow(int nb, int po)
+unsigned long long	ft_pow(unsigned long long nb, int po)
 {
-	int		res;
+	unsigned long long	res;
 
 	res = 1;
 	if (!po)

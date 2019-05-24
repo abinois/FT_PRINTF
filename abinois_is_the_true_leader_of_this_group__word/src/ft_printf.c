@@ -9,6 +9,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <float.h>
 #include "../libft/libft.h"
 #include "ft_printf.h"
 #include <stdarg.h>
@@ -53,16 +54,12 @@ int		ft_printf(const char *fmt, ...)
 int		main(int argc, char **argv)
 {
 
-	long double	a = 4.125;
-	char		*str;
+	long double	a = 5674736738768371468418381.0;
 	(void)argc;
 	(void)argv;
-	str = get_mantissa(a);
-	printf("%hd", get_exponent(a));
-	printf("%s\n", str);
 	ft_putstr("_____ ft_printf _____\n");
-	ft_printf("%-15.8s\n", "Salut");
+	ft_printf("%Lf\n", a);
 	ft_putstr("_____ printf _____\n");
-	printf("%-15.8s\n", "Salut");
+	printf("%Lf\n", a);
 	return (0);
 }
