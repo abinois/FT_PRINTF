@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 16:39:36 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/23 15:12:57 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/24 13:05:26 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,40 @@ char		*get_float(long double dbl, t_flag flagz, va_list ap)
 	nb = check_f_flagz(F, ap);
 	float_data->mantissa = get_mantissa(nb);
 	float_data->expo = get_exponent(nb);
-	float_data->sign = dbl > 0 ? false : true;
+	float_data->sign = dbl >= 0 ? false : true;
 	return (float_data->result);
+}
+
+
+char	*positive_part_of_float(t_float *float_data)
+{
+	char		*result;
+	char		*buffer;
+	uint16_t	i;
+	uint16_t	x;
+
+	x = 1;
+	i = 0;
+	while (expo - i > 0 && float_data->mantissa[i])
+		i++;
+	if (expo - i <= 64)
+		buffer = ft_lltoa(ft_pow(2, expo - i));
+	if (!(result = ft_strnew(100)))
+		return (NULL);
+	if (!(buffer = ft_strnew(100)))
+		return (NULL);
+	while (expo_cpy < float_data->expo)
+	{
+		if (float_data->mantissa[expo_cpy] == '1')
+		{
+			if (expo_cpy == 0)
+				buffer[100] = '1';
+			while (x-- > 0)
+				if (!(buffer = str_times_two(new)))
+					return (NULL);
+			x = 1;
+		}
+		else
+			x++;
+	}
 }
