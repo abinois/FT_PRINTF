@@ -6,16 +6,17 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 16:39:36 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/27 20:49:34 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/27 20:41:11 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft/libft.h"
+#include "../libft/libft.h"
 #include <stdarg.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 /*
 ** THIS IS CHECK F
