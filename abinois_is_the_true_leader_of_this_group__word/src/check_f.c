@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 16:39:36 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/27 16:09:18 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/27 19:13:54 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int16_t		get_exponent(long double dbl)
 	nb += 4;
 	*nb &= mask;
 	*nb -= 16383;
-	printf("nb = %hd\n", *nb);	
 	return (*nb);
 }
 
@@ -105,7 +104,6 @@ char	*over_63(t_float *infloat, char *res, int x, int i)
 char	*deci_float(t_float *infloat, long double nb)
 {
 	char	*res;
-	char	*buffer;
 	int		i;
 	int		x;
 
@@ -141,7 +139,6 @@ char	*fracti_float(t_float *infloat)
 	i = 0;
 	while ((int)infloat->expo - i > -1 && i < 63)
 		i++;
-	printf("i = %d\n", i);
 	if (!(buffer = (char *)malloc(sizeof(char) * 2)))
 		return (NULL);
 	buffer = "5\0";
@@ -162,7 +159,6 @@ char	*fracti_float(t_float *infloat)
 			}
 			if (!(res = str_add(buffer, res)))
 				return (NULL);
-			printf("res = %s\n", res);
 			x = 1;
 		}
 		else
@@ -171,23 +167,13 @@ char	*fracti_float(t_float *infloat)
 	return (res);
 }
 
-char		*p_sign_float(char * deci_float_str, t_flag flagz, t_float *infloat)
-{
-	if (infloat->sign)
-		deci_float_str = ft_strjoin("-", deci_float_str);
-	else if (F.plus)
-		deci_float_str = ft_strjoin("+", deci_float_str);
-	else if (F.sp)
-		deci_float_str = ft_strjoin(" ", deci_float_str);
-	return (deci_float_str);
-}
-
 char		*get_float(t_flag flagz, va_list ap)
 {
 	long double	nb;
 	t_float		*infloat;
-	char		*deci_float_str;
-	char		*fracti_float_str;
+	char		*deci_str;
+	char		*fracti_str;
+	char		*zersp;
 
 	if (!(infloat = (t_float *)malloc(sizeof(t_float))))
 		return (NULL);
@@ -195,14 +181,19 @@ char		*get_float(t_flag flagz, va_list ap)
 	infloat->mantissa = get_mantissa(nb);
 	infloat->expo = get_exponent(nb);
 	infloat->sign = nb >= 0 ? false : true;
-	deci_float_str = deci_float(infloat, nb);
-//	while (F.field-- (- ft_strlen(deci_float_str) - F.preci))
-	deci_float_str = p_sign_float(deci_float_str, F, infloat);
-	if (!F.hash && !F.preci)
-		return (deci_float_str);
-	infloat->result = ft_strjoin(deci_float_str, ".");
-	fracti_float_str = fracti_float(infloat);
-	infloat->result = ft_strjoin(infloat->result, fracti_float_str);
+	deci_str = deci_float(infloat, nb);
+	fracti_str = fracti_float(infloat);
+	zersp = get_zersp(infloat, F, deci_str);
+	if (F.minus)
+	{
+		deci_str = p_sign_float(deci_str, F, infloat);
+		if (F.hash || F.preci)
+			infloat->result = ft_strjoin(deci_str, ".");
+		if (F.preci)
+			infloat->result = ft_strjoin(infloat->result, fracti_str);
+		if (zersp)
+			infloat->result = ft_strjoin(infloat->result, zersp);
+	}
 	return (infloat->result);
 }
 

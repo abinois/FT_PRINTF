@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 17:06:59 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/21 12:13:47 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/27 17:49:13 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ char		*malloc_str_d(t_flag flagz, va_list ap)
 		lmax = F.nb < 0 ? F.preci + 1 : F.preci;
 	if (F.nb > 0 && (F.plus || F.sp) && F.field < lmax)
 		lmax++;
-//	toa += F.nb < 0 ? 1 : 0;
 	if (!(res = (char *)malloc(sizeof(char) * (lmax + 1))))
 		return (NULL);
 	res[lmax] = '\0';

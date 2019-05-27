@@ -54,12 +54,12 @@ int		ft_printf(const char *fmt, ...)
 int		main(int argc, char **argv)
 {
 
-	long double	a = 15332133344314113213131231.1231333215;
+	long double	a = 1.125;
 	(void)argc;
 	(void)argv;
 	ft_putstr("_____ ft_printf _____\n");
-	ft_printf("%Lf\n", a);
+	ft_printf("%+-#50.3Lf\n", a);
 	ft_putstr("_____ printf _____\n");
-	printf("%.25Lf\n", a);
+	printf("%+-#50.3Lf\n", a);
 	return (0);
 }
