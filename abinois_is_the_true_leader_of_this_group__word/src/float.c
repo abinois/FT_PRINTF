@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 13:46:22 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/24 19:10:14 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/27 11:55:34 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*allocplus(char *buf, char ret, int *x)
 	{
 		while (buf[i])
 			i++;
-		if (!( buf2= (char*)malloc(sizeof(char) * ++i + 1)))
+		if (!(buf2 = (char*)malloc(sizeof(char) * ++i + 1)))
 			return (NULL);
 		buf2[i] = '\0';
 		i = 0;
@@ -83,8 +83,6 @@ char	*str_add(char *s1, char *s2)
 		if (!(buf = allocplus(buf, ret, &x)))
 			return (NULL);
 	}
-//	ft_memdel((void**)&s1);
-//	ft_memdel((void**)&s2);
 	return (buf);
 }
 
@@ -113,6 +111,29 @@ char	*str_times_two(char *str)
 			ret = 0;
 		new[x] += '0';
 	}
-//	ft_memdel((void**)&str);
 	return (new);
+}
+
+char	*str_by_two(char *str)
+{
+	char	*new;
+	int		deci;
+	int		ret;
+	char	*final;
+	int		i;
+
+	if (!(new = ft_strjoin((const char *)str, "0")))
+		return (NULL);
+	if (!(final = (char*)malloc(sizeof(char) * (ft_strlen(new) + 1))))
+		return (NULL);
+	ret = 0;
+	i = -1;
+	while (new[++i])
+	{
+		deci = (new[i] - '0') / 2 + ret;
+		final[i] = deci + '0';
+		ret = ((new[i] - '0') * 5) % 10;
+	}
+	final[i] = '\0';
+	return (final);
 }

@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 13:23:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/24 17:18:52 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/27 11:54:07 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,6 @@ char			*allocplus(char *buf, char ret, int *x);
 char			*str_add(char *s1, char *s2);
 void			move_to_the_end(int *i, int *j, char *s1, char *s2);
 char			*str_times_two(char *str);
+char			*str_by_two(char *str);
 
 #endif
