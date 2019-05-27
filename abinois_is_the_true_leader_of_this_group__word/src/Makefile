@@ -1,0 +1,61 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: edillenb <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/05/27 16:42:47 by edillenb          #+#    #+#              #
+#    Updated: 2019/05/27 20:01:14 by edillenb         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME = libftprintf.a
+CFLAGS = -Wall -Werror -Wextra
+CC = gcc
+LIBFT = libft/libft.a
+
+SRC = $(addsuffix .c, \
+	  check_d check_ou check_xp check_f check_s buffer convert flag float \
+	  ft_printf tools fill_float)
+
+SRCLIBFT = $(addprefix libft/ft_, $(addsuffix .o, \
+		   hexatoa lltoa llutoa memdel octatoa pow putstr strjoin strnew \
+		   strlen strsub str_up atoi strjoinfr))
+
+OBJ = $(SRC:.c=.o)
+
+GREEN = \033[01;32m 
+BLUE = \033[01;34m 
+RED = \033[01;31m 
+YELLOW = \033[01;33m 
+NOCOLOR = \033[01;30m 
+
+all: $(NAME)
+
+$(NAME): $(OBJ) Makefile ft_printf.h
+	make -C libft
+	@ar xv $(LIBFT) $(SRCLIBFT)
+	@echo "$(BLUE)COMPILATION . . . . . . . . . . . . ."
+	$(CC) $(CFLAGS) -c $(SRC)
+	@ar rc $(NAME) $(OBJ) $(SRCLIBFT)
+	@ranlib $(NAME)
+	@echo "$(GREEN)TOUT EST ---------------------------> OK$(NOCOLOR)"
+
+clean:
+	@echo "$(BLUE)SUPPRESSION DES .O . . . . . . . . . ."
+	make clean -C libft
+	rm -f $(OBJ)
+	@echo "$(GREEN)TOUT EST ---------------------------> OK$(NOCOLOR)"
+
+fclean: clean
+	@echo "$(BLUE)SUPPRESSION DE LA LIB . . . . . . . ."
+	make fclean -C libft
+	rm -f $(NAME)
+	@echo "$(GREEN)TOUT EST ---------------------------> OK$(NOCOLOR)"
+
+re: fclean all
+	@echo "$(BLUE)RELINK . . . . . . . . . . . . . . ."
+	@echo "$(GREEN)TOUT EST ---------------------------> OK$(NOCOLOR)"
+
+.PHONY: all clean fclean re

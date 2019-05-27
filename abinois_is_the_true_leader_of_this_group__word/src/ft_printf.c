@@ -50,16 +50,3 @@ int		ft_printf(const char *fmt, ...)
 	free(buf);
 	return (1);
 }
-
-int		main(int argc, char **argv)
-{
-
-	long double	a = 1.125;
-	(void)argc;
-	(void)argv;
-	ft_putstr("_____ ft_printf _____\n");
-	ft_printf("%+-#50.3Lf\n", a);
-	ft_putstr("_____ printf _____\n");
-	printf("%+-#50.3Lf\n", a);
-	return (0);
-}
