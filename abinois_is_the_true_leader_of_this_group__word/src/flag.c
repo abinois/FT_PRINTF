@@ -6,12 +6,12 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 16:16:20 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/15 10:31:31 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/27 20:16:23 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "../libft/libft.h"
+#include "libft/libft.h"
 #include <stdbool.h>
 
 void	check_first_flagz(const char *fmt, t_flag *flagz, int *i)

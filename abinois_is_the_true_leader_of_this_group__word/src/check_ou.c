@@ -6,12 +6,12 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 14:50:25 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/15 18:34:32 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/27 20:16:49 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "../libft/libft.h"
+#include "libft/libft.h"
 #include <stdarg.h>
 #include <stdbool.h>
 #include <stdlib.h>

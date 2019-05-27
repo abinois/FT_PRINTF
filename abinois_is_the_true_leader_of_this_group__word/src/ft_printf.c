@@ -10,7 +10,7 @@
 /* ************************************************************************** */
 
 #include <float.h>
-#include "../libft/libft.h"
+#include "libft/libft.h"
 #include "ft_printf.h"
 #include <stdarg.h>
 #include <stdbool.h>

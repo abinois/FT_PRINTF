@@ -6,14 +6,14 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:28:27 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/21 12:13:37 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/27 20:17:21 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdbool.h>
 #include <stdlib.h>
-#include "../libft/libft.h"
+#include "libft/libft.h"
 
 void		reset_flagz(t_flag *flagz)
 {

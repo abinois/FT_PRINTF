@@ -6,11 +6,11 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 16:45:46 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/27 19:13:52 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/27 20:17:06 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "libft/libft.h"
 #include "ft_printf.h"
 #include <stdlib.h>
 

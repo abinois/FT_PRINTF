@@ -6,12 +6,12 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 14:37:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/15 10:14:05 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/27 20:15:47 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "../libft/libft.h"
+#include "libft/libft.h"
 
 char	*m_to_buf(int *m, char *buf, const char *fmt, int i)
 {

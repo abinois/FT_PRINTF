@@ -6,13 +6,13 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:31:29 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/27 14:22:37 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/27 20:16:15 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "ft_printf.h"
-#include "../libft/libft.h"
+#include "libft/libft.h"
 
 char		*check_conv1(const char *fmt, t_flag flagz, int *i, va_list ap)
 {
