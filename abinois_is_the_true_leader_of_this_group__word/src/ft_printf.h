@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 13:23:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/27 11:54:07 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/27 15:44:22 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct	s_float
 {
 	char		*mantissa;
 	bool		sign;
-	uint16_t	expo;
+	int			expo;
 	char		*result;
 }				t_float;
 
@@ -91,9 +91,9 @@ char			*fill_str_s(t_flag flagz, size_t lmax, char *toa, char *res);
 // check_f.c   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 char			*get_mantissa(long double dbl);
 long double		check_f_flagz(t_flag flagz, va_list ap);
-uint16_t		get_exponent(long double dbl);
+int16_t			get_exponent(long double dbl);
 char			*get_float(t_flag flagz, va_list ap);
-char			*deci_float(t_float *infloat);
+char			*deci_float(t_float *infloat, long double nb);
 char			*over_63(t_float *infloat, char *res, int x, int i);
 // float.c     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 char			*allocplus(char *buf, char ret, int *x);

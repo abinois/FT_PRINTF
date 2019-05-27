@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 16:39:36 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/24 19:13:19 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/27 16:09:18 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,17 @@ char	*get_mantissa(long double dbl)
 	return (binary);
 }
 
-uint16_t	get_exponent(long double dbl)
+int16_t		get_exponent(long double dbl)
 {
-	uint16_t	mask;
-	uint16_t	*nb;
+	int16_t	mask;
+	int16_t	*nb;
 
 	mask = 32767;
-	nb = (uint16_t*)&dbl;
+	nb = (int16_t*)&dbl;
 	nb += 4;
 	*nb &= mask;
 	*nb -= 16383;
+	printf("nb = %hd\n", *nb);	
 	return (*nb);
 }
 
@@ -82,13 +83,10 @@ char	*over_63(t_float *infloat, char *res, int x, int i)
 	while (++x <= (int)infloat->expo - i)
 		if (!(buffer = str_times_two(buffer)))
 			return (NULL);
-	if ((infloat->mantissa)[i] == '1')
-		if (!(res = str_add(buffer, res)))
-			return (NULL);
-	x = 1;
-	while (--i >= 0)
+	x = 0;
+	while (i >= 0)
 	{
-		if ((infloat->mantissa)[i] == '1')
+		if ((infloat->mantissa)[i--] == '1')
 		{
 			while (x-- > 0)
 				if (!(buffer = str_times_two(buffer)))
@@ -104,12 +102,12 @@ char	*over_63(t_float *infloat, char *res, int x, int i)
 	return (res);
 }
 
-char	*deci_float(t_float *infloat)
+char	*deci_float(t_float *infloat, long double nb)
 {
-	char		*res;
-	char		*buffer;
-	int	i;
-	int	x;
+	char	*res;
+	char	*buffer;
+	int		i;
+	int		x;
 
 	x = 0;
 	i = 0;
@@ -117,7 +115,9 @@ char	*deci_float(t_float *infloat)
 		i++;
 	if (!(res = (char*)malloc(sizeof(char) * 2)))
 		return (NULL);
-	res = "0\0"; 
+	res = "0\0";
+	if (nb < 1 && nb > -1)
+		return (res);
 	while (i >= 0 && (int)infloat->expo - i <= 63)
 	{
 		if ((infloat->mantissa)[i] == '1')
@@ -131,10 +131,63 @@ char	*deci_float(t_float *infloat)
 	return (res);
 }
 
+char	*fracti_float(t_float *infloat)
+{
+	char	*res;
+	char	*buffer;
+	int		i;
+	int		x;
+
+	i = 0;
+	while ((int)infloat->expo - i > -1 && i < 63)
+		i++;
+	printf("i = %d\n", i);
+	if (!(buffer = (char *)malloc(sizeof(char) * 2)))
+		return (NULL);
+	buffer = "5\0";
+	if (!(res = (char *)malloc(sizeof(char) * 2)))
+		return (NULL);
+	res = "0\0";
+	x = infloat->expo < 0 ? -(infloat->expo + 1) : 0;
+	while ((infloat->mantissa)[i])
+	{
+		if ((infloat->mantissa)[i++] == '1')
+		{
+			while (x-- > 0)
+			{
+				if (!(buffer = str_by_two(buffer)))
+					return (NULL);
+				if (!(res = ft_strjoin(res, "0")))
+					return (NULL);
+			}
+			if (!(res = str_add(buffer, res)))
+				return (NULL);
+			printf("res = %s\n", res);
+			x = 1;
+		}
+		else
+			x++;
+	}
+	return (res);
+}
+
+char		*p_sign_float(char * deci_float_str, t_flag flagz, t_float *infloat)
+{
+	if (infloat->sign)
+		deci_float_str = ft_strjoin("-", deci_float_str);
+	else if (F.plus)
+		deci_float_str = ft_strjoin("+", deci_float_str);
+	else if (F.sp)
+		deci_float_str = ft_strjoin(" ", deci_float_str);
+	return (deci_float_str);
+}
+
 char		*get_float(t_flag flagz, va_list ap)
 {
 	long double	nb;
 	t_float		*infloat;
+	char		*deci_float_str;
+	char		*fracti_float_str;
 
 	if (!(infloat = (t_float *)malloc(sizeof(t_float))))
 		return (NULL);
@@ -142,7 +195,14 @@ char		*get_float(t_flag flagz, va_list ap)
 	infloat->mantissa = get_mantissa(nb);
 	infloat->expo = get_exponent(nb);
 	infloat->sign = nb >= 0 ? false : true;
-	infloat->result = deci_float(infloat);
+	deci_float_str = deci_float(infloat, nb);
+//	while (F.field-- (- ft_strlen(deci_float_str) - F.preci))
+	deci_float_str = p_sign_float(deci_float_str, F, infloat);
+	if (!F.hash && !F.preci)
+		return (deci_float_str);
+	infloat->result = ft_strjoin(deci_float_str, ".");
+	fracti_float_str = fracti_float(infloat);
+	infloat->result = ft_strjoin(infloat->result, fracti_float_str);
 	return (infloat->result);
 }
 
