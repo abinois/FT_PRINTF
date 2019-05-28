@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 16:45:46 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/28 12:01:47 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/28 20:57:36 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ char		*get_zersp(t_float *infloat, t_flag flagz, char *deci_str)
 	z += F.hash || F.preci ? 1 : 0;
 	z += I->sign || F.plus || F.sp ? 1 : 0;
 	F.field = F.field > z ? F.field - z : 0;
-	zersp = NULL;
 	if (F.field)
 	{
 		if (!(zersp = (char*)malloc(sizeof(char) * (F.field + 1))))
@@ -44,8 +43,9 @@ char		*get_zersp(t_float *infloat, t_flag flagz, char *deci_str)
 		while (F.field--)
 			zersp[i++] = F.zer ? '0' : ' ';
 		zersp[i] = '\0';
+		return (zersp);
 	}
-	return (zersp);
+	return (NULL);
 }
 
 char		*get_float(t_flag flagz, va_list ap)
@@ -63,7 +63,8 @@ char		*get_float(t_flag flagz, va_list ap)
 	I->expo = get_exponent(nb);
 	I->sign = nb >= 0 ? false : true;
 	deci_str = deci_float(I, nb);
-	fracti_str = fracti_float(I);
+	fracti_str = fracti_float(I, 0);
+	preci_float(&fracti_str, &deci_str, F);
 	zersp = get_zersp(I, F, deci_str);
 	if (F.minus)
 	{

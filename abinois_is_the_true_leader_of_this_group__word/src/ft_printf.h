@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 13:23:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/28 12:01:41 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/28 20:46:34 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char			*put_hash(char *res, size_t *c, t_flag flagz, size_t l_nb);
 // buffer.c      - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 char			*m_to_buf(int *m, char *buf, const char *fmt, int i);
 char			*percent_to_buf(int *m, char *buf, int *i);
-int			 m_or_percent(int *m, char **buf, const char *fmt, int *i);
+int				 m_or_percent(int *m, char **buf, const char *fmt, int *i);
 char			*arg_to_buf(char *arg, char **buf);
 // flag.c        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void			check_first_flagz(const char *fmt, t_flag *flagz, int *i);
@@ -76,8 +76,9 @@ char			*check_conv3(const char *fmt, t_flag flagz, int *i, va_list ap);
 // float_a.c     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 char			*over_63(t_float *infloat, char *res, int x, int i);
 char			*deci_float(t_float *infloat, long double nb);
-char			*fracti_float(t_float *infloat);
-int			fracti_algo(char **buffer, char **res, int *x);
+char			*fracti_float(t_float *infloat, int i);
+int				fracti_algo(char **buffer, char **res, int *x);
+int				preci_float(char **fracti_str, char **deci_str, t_flag flagz);
 // float_b.c       - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 char			*str_times_two(char *str);
 char			*str_by_two(char *str);
@@ -101,7 +102,7 @@ char			*fill_str_s(t_flag flagz, size_t lmax, char *toa, char *res);
 char			*fill_nomin_xp(t_flag flagz, size_t l_nb, char *res, size_t *c);
 // cast_arg.c
 long long		check_d_i_flagz(t_flag flagz, va_list ap);
-ULL			check_poux_flagz(t_flag flagz, va_list ap);
+ULL				check_poux_flagz(t_flag flagz, va_list ap);
 long double		check_f_flagz(t_flag flagz, va_list ap);
 
 #endif
