@@ -14,15 +14,6 @@
 #include "ft_printf.h"
 #include <stdlib.h>
 
-long double	check_f_flagz(t_flag flagz, va_list ap)
-{
-	long double	number;
-
-	if (F.bigl)
-		return ((number = va_arg(ap, long double)));
-	return ((number = va_arg(ap, double)));
-}
-
 char		*p_sign_float(char *str, t_flag flagz, t_float *infloat)
 {
 	if (I->sign)

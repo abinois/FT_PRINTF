@@ -16,12 +16,12 @@ CC = gcc
 LIBFT = libft/libft.a
 
 SRC = $(addsuffix .c, \
-	  check_d check_ou check_xp check_f check_s buffer convert flag float \
-	  ft_printf tools fill_float)
+	buffer convert flag float_a float_b cast_arg malloc_str fill_str \
+	ft_printf tools fill_float)
 
 SRCLIBFT = $(addprefix libft/ft_, $(addsuffix .o, \
-		   hexatoa lltoa llutoa memdel octatoa pow putstr strjoin strnew \
-		   strlen strsub str_up atoi strjoinfr))
+	    hexatoa lltoa llutoa memdel octatoa pow putstr strjoin strnew \
+	    strlen strsub str_up atoi strjoinfr str_add putnstr))
 
 OBJ = $(SRC:.c=.o)
 

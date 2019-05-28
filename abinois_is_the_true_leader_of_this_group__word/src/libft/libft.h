@@ -19,9 +19,9 @@
 
 typedef struct	s_list
 {
-	void			*content;
-	size_t			content_size;
-	struct s_list	*next;
+    void			*content;
+    size_t			content_size;
+    struct s_list	*next;
 }				t_list;
 
 void			*ft_memset(void *b, int c, size_t len);
@@ -98,6 +98,7 @@ char			*ft_lltoa(long long nbr);
 char			*ft_octatoa(unsigned long long nbr);
 char			*ft_hexatoa(unsigned long long nbr);
 char			*ft_str_up(char *s);
-char			*ft_strjoinfr(const char *s1, const char *s2);
+char			*ft_strjoinfr(const char *s1, const char *s2, char option);
+char			*ft_str_add(char *s1, char *s2);
 
 #endif

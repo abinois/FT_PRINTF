@@ -17,80 +17,67 @@
 
 void		reset_flagz(t_flag *flagz)
 {
-	F->zer = false;
-	F->minus = false;
-	F->sp = false;
-	F->plus = false;
-	F->hash = false;
-	F->field = 0;
-	F->dot = false;
-	F->preci = 0;
-	F->l = false;
-	F->ll = false;
-	F->bigl = false;
-	F->h = false;
-	F->hh = false;
-	F->conv = 'r';
-	F->nb = 0;
+    F->zer = false;
+    F->minus = false;
+    F->sp = false;
+    F->plus = false;
+    F->hash = false;
+    F->field = 0;
+    F->dot = false;
+    F->preci = 0;
+    F->l = false;
+    F->ll = false;
+    F->bigl = false;
+    F->h = false;
+    F->hh = false;
+    F->conv = 'r';
+    F->nb = 0;
 }
 
 char		*p_toa(char *toa, char *res, size_t *c)
 {
-	size_t	i;
+    size_t	i;
 
-	i = *toa == '-' ? 1 : 0;
-	while (toa[i])
-		res[(*c)++] = toa[i++];
-	ft_memdel((void**)&toa);
-	return (res);
+    i = *toa == '-' ? 1 : 0;
+    while (toa[i])
+	res[(*c)++] = toa[i++];
+    ft_memdel((void**)&toa);
+    return (res);
 }
 
 char		*p_sign(t_flag *flagz, char *res, size_t *c)
 {
-	if (!(F->minus) && (!(F->zer) || F->dot) && ((F->nb < 0 || F->plus || F->sp)
-			&& *c != 0))
-		(*c)--;
-	if (F->nb < 0)
-		res[(*c)++] = '-';
-	else if (F->plus && F->nb >= 0)
-		res[(*c)++] = '+';
-	else if (F->sp && F->nb >= 0)
-		res[(*c)++] = ' ';
-	if (!(F->minus) && F->zer && !(F->dot) && *c == 1)
-		F->field--;
-	return (res);
+    if (!(F->minus) && (!(F->zer) || F->dot) && ((F->nb < 0 || F->plus || F->sp)
+		&& *c != 0))
+	(*c)--;
+    if (F->nb < 0)
+	res[(*c)++] = '-';
+    else if (F->plus && F->nb >= 0)
+	res[(*c)++] = '+';
+    else if (F->sp && F->nb >= 0)
+	res[(*c)++] = ' ';
+    if (!(F->minus) && F->zer && !(F->dot) && *c == 1)
+	F->field--;
+    return (res);
 }
 
 char		*p_zer(size_t flag, char *res, size_t *c, size_t l_nb)
 {
-	if (flag > l_nb)
-		while (l_nb++ < flag)
-			res[(*c)++] = '0';
-	return (res);
+    if (flag > l_nb)
+	while (l_nb++ < flag)
+	    res[(*c)++] = '0';
+    return (res);
 }
 
-char		*llhexatoa(ULL nbr)
+char		*put_hash(char *res, size_t *c, t_flag flagz, size_t l_nb)
 {
-	char				*base;
-	ULL					res;
-	char				*tab;
-	int					n;
-
-	base = "0123456789abcdef";
-	res = nbr;
-	n = 1;
-	while (res > 15)
-	{
-		n++;
-		res /= 16;
-	}
-	if (!(tab = (char*)malloc(sizeof(*tab) * n + 1)))
-		return (NULL);
-	tab[n] = '\0';
-	while (n-- > 0)
-	{
-		tab[n] = base[nbr % 16];
-		nbr /= 16;
-	}
-	return (tab);
+    res = p_zer(F.preci, res, c, l_nb);
+    if (F.conv == 'o')
+    {
+	if (F.hash && *c == 0)
+	    res[(*c)++] = '0';
+	else if (F.hash)
+	    res[(*c) - 1] = '0';
+    }
+    return (res);
 }
