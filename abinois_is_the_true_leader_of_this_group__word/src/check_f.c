@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 16:39:36 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/27 20:49:34 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/28 11:54:16 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,10 @@
 #include <string.h>
 
 /*
-** THIS IS CHECK F
-*/
+ ** Get all parts of the float : exponent, mantissa, sign, decimal, fractional.
+ */
 
-long double	check_f_flagz(t_flag flagz, va_list ap)
-{
-	long double	number;
-
-	if (F.bigl)
-		return ((number = va_arg(ap, long double)));
-	return ((number = va_arg(ap, double)));
-}
-
-char	*get_mantissa(long double dbl)
+char		*get_mantissa(long double dbl)
 {
 	uint8_t		*nb;
 	char		*binary;
@@ -71,20 +62,20 @@ int16_t		get_exponent(long double dbl)
 	return (*nb);
 }
 
-char	*over_63(t_float *infloat, char *res, int x, int i)
+char		*over_63(t_float *infloat, char *res, int x, int i)
 {
 	char	*buffer;
 
 	if (!(buffer = (char*)malloc(sizeof(char) * 2)))
 		return (NULL);
 	buffer = "1\0";
-	while (++x <= (int)infloat->expo - i)
+	while (++x <= (int)I->expo - i)
 		if (!(buffer = str_times_two(buffer)))
 			return (NULL);
 	x = 0;
 	while (i >= 0)
 	{
-		if ((infloat->mantissa)[i--] == '1')
+		if ((I->mantissa)[i--] == '1')
 		{
 			while (x-- > 0)
 				if (!(buffer = str_times_two(buffer)))
@@ -100,7 +91,7 @@ char	*over_63(t_float *infloat, char *res, int x, int i)
 	return (res);
 }
 
-char	*deci_float(t_float *infloat, long double nb)
+char		*deci_float(t_float *infloat, long double nb)
 {
 	char	*res;
 	int		i;
@@ -108,27 +99,27 @@ char	*deci_float(t_float *infloat, long double nb)
 
 	x = 0;
 	i = 0;
-	while ((int)infloat->expo - i > 0 && i < 63)
+	while ((int)I->expo - i > 0 && i < 63)
 		i++;
 	if (!(res = (char*)malloc(sizeof(char) * 2)))
 		return (NULL);
 	res = "0\0";
 	if (nb < 1 && nb > -1)
 		return (res);
-	while (i >= 0 && (int)infloat->expo - i <= 63)
+	while (i >= 0 && (int)I->expo - i <= 63)
 	{
-		if ((infloat->mantissa)[i] == '1')
-			if (!(res = str_add(res, ft_llutoa(ft_pow(2, (int)infloat->expo - i)))))
+		if ((I->mantissa)[i] == '1')
+			if (!(res = str_add(res, ft_llutoa(ft_pow(2, (int)I->expo - i)))))
 				return (NULL);
 		i--;
 	}
-	if (i >= 0 && (int)infloat->expo - i > 63)	
-		if (!(res = over_63(infloat, res, x, i)))
+	if (i >= 0 && (int)I->expo - i > 63)
+		if (!(res = over_63(I, res, x, i)))
 			return (NULL);
 	return (res);
 }
 
-char	*fracti_float(t_float *infloat)
+char		*fracti_float(t_float *infloat)
 {
 	char	*res;
 	char	*buffer;
@@ -136,7 +127,7 @@ char	*fracti_float(t_float *infloat)
 	int		x;
 
 	i = 0;
-	while ((int)infloat->expo - i > -1 && i < 63)
+	while ((int)I->expo - i > -1 && i < 63)
 		i++;
 	if (!(buffer = (char *)malloc(sizeof(char) * 2)))
 		return (NULL);
@@ -144,76 +135,27 @@ char	*fracti_float(t_float *infloat)
 	if (!(res = (char *)malloc(sizeof(char) * 2)))
 		return (NULL);
 	res = "0\0";
-	x = infloat->expo < 0 ? -(infloat->expo + 1) : 0;
-	while ((infloat->mantissa)[i])
+	x = I->expo < 0 ? -(I->expo + 1) : 0;
+	while ((I->mantissa)[i])
 	{
-		if ((infloat->mantissa)[i++] == '1')
-		{
-			while (x-- > 0)
-			{
-				if (!(buffer = str_by_two(buffer)))
-					return (NULL);
-				if (!(res = ft_strjoin(res, "0")))
-					return (NULL);
-			}
-			if (!(res = str_add(buffer, res)))
-				return (NULL);
-			x = 1;
-		}
+		if ((I->mantissa)[i++] == '1')
+			fracti_algo(buffer, res, &x);
 		else
 			x++;
 	}
 	return (res);
 }
 
-char		*get_float(t_flag flagz, va_list ap)
+void		fracti_algo(char *buffer, char *res, int *x)
 {
-	long double	nb;
-	t_float		*infloat;
-	char		*deci_str;
-	char		*fracti_str;
-	char		*zersp;
-
-	if (!(infloat = (t_float *)malloc(sizeof(t_float))))
+	while ((*x)-- > 0)
+	{
+		if (!(buffer = str_by_two(buffer)))
+			return (NULL);
+		if (!(res = ft_strjoin(res, "0")))
+			return (NULL);
+	}
+	if (!(res = str_add(buffer, res)))
 		return (NULL);
-	nb = check_f_flagz(F, ap);
-	infloat->mantissa = get_mantissa(nb);
-	infloat->expo = get_exponent(nb);
-	infloat->sign = nb >= 0 ? false : true;
-	deci_str = deci_float(infloat, nb);
-	fracti_str = fracti_float(infloat);
-	zersp = get_zersp(infloat, F, deci_str);
-	if (F.minus)
-	{
-		deci_str = p_sign_float(deci_str, F, infloat);
-		if (F.hash || F.preci)
-			infloat->result = ft_strjoin(deci_str, ".");
-		if (F.preci)
-			infloat->result = ft_strjoin(infloat->result, fracti_str);
-		if (zersp)
-			infloat->result = ft_strjoin(infloat->result, zersp);
-	}
-	else if (F.zer)
-	{
-		if (zersp)
-			deci_str = ft_strjoin(zersp, deci_str);
-		infloat->result = p_sign_float(deci_str, F, infloat);
-		if (F.hash || F.preci)
-			infloat->result = ft_strjoin(infloat->result, ".");
-		if (F.preci)
-			infloat->result = ft_strjoin(infloat->result, fracti_str);
-	}
-	else
-	{
-		deci_str = p_sign_float(deci_str, F, infloat);
-		infloat->result = deci_str;
-		if (zersp)
-			infloat->result = ft_strjoin(zersp, deci_str);
-		if (F.hash || F.preci)
-			infloat->result = ft_strjoin(infloat->result, ".");
-		if (F.preci)
-			infloat->result = ft_strjoin(infloat->result, fracti_str);
-	}
-	return (infloat->result);
+	*x = 1;
 }
-

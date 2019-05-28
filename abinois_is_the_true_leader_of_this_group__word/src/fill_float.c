@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 16:45:46 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/27 20:49:08 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/28 12:01:47 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,18 @@
 #include "ft_printf.h"
 #include <stdlib.h>
 
+long double	check_f_flagz(t_flag flagz, va_list ap)
+{
+	long double	number;
+
+	if (F.bigl)
+		return ((number = va_arg(ap, long double)));
+	return ((number = va_arg(ap, double)));
+}
+
 char		*p_sign_float(char *str, t_flag flagz, t_float *infloat)
 {
-	if (infloat->sign)
+	if (I->sign)
 		str = ft_strjoin("-", str);
 	else if (F.plus)
 		str = ft_strjoin("+", str);
@@ -33,7 +42,7 @@ char		*get_zersp(t_float *infloat, t_flag flagz, char *deci_str)
 
 	z = ft_strlen(deci_str) + F.preci;
 	z += F.hash || F.preci ? 1 : 0;
-	z += infloat->sign || F.plus || F.sp ? 1 : 0;
+	z += I->sign || F.plus || F.sp ? 1 : 0;
 	F.field = F.field > z ? F.field - z : 0;
 	zersp = NULL;
 	if (F.field)
@@ -46,4 +55,55 @@ char		*get_zersp(t_float *infloat, t_flag flagz, char *deci_str)
 		zersp[i] = '\0';
 	}
 	return (zersp);
+}
+
+char		*get_float(t_flag flagz, va_list ap)
+{
+	long double	nb;
+	t_float		*infloat;
+	char		*deci_str;
+	char		*fracti_str;
+	char		*zersp;
+
+	if (!(I = (t_float *)malloc(sizeof(t_float))))
+		return (NULL);
+	nb = check_f_flagz(F, ap);
+	I->mantissa = get_mantissa(nb);
+	I->expo = get_exponent(nb);
+	I->sign = nb >= 0 ? false : true;
+	deci_str = deci_float(I, nb);
+	fracti_str = fracti_float(I);
+	zersp = get_zersp(I, F, deci_str);
+	if (F.minus)
+	{
+		deci_str = p_sign_float(deci_str, F, I);
+		if (F.hash || F.preci)
+			I->result = ft_strjoin(deci_str, ".");
+		if (F.preci)
+			I->result = ft_strjoin(I->result, fracti_str);
+		if (zersp)
+			I->result = ft_strjoin(I->result, zersp);
+	}
+	else if (F.zer)
+	{
+		if (zersp)
+			deci_str = ft_strjoin(zersp, deci_str);
+		I->result = p_sign_float(deci_str, F, I);
+		if (F.hash || F.preci)
+			I->result = ft_strjoin(I->result, ".");
+		if (F.preci)
+			I->result = ft_strjoin(I->result, fracti_str);
+	}
+	else
+	{
+		deci_str = p_sign_float(deci_str, F, I);
+		I->result = deci_str;
+		if (zersp)
+			I->result = ft_strjoin(zersp, deci_str);
+		if (F.hash || F.preci)
+			I->result = ft_strjoin(I->result, ".");
+		if (F.preci)
+			I->result = ft_strjoin(I->result, fracti_str);
+	}
+	return (I->result);
 }

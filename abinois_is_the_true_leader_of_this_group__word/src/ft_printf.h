@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 13:23:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/27 19:13:47 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/28 12:01:41 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@
 # include <string.h>
 # include <stdint.h>
 
+# define F		flagz
+# define I		infloat
 # define UI		unsigned int
 # define ULL	unsigned long long
-# define F		flagz
 
 typedef struct	s_float
 {
@@ -49,6 +50,7 @@ typedef struct	s_flag
 	long long	nb;
 }				t_flag;
 
+// ft_printf.c   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 int				ft_printf(const char *fmt, ...);
 // tools.c       - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void			reset_flagz(t_flag *flagz);
@@ -90,18 +92,20 @@ char			*malloc_str_s(t_flag flagz, va_list ap);
 char			*fill_str_s(t_flag flagz, size_t lmax, char *toa, char *res);
 // check_f.c     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 char			*get_mantissa(long double dbl);
-long double		check_f_flagz(t_flag flagz, va_list ap);
 int16_t			get_exponent(long double dbl);
-char			*get_float(t_flag flagz, va_list ap);
-char			*deci_float(t_float *infloat, long double nb);
 char			*over_63(t_float *infloat, char *res, int x, int i);
+char			*deci_float(t_float *infloat, long double nb);
+char			*fracti_float(t_float *infloat);
+void			fracti_algo(char *buffer, char *res, int *x);
 // float.c       - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-char			*allocplus(char *buf, char ret, int *x);
-char			*str_add(char *s1, char *s2);
+char			*allocplus(char *buf, char ret, int *x);// >> go to the libft
+char			*str_add(char *s1, char *s2);// >> go to the libft
 void			move_to_the_end(int *i, int *j, char *s1, char *s2);
-char			*str_times_two(char *str);
-char			*str_by_two(char *str);
+char			*str_times_two(char *str);// >> go to the libft
+char			*str_by_two(char *str);// >> go to the libft
 // fill_float.c  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+long double		check_f_flagz(t_flag flagz, va_list ap);
 char			*p_sign_float(char *str, t_flag flagz, t_float *infloat);
 char			*get_zersp(t_float *infloat, t_flag flagz, char *deci_str);
+char			*get_float(t_flag flagz, va_list ap);
 #endif
