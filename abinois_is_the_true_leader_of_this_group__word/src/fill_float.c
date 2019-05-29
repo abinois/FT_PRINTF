@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 16:45:46 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/29 17:42:18 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/29 19:47:11 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ char		*get_float(t_flag flagz, va_list ap)
 {
 	long double	nb;
 	t_float		*infloat;
+	char		*result;
 
 	I = NULL;
 	if (!(get_f_start(&I, &nb, ap, F)))
@@ -105,5 +106,7 @@ char		*get_float(t_flag flagz, va_list ap)
 		if (!(get_f_else(I, F)))
 			return (NULL);
 	}
+	result = I->result;
+//	free_float(I);
 	return (I->result);
 }

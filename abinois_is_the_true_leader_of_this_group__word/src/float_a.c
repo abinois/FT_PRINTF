@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 16:39:36 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/29 17:50:56 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/29 19:47:08 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,20 +109,24 @@ int		fracti_algo(char **buffer, char **res, int *x)
 	while ((*x)-- > 0)
 	{
 		if (!(*buffer = str_by_two(*buffer)))
+		{
+			ft_memdel((void**)res);
 			return (-1);
+		}
 		if (!(*res = ft_strjoinfr(*res, "0", 1)))
 			return (-1);
 	}
 	if (!(*res = ft_str_add(*buffer, *res)))
 		return (-1);
+//	ft_memdel((void**)buffer); si on le free mtn, ca marche plus, mais ca leaks
 	*x = 1;
 	return (0);
 }
 
 int		preci_float(char **fracti_str, char **deci_str, t_flag flagz)
 {
-	int		i;
 	char	*new;
+	int		i;
 
 	new = NULL;
 	if (ft_strlen(*fracti_str) <= F.preci)
@@ -137,16 +141,10 @@ int		preci_float(char **fracti_str, char **deci_str, t_flag flagz)
 		return (0);
 	}
 	i = F.preci;
-	if ((*fracti_str)[i--] >= '5')
-	{
-		(*fracti_str)[i] += 1;
-		while ((*fracti_str)[i] > '9' && i >= 0)
-		{
-			(*fracti_str)[i--] = '0';
+	if ((*fracti_str)[i--] >= '5' && ((*fracti_str)[i] += 1))
+		while ((*fracti_str)[i] > '9' && i >= 0 && ((*fracti_str)[i--] = '0'))
 			if (i >= 0)
 				(*fracti_str)[i] += 1;
-		}
-	}
 	if (i == -1)
 		*deci_str = ft_str_add(*deci_str, "1");
 	*fracti_str = ft_strsub(*fracti_str, 0, F.preci);

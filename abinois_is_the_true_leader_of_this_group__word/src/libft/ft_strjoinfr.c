@@ -6,13 +6,12 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 11:58:59 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/29 14:44:37 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/29 18:49:18 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
-#include <stdio.h>
 
 char	*ft_strjoinfr(const char *s1, const char *s2, char option)
 {

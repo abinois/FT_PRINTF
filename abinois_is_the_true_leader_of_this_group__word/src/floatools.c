@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 16:48:32 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/29 17:11:00 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/29 19:24:28 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ char		*free_float(t_float *infloat)
 		ft_memdel((void**)&(I->deci_str));
 	if (I->zersp)
 		ft_memdel((void**)&(I->zersp));
+	ft_memdel((void**)&I);
 	return (NULL);
 }

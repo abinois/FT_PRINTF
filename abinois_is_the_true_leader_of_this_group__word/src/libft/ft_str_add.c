@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 13:46:22 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/29 13:09:08 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/29 19:47:29 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ static char	*allocplus(char *buf, char ret, int *x)
 		while (buf[i])
 			i++;
 		if (!(buf2 = (char*)malloc(sizeof(char) * ++i + 1)))
+		{
+//			ft_memdel((void**)&buf);
 			return (NULL);
+		}
 		buf2[i] = '\0';
 		i = 0;
 		while (buf[i])
@@ -52,7 +55,11 @@ static char	*move_to_the_end(int *i, int *j, char *s1, char *s2)
 		(*j)++;
 	x = (*i) > (*j) ? (*i) : (*j);
 	if (!(buf = (char*)malloc(sizeof(char) * x + 1)))
+	{
+//		ft_memdel((void**)&s1);
+//		ft_memdel((void**)&s2);
 		return (NULL);
+	}
 	buf[x--] = '\0';
 	return (buf);
 }
@@ -81,6 +88,8 @@ char		*ft_str_add(char *s1, char *s2)
 			ret = 0;
 		if (!(buf = allocplus(buf, ret, &x)))
 			return (NULL);
+//		ft_memdel((void**)&s1);
+//		ft_memdel((void**)&s2);
 	}
 	return (buf);
 }
