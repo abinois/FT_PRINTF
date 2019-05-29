@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 13:23:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/29 15:09:38 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/29 16:44:57 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ typedef struct	s_float
 	bool		sign;
 	int			expo;
 	char		*result;
+	char		*fracti_str;
+	char		*deci_str;
+	char		*zersp;
 }				t_float;
 
 typedef struct	s_flag
@@ -86,7 +89,9 @@ char			*get_mantissa(long double dbl);
 int16_t			get_exponent(long double dbl);
 // fill_float.c  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 char			*p_sign_float(char *str, t_flag flagz, t_float *infloat);
-char			*get_zersp(t_float *infloat, t_flag flagz, char *deci_str);
+int				get_zersp(t_float *infloat, t_flag flagz);
+t_float			*reset_float(t_float *infloat);
+char			*free_float(t_float *infloat);
 char			*get_float(t_flag flagz, va_list ap);
 // malloc_str.c
 char			*malloc_str_c(t_flag flagz, va_list ap, char option);
