@@ -1,20 +1,17 @@
-/* ************************************************************************** */ /*                                                                            */
+/* ************************************************************************** */
+/*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 17:15:31 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/23 12:12:43 by edillenb         ###   ########.fr       */
+/*   Created: 2019/05/29 13:14:02 by edillenb          #+#    #+#             */
+/*   Updated: 2019/05/29 13:15:30 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <float.h>
 #include "libft/libft.h"
 #include "ft_printf.h"
-#include <stdarg.h>
-#include <stdbool.h>
-#include <stdio.h>
 #include <stdlib.h>
 
 int		ft_printf(const char *fmt, ...)
@@ -29,7 +26,7 @@ int		ft_printf(const char *fmt, ...)
 	m = 0;
 	buf = NULL;
 	va_start(ap, fmt);
-	while (fmt[i]) 
+	while (fmt[i])
 		if (fmt[i++] == '%') 
 		{ 
 			if (m_or_percent(&m, &buf, fmt, &i) == -1)

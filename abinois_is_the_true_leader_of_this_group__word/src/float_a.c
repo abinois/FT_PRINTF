@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 16:39:36 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/28 20:56:21 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/29 13:20:10 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,8 +134,6 @@ int		preci_float(char **fracti_str, char **deci_str, t_flag flagz)
 		new = ft_strncpy(new, *fracti_str, ft_strlen(*fracti_str));
 		free(*fracti_str);
 		*fracti_str = new;
-		// NO NEED TO FREE, BUT WHY!!!!!!!!!!!
-		// free(fracti_str);
 		return (0);
 	}
 	i = F.preci;

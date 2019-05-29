@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 13:23:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/28 20:46:34 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/29 13:11:23 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,29 +25,29 @@
 
 typedef struct	s_float
 {
-    char		*mantissa;
-    bool		sign;
-    int			expo;
-    char		*result;
+	char		*mantissa;
+	bool		sign;
+	int			expo;
+	char		*result;
 }				t_float;
 
 typedef struct	s_flag
 {
-    bool		zer;
-    bool		minus;
-    bool		sp;
-    bool		plus;
-    bool		hash;
-    size_t		field;
-    bool		dot;
-    size_t		preci;
-    bool		l;
-    bool		ll;
-    bool		bigl;
-    bool		h;
-    bool		hh;
-    char		conv;
-    long long	nb;
+	bool		zer;
+	bool		minus;
+	bool		sp;
+	bool		plus;
+	bool		hash;
+	size_t		field;
+	bool		dot;
+	size_t		preci;
+	bool		l;
+	bool		ll;
+	bool		bigl;
+	bool		h;
+	bool		hh;
+	char		conv;
+	long long	nb;
 }				t_flag;
 
 // ft_printf.c   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -61,7 +61,7 @@ char			*put_hash(char *res, size_t *c, t_flag flagz, size_t l_nb);
 // buffer.c      - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 char			*m_to_buf(int *m, char *buf, const char *fmt, int i);
 char			*percent_to_buf(int *m, char *buf, int *i);
-int				 m_or_percent(int *m, char **buf, const char *fmt, int *i);
+int				m_or_percent(int *m, char **buf, const char *fmt, int *i);
 char			*arg_to_buf(char *arg, char **buf);
 // flag.c        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void			check_first_flagz(const char *fmt, t_flag *flagz, int *i);
@@ -79,7 +79,7 @@ char			*deci_float(t_float *infloat, long double nb);
 char			*fracti_float(t_float *infloat, int i);
 int				fracti_algo(char **buffer, char **res, int *x);
 int				preci_float(char **fracti_str, char **deci_str, t_flag flagz);
-// float_b.c       - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// float_b.c     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 char			*str_times_two(char *str);
 char			*str_by_two(char *str);
 char			*get_mantissa(long double dbl);
