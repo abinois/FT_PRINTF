@@ -107,6 +107,6 @@ char		*get_float(t_flag flagz, va_list ap)
 			return (NULL);
 	}
 	result = I->result;
-//	free_float(I);
+	free_float(I);
 	return (I->result);
 }

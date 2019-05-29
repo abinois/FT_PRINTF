@@ -25,37 +25,56 @@ SRCLIBFT = $(addprefix libft/ft_, $(addsuffix .o, \
 
 OBJ = $(SRC:.c=.o)
 
-GREEN = \033[01;32m 
-BLUE = \033[01;34m 
-RED = \033[01;31m 
-YELLOW = \033[01;33m 
-NOCOLOR = \033[01;30m 
+GREEN = \033[01;32m
+BLUE = \033[01;34m
+RED = \033[01;31m
+YELLOW = \033[01;33m
+MAGENTA = \033[35m
+BLACK = \033[30m
+NOCOLOR = \033[0m
 
 all: $(NAME)
 
 $(NAME): $(OBJ) Makefile ft_printf.h
+	@echo "🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫"
+	@echo "🔫                                                              $(MAGENTA)🔫"
+	@echo "🔫   [ auteurs : abinois ⚡️ edillenb ]$(BLUE)                          🔫"
+	@echo "🔫                                                              🔫"
+	@echo "🔫  ._____,   ._____,     ._. .__,      ._. ._______. .______,  🔫"
+	@echo "🔫  | ._,  \  | ._,  \    |_| |   \     | | |__. .__| | .____|  🔫"
+	@echo "🔫  | |  \  | | |  \  |   ._. | |\ \    | |    | |    | |       🔫"
+	@echo "🔫  | |   | | | |   | |   | | | | \ \   | |    | |    | |__.    🔫"
+	@echo "🔫  | |__/ /  | |__/ /    | | | |  \ \  | |    | |    | .__|    🔫"
+	@echo "🔫  | .___/   |  ___ \    | | | |   \ \ | |    | |    | |       🔫"
+	@echo "🔫  | |       | |   \ \   | | | |    \ \| |    | |    | |       🔫"
+	@echo "🔫  | |       | |    \ \  | | | |     \   |    | |    | |       🔫"
+	@echo "🔫  |_|       |_|     \_\ |_| |_|      \__|    |_|    |_|       🔫"
+	@echo "🔫                                                              🔫"
+	@echo "🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫$(BLACK)"
 	make -C libft
+	@echo "$(BLUE)⚡️EXTRACTION DES .O . . . . . . . . . . . . .$(YELLOW)"
 	@ar xv $(LIBFT) $(SRCLIBFT)
-	@echo "$(BLUE)COMPILATION . . . . . . . . . . . . .$(YELLOW)"
+	@echo "$(BLUE)⚡️COMPILATION . . . . . . . . . . . . .$(YELLOW)"
 	$(CC) $(CFLAGS) -c $(SRC)
 	@ar rc $(NAME) $(OBJ) $(SRCLIBFT)
 	@ranlib $(NAME)
 	@echo "$(GREEN)TOUT EST ---------------------------> OK$(NOCOLOR)"
 
 clean:
-	@echo "$(BLUE)SUPPRESSION DES .O . . . . . . . . . .$(RED)"
 	make clean -C libft
+	@echo "$(BLUE)⚡️SUPPR DES .O . . . . . . . . . .$(RED)"
 	rm -f $(OBJ)
 	@echo "$(GREEN)TOUT EST ---------------------------> OK$(NOCOLOR)"
 
 fclean: clean
-	@echo "$(BLUE)SUPPRESSION DE LA LIB . . . . . . . .$(RED)"
 	make fclean -C libft
+	@echo "$(BLUE)⚡️SUPPR DU .A . . . . . . . .$(RED)"
 	rm -f $(NAME)
 	@echo "$(GREEN)TOUT EST ---------------------------> OK$(NOCOLOR)"
 
 re: fclean all
-	@echo "$(BLUE)RELINK . . . . . . . . . . . . . . ."
+	@echo "🔫🔫🔫🔫🔫🔫🔫🔫 $(BLUE)ET C'EST REPARTI ! 🔫🔫🔫🔫🔫🔫🔫🔫"
+	@echo "$(BLUE)⚡️RELINK . . . . . . . . . . . . . . ."
 	@echo "$(GREEN)TOUT EST ---------------------------> OK$(NOCOLOR)"
 
 .PHONY: all clean fclean re
