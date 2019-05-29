@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 13:46:22 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/28 17:00:43 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/29 14:49:58 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*str_by_two(char *str)
 	char	*final;
 	int		i;
 
-	if (!(new = ft_strjoin((const char *)str, "0")))
+	if (!(new = ft_strjoinfr(str, "0", 1)))
 		return (NULL);
 	if (!(final = (char*)malloc(sizeof(char) * (ft_strlen(new) + 1))))
 		return (NULL);
@@ -63,6 +63,7 @@ char	*str_by_two(char *str)
 		ret = ((new[i] - '0') * 5) % 10;
 	}
 	final[i] = '\0';
+	ft_memdel((void**)&new);
 	return (final);
 }
 

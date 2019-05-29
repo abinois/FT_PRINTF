@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 16:39:36 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/29 13:20:10 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/29 14:25:02 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*over_63(t_float *infloat, char *res, int x, int i)
 		else
 			x++;
 	}
-	free(buffer);
+	ft_memdel((void **)&buffer);
 	return (res);
 }
 
@@ -110,7 +110,7 @@ int		fracti_algo(char **buffer, char **res, int *x)
 	{
 		if (!(*buffer = str_by_two(*buffer)))
 			return (-1);
-		if (!(*res = ft_strjoin(*res, "0")))
+		if (!(*res = ft_strjoinfr(*res, "0", 1)))
 			return (-1);
 	}
 	if (!(*res = ft_str_add(*buffer, *res)))
@@ -132,7 +132,7 @@ int		preci_float(char **fracti_str, char **deci_str, t_flag flagz)
 		new[F.preci] = '\0';
 		new = (char*)ft_memset(new, '0', F.preci);
 		new = ft_strncpy(new, *fracti_str, ft_strlen(*fracti_str));
-		free(*fracti_str);
+		ft_memdel((void**)fracti_str);
 		*fracti_str = new;
 		return (0);
 	}

@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 14:37:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/27 20:15:47 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/29 14:47:31 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,8 @@ char	*m_to_buf(int *m, char *buf, const char *fmt, int i)
 		ft_memdel((void**)&buf);
 		return (NULL);
 	}
-	if (!(tmpjoin = ft_strjoin(buf, tmpsub)))
-	{
-		ft_memdel((void**)&buf);
-		ft_memdel((void**)&tmpsub);
+	if (!(tmpjoin = ft_strjoinfr(buf, tmpsub, 3)))
 		return (NULL);
-	}
-	ft_memdel((void**)&buf);
-	ft_memdel((void**)&tmpsub);
 	*m = 0;
 	return (tmpjoin);
 }
@@ -45,12 +39,8 @@ char	*percent_to_buf(int *m, char *buf, int *i)
 	percent = "%";
 	if (!buf && !(buf = ft_strnew(0)))
 		return (NULL);
-	if (!(tmpjoin = ft_strjoin(buf, percent)))
-	{
-		ft_memdel((void**)&buf);
+	if (!(tmpjoin = ft_strjoinfr(buf, percent, 1)))
 		return (NULL);
-	}
-	ft_memdel((void**)&buf);
 	*m = -1;
 	(*i)++;
 	return (tmpjoin);
@@ -76,12 +66,7 @@ char	*arg_to_buf(char *arg, char **buf)
 
 	if (!(*buf) && !(*buf = ft_strnew(0)))
 		return (NULL);
-	if (!(tmpjoin = ft_strjoin(*buf, arg)))
-	{
-		ft_memdel((void**)buf);
+	if (!(tmpjoin = ft_strjoinfr(*buf, arg, 3)))
 		return (NULL);
-	}
-	ft_memdel((void**)&arg);
-	ft_memdel((void**)buf);
 	return (tmpjoin);
 }
