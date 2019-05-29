@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 13:23:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/29 13:11:23 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/29 13:40:12 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char			*p_sign_float(char *str, t_flag flagz, t_float *infloat);
 char			*get_zersp(t_float *infloat, t_flag flagz, char *deci_str);
 char			*get_float(t_flag flagz, va_list ap);
 // malloc_str.c
-char			*malloc_str_c(t_flag flagz, va_list ap);
+char			*malloc_str_c(t_flag flagz, va_list ap, char option);
 char			*malloc_str_s(t_flag flagz, va_list ap);
 char			*malloc_str_xp(t_flag flagz, va_list ap);
 char			*malloc_str_ou(t_flag flagz, va_list ap);

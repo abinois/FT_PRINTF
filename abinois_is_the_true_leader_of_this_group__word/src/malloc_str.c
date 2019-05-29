@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 13:06:44 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/29 13:06:56 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/29 13:40:06 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,14 +101,14 @@ char	*malloc_str_s(t_flag flagz, va_list ap)
 	return ((res = fill_str_s(F, lmax, toa, res)));
 }
 
-char	*malloc_str_c(t_flag flagz, va_list ap)
+char	*malloc_str_c(t_flag flagz, va_list ap, char option)
 {
 	char	c;
 	size_t	lmax;
 	char	*res;
 	size_t	i;
 
-	c = (char)va_arg(ap, UI);
+	c = option == 1 ? '%' : (char)va_arg(ap, UI);
 	i = 0;
 	lmax = F.field > 1 ? F.field : 1;
 	if (!(res = (char *)malloc(sizeof(char) * (lmax + 1))))
