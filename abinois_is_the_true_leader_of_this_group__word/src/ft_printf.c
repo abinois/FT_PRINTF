@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 13:14:02 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/29 13:15:30 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/29 17:48:23 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int		ft_printf(const char *fmt, ...)
 	buf = NULL;
 	va_start(ap, fmt);
 	while (fmt[i])
-		if (fmt[i++] == '%') 
-		{ 
+		if (fmt[i++] == '%')
+		{
 			if (m_or_percent(&m, &buf, fmt, &i) == -1)
 				return (-1);
 			if (m == 0)

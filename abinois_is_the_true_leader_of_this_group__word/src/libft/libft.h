@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 17:24:14 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/27 12:02:59 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/29 17:59:26 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 
 typedef struct	s_list
 {
-    void			*content;
-    size_t			content_size;
-    struct s_list	*next;
+	void			*content;
+	size_t			content_size;
+	struct s_list	*next;
 }				t_list;
 
 void			*ft_memset(void *b, int c, size_t len);
@@ -87,7 +87,7 @@ void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 size_t			ft_lst_size(t_list *alst);
 t_list			**ft_lst_rev(t_list **alst);
-ULL				ft_pow(ULL nb, int po);
+ULL				ft_po(ULL nb, int po);
 int				ft_sqrt(int nb);
 int				ft_get_next_line(const int fd, char **line);
 void			ft_display_file(char *filename);

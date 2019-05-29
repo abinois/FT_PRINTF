@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 16:39:36 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/29 16:11:35 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/29 17:50:56 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*deci_float(t_float *infloat, long double nb)
 	while (i >= 0 && (int)I->expo - i <= 63)
 	{
 		if ((I->mantissa)[i] == '1')
-			if (!(res = ft_str_add(res, ft_llutoa(ft_pow(2, (int)I->expo - i)))))
+			if (!(res = ft_str_add(res, ft_llutoa(ft_po(2, (int)I->expo - i)))))
 				return (NULL);
 		i--;
 	}

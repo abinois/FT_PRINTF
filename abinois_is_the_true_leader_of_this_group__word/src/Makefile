@@ -6,7 +6,7 @@
 #    By: edillenb <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/27 16:42:47 by edillenb          #+#    #+#              #
-#    Updated: 2019/05/29 17:44:35 by abinois          ###   ########.fr        #
+#    Updated: 2019/05/29 17:56:19 by abinois          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRC = $(addsuffix .c, \
 	ft_printf tools fill_float floatools)
 
 SRCLIBFT = $(addprefix libft/ft_, $(addsuffix .o, \
-	    hexatoa lltoa llutoa memdel octatoa pow putstr strnew strlen \
+	    hexatoa lltoa llutoa memdel octatoa po putstr strnew strlen \
 	    strsub str_up atoi strjoinfr str_add putnstr memset strncpy))
 
 OBJ = $(SRC:.c=.o)
