@@ -49,5 +49,6 @@ int		ft_printf(const char *fmt, ...)
 		return (-1);
 	ft_putstr(buf);
 	ft_memdel((void**)&buf);
+	va_end(ap);
 	return (1);
 }

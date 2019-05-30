@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include "ft_printf.h"
 #include "libft/libft.h"
+#include <stdio.h>
 
 char	*malloc_str_d(t_flag flagz, va_list ap)
 {
@@ -21,16 +22,24 @@ char	*malloc_str_d(t_flag flagz, va_list ap)
 	size_t	lmax;
 
 	F.nb = check_d_i_flagz(flagz, ap);
-	toa = ft_lltoa(F.nb);
+	if (!(toa = ft_lltoa(F.nb)))
+		return (NULL);
 	lmax = ft_strlen(toa);
+	printf("lmax = %lu\n", lmax);
 	if (F.field > lmax)
 		lmax = F.field;
+	printf("lmax = %lu\n", lmax);
 	if (F.preci >= F.field && F.preci > lmax)
 		lmax = F.nb < 0 ? F.preci + 1 : F.preci;
+	printf("lmax = %lu\n", lmax);
 	if (F.nb > 0 && (F.plus || F.sp) && F.field < lmax)
 		lmax++;
+	printf("lmax = %lu\n", lmax);
 	if (!(res = (char *)malloc(sizeof(char) * (lmax + 1))))
+	{
+		ft_memdel((void**)&toa);
 		return (NULL);
+	}
 	res[lmax] = '\0';
 	return ((res = fill_str_d(F, lmax, toa, res)));
 }
@@ -43,10 +52,8 @@ char	*malloc_str_ou(t_flag flagz, va_list ap)
 	size_t	lmax;
 
 	nb = check_poux_flagz(F, ap);
-	if (F.conv == 'o')
-		toa = ft_octatoa(nb);
-	else
-		toa = ft_llutoa(nb);
+	if (!(toa = (F.conv == 'o' ? ft_octatoa(nb) : ft_llutoa(nb))))
+		return (NULL);
 	lmax = ft_strlen(toa);
 	if (F.conv == 'o' && F.hash)
 		lmax++;
@@ -57,7 +64,10 @@ char	*malloc_str_ou(t_flag flagz, va_list ap)
 	if (F.field > lmax)
 		lmax = F.field;
 	if (!(res = (char *)malloc(sizeof(char) * (lmax + 1))))
+	{
+		ft_memdel((void**)&toa);
 		return (NULL);
+	}
 	res[lmax] = '\0';
 	return ((res = fill_str_ou(F, lmax, toa, res)));
 }
@@ -70,7 +80,8 @@ char	*malloc_str_xp(t_flag flagz, va_list ap)
 	size_t	lmax;
 
 	nb = check_poux_flagz(F, ap);
-	toa = ft_hexatoa(nb);
+	if (!(toa = ft_hexatoa(nb)))
+		return (NULL);
 	lmax = ft_strlen(toa);
 	if ((F.conv == 'x' && F.hash) || F.conv == 'p')
 		lmax += 2;
@@ -79,7 +90,10 @@ char	*malloc_str_xp(t_flag flagz, va_list ap)
 	if (F.field > lmax)
 		lmax = F.field;
 	if (!(res = (char *)malloc(sizeof(char) * (lmax + 1))))
+	{
+		ft_memdel((void**)&toa);
 		return (NULL);
+	}
 	return ((res = fill_str_xp(F, lmax, toa, res)));
 }
 

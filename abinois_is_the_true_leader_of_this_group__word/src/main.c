@@ -17,12 +17,13 @@
 int		main(int argc, char **argv)
 {
 
-	long double	a = 9.99;
+//	long double	a = 9.99;
+	int		longo = 4040;
 	(void)argc;
 	(void)argv;
 	ft_putstr("_____ ft_printf _____\n");
-	ft_printf("%5.2Lf\n", a);
+	ft_printf("%-+10.2d\n", longo);
 	ft_putstr("_____ printf _____\n");
-	printf("%5.2Lf\n", a);
+	printf("%-+10.2d\n", longo);
 	return (0);
 }
