@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 16:39:36 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/30 19:46:48 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/30 20:34:32 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,7 @@ char	*fracti_float(t_float *infloat, int i)
 		}
 		else
 			x++;
-	printf("free buffer plz 1%p\n", buffer);
 	ft_memdel((void**)&buffer);
-	printf("free buffer plz 2%p\n", buffer);
 	return (res);
 }
 
