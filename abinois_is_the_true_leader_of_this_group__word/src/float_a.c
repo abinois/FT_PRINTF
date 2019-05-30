@@ -6,13 +6,14 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 16:39:36 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/30 18:37:48 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/30 19:46:48 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft/libft.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 /*
 ** Get all parts of the float : exponent, mantissa, sign, decimal, fractional.
@@ -95,7 +96,10 @@ char	*fracti_float(t_float *infloat, int i)
 		return (NULL);
 	buffer[0] = '5';
 	if (!(res = ft_strnew(1)))
+	{
+		ft_memdel((void**)&buffer);
 		return (NULL);
+	}
 	res[0] = '0';
 	x = I->expo < 0 ? -(I->expo + 1) : 0;
 	while ((I->mantissa)[i])
@@ -106,7 +110,9 @@ char	*fracti_float(t_float *infloat, int i)
 		}
 		else
 			x++;
+	printf("free buffer plz 1%p\n", buffer);
 	ft_memdel((void**)&buffer);
+	printf("free buffer plz 2%p\n", buffer);
 	return (res);
 }
 
@@ -123,11 +129,17 @@ int		fracti_algo(char **buffer, char **res, int *x)
 			return (-1);
 		}
 		if (!(*res = ft_strjoinfr(res, &zer, 1)))
+		{
+			ft_memdel((void**)buffer);
 			return (-1);
+		}
 	}
 	if (!(*res = ft_str_add(buffer, res, 2)))
+	{
+		ft_memdel((void**)buffer);
 		return (-1);
-//	ft_memdel((void**)buffer); si on le free mtn, ca marche plus, mais ca leaks
+	}
+//	ft_memdel((void**)buffer);
 	*x = 1;
 	return (0);
 }
