@@ -6,14 +6,13 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 16:39:36 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/29 19:47:08 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/30 18:37:48 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft/libft.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 /*
 ** Get all parts of the float : exponent, mantissa, sign, decimal, fractional.
@@ -37,7 +36,7 @@ char	*over_63(t_float *infloat, char *res, int x, int i)
 			while (x-- > 0)
 				if (!(buffer = str_times_two(buffer)))
 					return (NULL);
-			if (!(res = ft_str_add(buffer, res)))
+			if (!(res = ft_str_add(&buffer, &res, 2)))
 				return (NULL);
 			x = 1;
 		}
@@ -51,6 +50,7 @@ char	*over_63(t_float *infloat, char *res, int x, int i)
 char	*deci_float(t_float *infloat, long double nb)
 {
 	char	*res;
+	char	*llutoa;
 	int		i;
 	int		x;
 
@@ -58,16 +58,23 @@ char	*deci_float(t_float *infloat, long double nb)
 	i = 0;
 	while ((int)I->expo - i > 0 && i < 63)
 		i++;
-	if (!(res = (char*)malloc(sizeof(char) * 2)))
+	if (!(res = ft_strnew(1)))
 		return (NULL);
-	res = "0\0";
+	res[0] = '0';
 	if (nb < 1 && nb > -1)
 		return (res);
 	while (i >= 0 && (int)I->expo - i <= 63)
 	{
 		if ((I->mantissa)[i] == '1')
-			if (!(res = ft_str_add(res, ft_llutoa(ft_po(2, (int)I->expo - i)))))
+		{
+			if (!(llutoa = ft_llutoa(ft_po(2, (int)I->expo -i))))
+			{
+				ft_memdel((void**)&res);
 				return (NULL);
+			}
+			if (!(res = ft_str_add(&res, &llutoa, 3)))
+				return (NULL);
+		}
 		i--;
 	}
 	if (i >= 0 && (int)I->expo - i > 63)
@@ -84,14 +91,12 @@ char	*fracti_float(t_float *infloat, int i)
 
 	while ((int)I->expo - i > -1 && i < 63)
 		i++;
-	if (!(buffer = (char *)malloc(sizeof(char) * 2)))
+	if (!(buffer = ft_strnew(1)))
 		return (NULL);
 	buffer[0] = '5';
-	buffer[1] = '\0';
-	if (!(res = (char *)malloc(sizeof(char) * 2)))
+	if (!(res = ft_strnew(1)))
 		return (NULL);
 	res[0] = '0';
-	res[1] = '\0';
 	x = I->expo < 0 ? -(I->expo + 1) : 0;
 	while ((I->mantissa)[i])
 		if ((I->mantissa)[i++] == '1')
@@ -101,22 +106,26 @@ char	*fracti_float(t_float *infloat, int i)
 		}
 		else
 			x++;
+	ft_memdel((void**)&buffer);
 	return (res);
 }
 
 int		fracti_algo(char **buffer, char **res, int *x)
 {
+	char	*zer;
+
+	zer = "0";
 	while ((*x)-- > 0)
 	{
-		if (!(*buffer = str_by_two(*buffer)))
+		if (!(*buffer = str_by_two(buffer)))
 		{
 			ft_memdel((void**)res);
 			return (-1);
 		}
-		if (!(*res = ft_strjoinfr(*res, "0", 1)))
+		if (!(*res = ft_strjoinfr(res, &zer, 1)))
 			return (-1);
 	}
-	if (!(*res = ft_str_add(*buffer, *res)))
+	if (!(*res = ft_str_add(buffer, res, 2)))
 		return (-1);
 //	ft_memdel((void**)buffer); si on le free mtn, ca marche plus, mais ca leaks
 	*x = 1;
@@ -146,7 +155,13 @@ int		preci_float(char **fracti_str, char **deci_str, t_flag flagz)
 			if (i >= 0)
 				(*fracti_str)[i] += 1;
 	if (i == -1)
-		*deci_str = ft_str_add(*deci_str, "1");
-	*fracti_str = ft_strsub(*fracti_str, 0, F.preci);
+	{
+		if (!(new = ft_llutoa(ft_po(2, 0))))
+			return (-1);
+		if (!(*deci_str = ft_str_add(deci_str, &new, 3)))
+			return (-1);
+	}
+	if (!(*fracti_str = ft_strsub(*fracti_str, 0, F.preci)))
+		return (-1);
 	return (0);
 }

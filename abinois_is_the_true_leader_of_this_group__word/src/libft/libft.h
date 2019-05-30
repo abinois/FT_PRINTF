@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 17:24:14 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/29 17:59:26 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/30 18:05:56 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <string.h>
 # define BUFF_SIZE_GNL 545
-# define ULL unsigned long long
+# define ULL	unsigned long long
 
 typedef struct	s_list
 {
@@ -98,7 +98,7 @@ char			*ft_lltoa(long long nbr);
 char			*ft_octatoa(unsigned long long nbr);
 char			*ft_hexatoa(unsigned long long nbr);
 char			*ft_str_up(char *s);
-char			*ft_strjoinfr(const char *s1, const char *s2, char option);
-char			*ft_str_add(char *s1, char *s2);
+char			*ft_strjoinfr(char **s1, char **s2, char option);
+char			*ft_str_add(char **s1, char **s2, int option);
 
 #endif

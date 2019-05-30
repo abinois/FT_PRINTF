@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 16:48:32 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/29 19:24:28 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/30 15:54:36 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,17 @@
 
 char		*p_sign_float(char *str, t_flag flagz, t_float *infloat)
 {
+	char	*sign[3];
+
+	sign[0] = "-";
+	sign[1] = "+";
+	sign[2] = " ";
 	if (I->sign)
-		str = ft_strjoinfr("-", str, 2);
+		str = ft_strjoinfr(&(sign[0]), &str, 2);
 	else if (F.plus)
-		str = ft_strjoinfr("+", str, 2);
+		str = ft_strjoinfr(&(sign[1]), &str, 2);
 	else if (F.sp)
-		str = ft_strjoinfr(" ", str, 2);
+		str = ft_strjoinfr(&(sign[2]), &str, 2);
 	return (str);
 }
 
@@ -63,16 +68,11 @@ t_float		*reset_float(t_float *infloat)
 
 char		*free_float(t_float *infloat)
 {
-	if (I->mantissa)
-		ft_memdel((void**)&(I->mantissa));
-	if (I->result)
-		ft_memdel((void**)&(I->result));
-	if (I->fracti_str)
-		ft_memdel((void**)&(I->fracti_str));
-	if (I->deci_str)
-		ft_memdel((void**)&(I->deci_str));
-	if (I->zersp)
-		ft_memdel((void**)&(I->zersp));
+	ft_memdel((void**)&(I->mantissa));
+	ft_memdel((void**)&(I->result));
+	ft_memdel((void**)&(I->fracti_str));
+	ft_memdel((void**)&(I->deci_str));
+	ft_memdel((void**)&(I->zersp));
 	ft_memdel((void**)&I);
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 13:23:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/29 18:22:06 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/30 18:59:18 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 
 # define F		flagz
 # define I		infloat
-# define UI		unsigned int
-# define ULL	unsigned long long
 # define LD 	long double
 # define VL		va_list
+# define UI		unsigned int
+# define ULL	unsigned long long
 
 typedef struct	s_float
 {
@@ -66,7 +66,7 @@ char			*put_hash(char *res, size_t *c, t_flag flagz, size_t l_nb);
 char			*m_to_buf(int *m, char *buf, const char *fmt, int i);
 char			*percent_to_buf(int *m, char *buf, int *i);
 int				m_or_percent(int *m, char **buf, const char *fmt, int *i);
-char			*arg_to_buf(char *arg, char **buf);
+char			*arg_to_buf(char **buf, char **arg);
 
 void			check_first_flagz(const char *fmt, t_flag *flagz, int *i);
 void			check_l_flagz(const char *fmt, t_flag *flagz, int *i);
@@ -85,7 +85,7 @@ int				fracti_algo(char **buffer, char **res, int *x);
 int				preci_float(char **fracti_str, char **deci_str, t_flag flagz);
 
 char			*str_times_two(char *str);
-char			*str_by_two(char *str);
+char			*str_by_two(char **str);
 char			*get_mantissa(LD dbl);
 int16_t			get_exponent(LD dbl);
 

@@ -6,12 +6,13 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 14:37:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/29 19:29:36 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/30 18:55:04 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft/libft.h"
+#include <stdio.h>
 
 char	*m_to_buf(int *m, char *buf, const char *fmt, int i)
 {
@@ -25,7 +26,7 @@ char	*m_to_buf(int *m, char *buf, const char *fmt, int i)
 		ft_memdel((void**)&buf);
 		return (NULL);
 	}
-	if (!(tmpjoin = ft_strjoinfr(buf, tmpsub, 3)))
+	if (!(tmpjoin = ft_strjoinfr(&buf, &tmpsub, 3)))
 		return (NULL);
 	*m = 0;
 	return (tmpjoin);
@@ -39,7 +40,7 @@ char	*percent_to_buf(int *m, char *buf, int *i)
 	percent = "%";
 	if (!buf && !(buf = ft_strnew(0)))
 		return (NULL);
-	if (!(tmpjoin = ft_strjoinfr(buf, percent, 1)))
+	if (!(tmpjoin = ft_strjoinfr(&buf, &percent, 1)))
 		return (NULL);
 	*m = -1;
 	(*i)++;
@@ -60,16 +61,16 @@ int		m_or_percent(int *m, char **buf, const char *fmt, int *i)
 	return (0);
 }
 
-char	*arg_to_buf(char *arg, char **buf)
+char	*arg_to_buf(char **buf, char **arg)
 {
 	char	*tmpjoin;
 
 	if (!(*buf) && (!(*buf = ft_strnew(0))))
 	{
-		ft_memdel((void**)&arg);
+		ft_memdel((void**)arg);
 			return (NULL);
 	}
-	if (!(tmpjoin = ft_strjoinfr(*buf, arg, 3)))
+	if (!(tmpjoin = ft_strjoinfr(buf, arg, 3)))
 		return (NULL);
 	return (tmpjoin);
 }

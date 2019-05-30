@@ -6,14 +6,14 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 13:46:22 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/29 19:47:29 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/30 18:41:22 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-static char	*allocplus(char *buf, char ret, int *x)
+static char	*allocplus(char **buf, char ret, int *x)
 {
 	int		i;
 	int		j;
@@ -21,25 +21,25 @@ static char	*allocplus(char *buf, char ret, int *x)
 
 	i = 0;
 	j = 1;
-	buf[(*x)] += '0';
+	(*buf)[(*x)] += '0';
 	if (--(*x) < 0 && ret == 1)
 	{
-		while (buf[i])
+		while ((*buf)[i])
 			i++;
 		if (!(buf2 = (char*)malloc(sizeof(char) * ++i + 1)))
 		{
-//			ft_memdel((void**)&buf);
+			ft_memdel((void**)buf);
 			return (NULL);
 		}
 		buf2[i] = '\0';
 		i = 0;
-		while (buf[i])
-			buf2[j++] = buf[i++];
-		ft_memdel((void**)&buf);
+		while ((*buf)[i])
+			buf2[j++] = (*buf)[i++];
+		ft_memdel((void**)buf);
 		buf2[0] = '1';
 		return (buf2);
 	}
-	return (buf);
+	return (*buf);
 }
 
 static char	*move_to_the_end(int *i, int *j, char *s1, char *s2)
@@ -56,15 +56,15 @@ static char	*move_to_the_end(int *i, int *j, char *s1, char *s2)
 	x = (*i) > (*j) ? (*i) : (*j);
 	if (!(buf = (char*)malloc(sizeof(char) * x + 1)))
 	{
-//		ft_memdel((void**)&s1);
-//		ft_memdel((void**)&s2);
+		ft_memdel((void**)&s1);
+		ft_memdel((void**)&s2);
 		return (NULL);
 	}
 	buf[x--] = '\0';
 	return (buf);
 }
 
-char		*ft_str_add(char *s1, char *s2)
+char		*ft_str_add(char **s1, char **s2, int option)
 {
 	int		i;
 	int		j;
@@ -72,24 +72,24 @@ char		*ft_str_add(char *s1, char *s2)
 	char	ret;
 	char	*buf;
 
-	if (!(buf = move_to_the_end(&i, &j, s1, s2)))
+	if (!(buf = move_to_the_end(&i, &j, *s1, *s2)))
 		return (NULL);
 	ret = 0;
 	x = i-- > j-- ? i : j;
 	while (i >= 0 || j >= 0)
 	{
-		if ((buf[x] = ((i < 0 ? 0 : s1[i--] - '0') + (j < 0 ? 0 : s2[j--] - '0')
-						+ ret)) > 9)
+		if ((buf[x] = ((i < 0 ? 0 : (*s1)[i--] - '0')
+						+ (j < 0 ? 0 : (*s2)[j--] - '0') + ret)) > 9)
 		{
 			ret = 1;
 			buf[x] -= 10;
 		}
 		else
 			ret = 0;
-		if (!(buf = allocplus(buf, ret, &x)))
-			return (NULL);
-//		ft_memdel((void**)&s1);
-//		ft_memdel((void**)&s2);
+		if (!(buf = allocplus(&buf, ret, &x)))
+			break ;
 	}
+	(option == 1 || option == 3) ? ft_memdel((void**)s1) : 0;
+	(option == 2 || option == 3) ? ft_memdel((void**)s2) : 0;
 	return (buf);
 }

@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 16:45:46 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/29 19:47:11 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/30 18:39:13 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,49 +35,57 @@ char		*get_f_start(t_float **infloat, LD *nb, VL ap, t_flag flagz)
 
 char		*get_f_min(t_float *infloat, t_flag flagz)
 {
+	char	*dot;
+
+	dot = ".";
 	if (!(I->deci_str = p_sign_float(I->deci_str, F, I)))
 		return (free_float(I));
 	if (F.hash || F.preci)
-		if (!(I->result = ft_strjoinfr(I->deci_str, ".", 1)))
+		if (!(I->result = ft_strjoinfr(&(I->deci_str), &dot, 1)))
 			return (free_float(I));
 	if (F.preci)
-		if (!(I->result = ft_strjoinfr(I->result, I->fracti_str, 3)))
+		if (!(I->result = ft_strjoinfr(&(I->result), &(I->fracti_str), 3)))
 			return (free_float(I));
 	if (I->zersp)
-		if (!(I->result = ft_strjoinfr(I->result, I->zersp, 3)))
+		if (!(I->result = ft_strjoinfr(&(I->result), &(I->zersp), 3)))
 			return (free_float(I));
 	return ("ok!");
 }
 
 char		*get_f_zer(t_float *infloat, t_flag flagz)
 {
+	char	*dot;
+
+	dot = ".";
 	if (I->zersp)
-		if (!(I->deci_str = ft_strjoinfr(I->zersp, I->deci_str, 3)))
+		if (!(I->deci_str = ft_strjoinfr(&(I->zersp), &(I->deci_str), 3)))
 			return (free_float(I));
 	if (!(I->result = p_sign_float(I->deci_str, F, I)))
 		return (free_float(I));
 	if (F.hash || F.preci)
-		if (!(I->result = ft_strjoinfr(I->result, ".", 1)))
+		if (!(I->result = ft_strjoinfr(&(I->result), &dot, 1)))
 			return (free_float(I));
 	if (F.preci)
-		if (!(I->result = ft_strjoinfr(I->result, I->fracti_str, 3)))
+		if (!(I->result = ft_strjoinfr(&(I->result), &(I->fracti_str), 3)))
 			return (free_float(I));
 	return ("ok!");
 }
 
 char		*get_f_else(t_float *infloat, t_flag flagz)
 {
+	char	*dot;
+
+	dot = ".";
 	if (!(I->deci_str = p_sign_float(I->deci_str, F, I)))
 		return (free_float(I));
-	I->result = I->deci_str;
 	if (I->zersp)
-		if (!(I->result = ft_strjoinfr(I->zersp, I->deci_str, 3)))
+		if (!(I->result = ft_strjoinfr(&(I->zersp), &(I->deci_str), 3)))
 			return (free_float(I));
 	if (F.hash || F.preci)
-		if (!(I->result = ft_strjoinfr(I->result, ".", 1)))
+		if (!(I->result = ft_strjoinfr(&(I->result), &dot, 1)))
 			return (free_float(I));
 	if (F.preci)
-		if (!(I->result = ft_strjoinfr(I->result, I->fracti_str, 3)))
+		if (!(I->result = ft_strjoinfr(&(I->result), &(I->fracti_str), 3)))
 			return (free_float(I));
 	return ("ok!");
 }
@@ -102,11 +110,10 @@ char		*get_float(t_flag flagz, va_list ap)
 			return (NULL);
 	}
 	else
-	{
 		if (!(get_f_else(I, F)))
 			return (NULL);
-	}
-	result = I->result;
+	if (!(result = ft_strdup(I->result)))
+		return (free_float(I));
 	free_float(I);
-	return (I->result);
+	return (result);
 }
