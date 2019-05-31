@@ -13,6 +13,14 @@
 #include "libft/libft.h"
 #include "ft_printf.h"
 
+char	*put_sp(t_flag flagz, size_t *c, size_t lmax, char *res)
+{
+	if (F.field > F.preci)
+		while (*c < lmax)
+			res[(*c)++] = ' ';
+	return (res);
+}
+
 char	*reput_backzer(char **str)
 {
 	size_t	i;

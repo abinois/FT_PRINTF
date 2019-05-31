@@ -22,15 +22,15 @@ char	*fill_str_d(t_flag flagz, size_t lmax, char *toa, char *res)
 	c = 0;
 	if (F.minus)
 	{
-		res = p_toa(toa, p_sign(&F, res, &c), &c);
-		if (F.field > F.preci)
-			while (c < lmax)
-				res[c++] = ' ';
+		res = p_sign(&F, res, &c);
+		res = F.preci > l_nb ? p_zer(F.preci, res, &c, l_nb) : res;
+		res = put_sp(F, &c, lmax, p_toa(toa, res, &c));
 	}
-	else if (F.zer && !(F.dot))
+	else if (F.zer && (!(F.dot) || (F.preci > F.field)))
 	{
 		res = p_sign(&F, res, &c);
-		res = p_toa(toa, p_zer(F.field, res, &c, l_nb), &c);
+		res = p_zer((F.preci > F.field ? F.preci : F.field), res, &c, l_nb);
+		res = p_toa(toa, res, &c);
 	}
 	else
 	{
@@ -52,9 +52,7 @@ char	*fill_str_ou(t_flag flagz, size_t lmax, char *toa, char *res)
 	if (F.minus)
 	{
 		res = p_toa(toa, put_hash(res, &c, F, l_nb), &c);
-		if (F.field > F.preci)
-			while (c < lmax)
-				res[c++] = ' ';
+		res = put_sp(F, &c, lmax, res);
 	}
 	else if (F.zer && !(F.dot))
 		res = p_toa(toa, p_zer(F.field, res, &c, l_nb), &c);
