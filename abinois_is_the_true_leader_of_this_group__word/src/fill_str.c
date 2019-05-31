@@ -22,7 +22,7 @@ char	*fill_str_d(t_flag flagz, size_t lmax, char *toa, char *res)
 	c = 0;
 	if (F.minus)
 	{
-		res = p_toa(toa, p_zer(F.field, p_sign(&F, res, &c), &c, l_nb), &c);
+		res = p_toa(toa, p_sign(&F, res, &c), &c);
 		if (F.field > F.preci)
 			while (c < lmax)
 				res[c++] = ' ';

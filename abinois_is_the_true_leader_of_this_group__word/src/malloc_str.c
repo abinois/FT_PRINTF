@@ -25,16 +25,12 @@ char	*malloc_str_d(t_flag flagz, va_list ap)
 	if (!(toa = ft_lltoa(F.nb)))
 		return (NULL);
 	lmax = ft_strlen(toa);
-	printf("lmax = %lu\n", lmax);
 	if (F.field > lmax)
 		lmax = F.field;
-	printf("lmax = %lu\n", lmax);
 	if (F.preci >= F.field && F.preci > lmax)
 		lmax = F.nb < 0 ? F.preci + 1 : F.preci;
-	printf("lmax = %lu\n", lmax);
 	if (F.nb > 0 && (F.plus || F.sp) && F.field < lmax)
 		lmax++;
-	printf("lmax = %lu\n", lmax);
 	if (!(res = (char *)malloc(sizeof(char) * (lmax + 1))))
 	{
 		ft_memdel((void**)&toa);
