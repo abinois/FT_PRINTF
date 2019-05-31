@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 16:39:36 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/30 20:34:32 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/31 12:08:14 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,16 @@
 ** Get all parts of the float : exponent, mantissa, sign, decimal, fractional.
 */
 
-char	*over_63(t_float *infloat, char *res, int x, int i)
+char	*over_63(t_float *infloat, char **res, int x, int i)
 {
 	char	*buffer;
 
 	if (!(buffer = (char*)malloc(sizeof(char) * 2)))
 		return (NULL);
-	buffer = "1\0";
+	buffer[0] = '1';
+	buffer[1] = '\0';
 	while (++x <= (int)I->expo - i)
-		if (!(buffer = str_times_two(buffer)))
+		if (!(buffer = str_times_two(&buffer)))
 			return (NULL);
 	x = 0;
 	while (i >= 0)
@@ -35,9 +36,9 @@ char	*over_63(t_float *infloat, char *res, int x, int i)
 		if ((I->mantissa)[i--] == '1')
 		{
 			while (x-- > 0)
-				if (!(buffer = str_times_two(buffer)))
+				if (!(buffer = str_times_two(&buffer)))
 					return (NULL);
-			if (!(res = ft_str_add(&buffer, &res, 2)))
+			if (!(*res = ft_str_add(&buffer, res, 2)))
 				return (NULL);
 			x = 1;
 		}
@@ -45,7 +46,7 @@ char	*over_63(t_float *infloat, char *res, int x, int i)
 			x++;
 	}
 	ft_memdel((void **)&buffer);
-	return (res);
+	return (*res);
 }
 
 char	*deci_float(t_float *infloat, long double nb)
@@ -79,7 +80,7 @@ char	*deci_float(t_float *infloat, long double nb)
 		i--;
 	}
 	if (i >= 0 && (int)I->expo - i > 63)
-		if (!(res = over_63(I, res, x, i)))
+		if (!(res = over_63(I, &res, x, i)))
 			return (NULL);
 	return (res);
 }
@@ -137,7 +138,6 @@ int		fracti_algo(char **buffer, char **res, int *x)
 		ft_memdel((void**)buffer);
 		return (-1);
 	}
-//	ft_memdel((void**)buffer);
 	*x = 1;
 	return (0);
 }

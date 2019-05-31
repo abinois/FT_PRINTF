@@ -6,30 +6,33 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 13:46:22 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/30 19:39:56 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/31 11:16:41 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include <stdlib.h>
 
-char	*str_times_two(char *str)
+char	*str_times_two(char **str)
 {
 	int		i;
 	int		x;
 	char	*new;
 	char	ret;
 
-	i = ft_strlen(str);
+	i = ft_strlen(*str);
 	ret = 0;
-	x = str[0] - '0' >= 5 ? i-- + 1 : i--;
+	x = (*str)[0] - '0' >= 5 ? i-- + 1 : i--;
 	if (!(new = (char*)malloc(sizeof(char) * x + 1)))
+	{
+		ft_memdel((void**)str);
 		return (NULL);
+	}
 	new[x] = '\0';
 	new[0] = '1';
 	while (i >= 0 && --x >= 0)
 	{
-		if ((new[x] = (str[i--] - '0') * 2 + ret) > 9)
+		if ((new[x] = ((*str)[i--] - '0') * 2 + ret) > 9)
 		{
 			ret = 1;
 			new[x] -= 10;
@@ -38,7 +41,7 @@ char	*str_times_two(char *str)
 			ret = 0;
 		new[x] += '0';
 	}
-	ft_memdel((void**)&str);
+	ft_memdel((void**)str);
 	return (new);
 }
 

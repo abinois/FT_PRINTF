@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 13:23:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/30 18:59:18 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/31 16:33:34 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,21 +82,21 @@ char			*check_conv1(const char *fmt, t_flag flagz, int *i, VL ap);
 char			*check_conv2(const char *fmt, t_flag flagz, int *i, VL ap);
 char			*check_conv3(const char *fmt, t_flag flagz, int *i, VL ap);
 
-char			*over_63(t_float *infloat, char *res, int x, int i);
+char			*over_63(t_float *infloat, char **res, int x, int i);
 char			*deci_float(t_float *infloat, LD nb);
 char			*fracti_float(t_float *infloat, int i);
 int				fracti_algo(char **buffer, char **res, int *x);
 int				preci_float(char **fracti_str, char **deci_str, t_flag flagz);
 
-char			*str_times_two(char *str);
+char			*str_times_two(char **str);
 char			*str_by_two(char **str);
 char			*get_mantissa(LD dbl);
 int16_t			get_exponent(LD dbl);
 
-char			*p_sign_float(char *str, t_flag flagz, t_float *infloat);
+char			*p_sign_float(char **str, t_flag flagz, t_float *infloat);
 int				get_zersp(t_float *infloat, t_flag flagz);
 t_float			*reset_float(t_float *infloat);
-char			*free_float(t_float *infloat);
+char			*free_float(t_float **infloat);
 
 char			*get_f_start(t_float **infloat, LD *nb, VL ap, t_flag flagz);
 char			*get_f_min(t_float *infloat, t_flag flagz);
