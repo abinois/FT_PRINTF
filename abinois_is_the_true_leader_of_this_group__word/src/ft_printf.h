@@ -57,6 +57,7 @@ typedef struct	s_flag
 
 int				ft_printf(const char *fmt, ...);
 
+char			*put_sp(t_flag flagz, size_t *c, size_t lmax, char *res);
 int				print__return(va_list ap, char **buf);
 char			*reput_backzer(char **str);
 
@@ -109,9 +110,9 @@ char			*malloc_str_xp(t_flag flagz, VL ap);
 char			*malloc_str_ou(t_flag flagz, VL ap);
 char			*malloc_str_d(t_flag flagz, VL ap);
 
-char			*fill_str_d(t_flag flagz, size_t lmax, char *toa, char *res);
-char			*fill_str_ou(t_flag flagz, size_t lmax, char *toa, char *res);
-char			*fill_str_xp(t_flag flagz, size_t lmax, char *toa, char *res);
+char			*fill_str_d(t_flag flagz, size_t lmax, char **toa, char *res);
+char			*fill_str_ou(t_flag flagz, size_t lmax, char **toa, char *res);
+char			*fill_str_xp(t_flag flagz, size_t lmax, char **toa, char *res);
 char			*fill_str_s(t_flag flagz, size_t lmax, char *toa, char *res);
 char			*fill_nomin_xp(t_flag flagz, size_t l_nb, char *res, size_t *c);
 

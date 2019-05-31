@@ -37,7 +37,7 @@ char	*malloc_str_d(t_flag flagz, va_list ap)
 		return (NULL);
 	}
 	res[lmax] = '\0';
-	return ((res = fill_str_d(F, lmax, toa, res)));
+	return ((res = fill_str_d(F, lmax, &toa, res)));
 }
 
 char	*malloc_str_ou(t_flag flagz, va_list ap)
@@ -65,7 +65,7 @@ char	*malloc_str_ou(t_flag flagz, va_list ap)
 		return (NULL);
 	}
 	res[lmax] = '\0';
-	return ((res = fill_str_ou(F, lmax, toa, res)));
+	return ((res = fill_str_ou(F, lmax, &toa, res)));
 }
 
 char	*malloc_str_xp(t_flag flagz, va_list ap)
@@ -90,7 +90,7 @@ char	*malloc_str_xp(t_flag flagz, va_list ap)
 		ft_memdel((void**)&toa);
 		return (NULL);
 	}
-	return ((res = fill_str_xp(F, lmax, toa, res)));
+	return ((res = fill_str_xp(F, lmax, &toa, res)));
 }
 
 char	*malloc_str_s(t_flag flagz, va_list ap)

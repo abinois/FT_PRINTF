@@ -41,15 +41,14 @@ char		*p_toa(char *toa, char *res, size_t *c)
 	i = *toa == '-' ? 1 : 0;
 	while (toa[i])
 		res[(*c)++] = toa[i++];
-	ft_memdel((void**)&toa);
 	return (res);
 }
 
 char		*p_sign(t_flag *flagz, char *res, size_t *c)
 {
-//	if (!(F->minus) && (!(F->zer) || F->dot) && ((F->nb < 0 || F->plus || F->sp)
-//				&& *c != 0))
-//		(*c)--;
+	if (!(F->minus) && (!(F->zer) || F->dot) && ((F->nb < 0 || F->plus || F->sp)
+				&& *c != 0))
+		(*c)--;
 	if (F->nb < 0)
 		res[(*c)++] = '-';
 	else if (F->plus && F->nb >= 0)
