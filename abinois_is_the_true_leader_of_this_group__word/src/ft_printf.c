@@ -12,8 +12,6 @@
 
 #include "libft/libft.h"
 #include "ft_printf.h"
-#include <stdlib.h>
-#include <stdio.h>
 
 int		ft_printf(const char *fmt, ...)
 {
@@ -47,8 +45,5 @@ int		ft_printf(const char *fmt, ...)
 			m++;
 	if (!(buf = m_to_buf(&m, buf, fmt, i)))
 		return (-1);
-	ft_putstr(buf);
-	ft_memdel((void**)&buf);
-	va_end(ap);
-	return (1);
+	return (print__return(ap, &buf));
 }

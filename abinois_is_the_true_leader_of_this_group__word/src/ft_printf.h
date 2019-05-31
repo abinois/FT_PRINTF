@@ -57,6 +57,9 @@ typedef struct	s_flag
 
 int				ft_printf(const char *fmt, ...);
 
+int				print__return(va_list ap, char **buf);
+char			*reput_backzer(char **str);
+
 void			reset_flagz(t_flag *flagz);
 char			*p_sign(t_flag *flagz, char *res, size_t *i);
 char			*p_toa(char *toa, char *res, size_t *c);

@@ -126,7 +126,7 @@ char	*malloc_str_c(t_flag flagz, va_list ap, char option)
 	res[lmax] = '\0';
 	if (F.minus)
 	{
-		res[i++] = c;
+		res[i++] = c == 0 ? -1 : c;
 		while (i < F.field)
 			res[i++] = ' ';
 	}
