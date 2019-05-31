@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 16:48:32 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/31 16:21:01 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/31 18:13:05 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ char		*p_sign_float(char **str, t_flag flagz, t_float *infloat)
 			return (NULL);
 		ft_memdel((void**)str);
 	}
+	*str = NULL;
 	return (new);
 }
 
@@ -84,26 +85,16 @@ t_float		*reset_float(t_float *infloat)
 
 char		*free_float(t_float **infloat)
 {
-	ft_putstr("1\n");
 	if ((*I)->mantissa)
 		ft_memdel((void**)&((*I)->mantissa));
-	ft_putstr("2\n");
-	if ((*I)->result == (*I)->deci_str)
-		(*I)->deci_str = NULL;
 	if ((*I)->result)
 		ft_memdel((void**)&((*I)->result));
-	ft_putstr("3\n");
 	if ((*I)->fracti_str)
 		ft_memdel((void**)&((*I)->fracti_str));
-	ft_putstr("4\n");
-	printf("this is the adress of deci_str : %p\n", (*I)->deci_str);
 	if ((*I)->deci_str)
 		ft_memdel((void**)&((*I)->deci_str));
-	ft_putstr("5\n");
 	if ((*I)->zersp)
 		ft_memdel((void**)&((*I)->zersp));
-	ft_putstr("6\n");
 	ft_memdel((void**)I);
-	ft_putstr("7\n");
 	return (NULL);
 }

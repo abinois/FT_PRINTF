@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 14:37:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/30 20:05:19 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/31 19:00:01 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*m_to_buf(int *m, char *buf, const char *fmt, int i)
 
 	if (!buf && !(buf = ft_strnew(0)))
 		return (NULL);
-	if (!(tmpsub = ft_strsub(fmt, i - *m, *m)))
+	if (!(tmpsub = ft_strsub(&fmt, i - *m , *m, 0)))
 	{
 		ft_memdel((void**)&buf);
 		return (NULL);

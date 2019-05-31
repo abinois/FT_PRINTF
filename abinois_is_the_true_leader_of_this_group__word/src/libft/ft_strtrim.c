@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 18:49:20 by abinois           #+#    #+#             */
-/*   Updated: 2019/04/12 12:16:39 by abinois          ###   ########.fr       */
+/*   Updated: 2019/05/31 18:36:26 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ char	*ft_strtrim(const char *s)
 		while (s[len - 1] == ' ' || s[len - 1] == '\t' || s[len - 1] == '\n')
 			len--;
 	}
-	return (ft_strsub(s, i, len - i));
+	return (ft_strsub((const char**)&s, i, len - i, 0));
 }

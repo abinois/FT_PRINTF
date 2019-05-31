@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 13:06:58 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/03 14:18:53 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/31 18:38:46 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 
 static int		send_line(char **b, char **b2, char **line)
 {
-	*line = ft_strsub(*b, 0, *b2 - *b);
-	if (!(*b2 = ft_strsub(*b, *b2 - *b + 1, ft_strlen(*b2))))
+	*line = ft_strsub((const char**)b, 0, *b2 - *b, 0);
+	if (!(*b2 = ft_strsub((const char**)b, *b2 - *b + 1, ft_strlen(*b2), 0)))
 		return (-1);
 	free(*b);
 	*b = *b2;

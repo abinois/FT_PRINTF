@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 16:39:36 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/31 12:08:14 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/31 18:48:12 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	*fracti_float(t_float *infloat, int i)
 	char	*buffer;
 	int		x;
 
-	while ((int)I->expo - i > -1 && i < 63)
+	while ((int)I->expo - i > -1 && I->mantissa[i])
 		i++;
 	if (!(buffer = ft_strnew(1)))
 		return (NULL);
@@ -171,7 +171,7 @@ int		preci_float(char **fracti_str, char **deci_str, t_flag flagz)
 		if (!(*deci_str = ft_str_add(deci_str, &new, 3)))
 			return (-1);
 	}
-	if (!(*fracti_str = ft_strsub(*fracti_str, 0, F.preci)))
+	if (!(*fracti_str = ft_strsub((const char**)fracti_str, 0, F.preci, 1)))
 		return (-1);
 	return (0);
 }

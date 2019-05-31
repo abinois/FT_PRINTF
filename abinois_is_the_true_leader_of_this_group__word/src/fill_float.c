@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 16:45:46 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/31 16:21:03 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/05/31 17:35:47 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,10 @@ char		*get_f_min(t_float *infloat, t_flag flagz)
 	char	*dot;
 
 	dot = ".";
-	if (!(I->deci_str = p_sign_float(&(I->deci_str), F, I)))
+	if (!(I->result = p_sign_float(&(I->deci_str), F, I)))
 		return (free_float(&I));
-	I->result = I->deci_str;
 	if (F.hash || F.preci)
-		if (!(I->result = ft_strjoinfr(&(I->deci_str), &dot, 1)))
+		if (!(I->result = ft_strjoinfr(&(I->result), &dot, 1)))
 			return (free_float(&I));
 	if (F.preci)
 		if (!(I->result = ft_strjoinfr(&(I->result), &(I->fracti_str), 3)))
@@ -78,11 +77,10 @@ char		*get_f_else(t_float *infloat, t_flag flagz)
 	char	*dot;
 
 	dot = ".";
-	if (!(I->deci_str = p_sign_float(&(I->deci_str), F, I)))
+	if (!(I->result = p_sign_float(&(I->deci_str), F, I)))
 		return (free_float(&I));
-	I->result = I->deci_str;
 	if (I->zersp)
-		if (!(I->result = ft_strjoinfr(&(I->zersp), &(I->deci_str), 3)))
+		if (!(I->result = ft_strjoinfr(&(I->zersp), &(I->result), 3)))
 			return (free_float(&I));
 	if (F.hash || F.preci)
 		if (!(I->result = ft_strjoinfr(&(I->result), &dot, 1)))
