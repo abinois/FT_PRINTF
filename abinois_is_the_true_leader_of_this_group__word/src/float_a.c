@@ -23,10 +23,9 @@ char	*over_63(t_float *infloat, char **res, int x, int i)
 {
 	char	*buffer;
 
-	if (!(buffer = (char*)malloc(sizeof(char) * 2)))
+	if (!(buffer = ft_strnew(1)))
 		return (NULL);
 	buffer[0] = '1';
-	buffer[1] = '\0';
 	while (++x <= (int)I->expo - i)
 		if (!(buffer = str_times_two(&buffer)))
 			return (NULL);
@@ -63,25 +62,17 @@ char	*deci_float(t_float *infloat, long double nb)
 	if (!(res = ft_strnew(1)))
 		return (NULL);
 	res[0] = '0';
-	if (nb < 1 && nb > -1)
-		return (res);
-	while (i >= 0 && (int)I->expo - i <= 63)
-	{
+	i++;
+	while (--i >= 0 && (int)I->expo - i <= 63 && nb < 1 && nb > -1)
 		if ((I->mantissa)[i] == '1')
 		{
-			if (!(llutoa = ft_llutoa(ft_po(2, (int)I->expo -i))))
-			{
+			if (!(llutoa = ft_llutoa(ft_po(2, (int)I->expo - i))))
 				ft_memdel((void**)&res);
-				return (NULL);
-			}
-			if (!(res = ft_str_add(&res, &llutoa, 3)))
+			if (!llutoa || !(res = ft_str_add(&res, &llutoa, 3)))
 				return (NULL);
 		}
-		i--;
-	}
-	if (i >= 0 && (int)I->expo - i > 63)
-		if (!(res = over_63(I, &res, x, i)))
-			return (NULL);
+	if (i >= 0 && (int)I->expo - i > 63 && !(res = over_63(I, &res, x, i)))
+		return (NULL);
 	return (res);
 }
 
@@ -93,14 +84,12 @@ char	*fracti_float(t_float *infloat, int i)
 
 	while ((int)I->expo - i > -1 && I->mantissa[i])
 		i++;
-	if (!(buffer = ft_strnew(1)))
+	buffer = ft_strnew(1);
+	if (!(res = ft_strnew(1)))
+		ft_memdel((void**)&buffer);
+	if (!res || !buffer)	
 		return (NULL);
 	buffer[0] = '5';
-	if (!(res = ft_strnew(1)))
-	{
-		ft_memdel((void**)&buffer);
-		return (NULL);
-	}
 	res[0] = '0';
 	x = I->expo < 0 ? -(I->expo + 1) : 0;
 	while ((I->mantissa)[i])
@@ -147,12 +136,10 @@ int		preci_float(char **fracti_str, char **deci_str, t_flag flagz)
 	char	*new;
 	int		i;
 
-	new = NULL;
 	if (ft_strlen(*fracti_str) <= F.preci)
 	{
-		if (!(new = (char *)malloc(sizeof(char) * F.preci + 1)))
+		if (!(new = ft_strnew(F.preci)))
 			return (-1);
-		new[F.preci] = '\0';
 		new = (char*)ft_memset(new, '0', F.preci);
 		new = ft_strncpy(new, *fracti_str, ft_strlen(*fracti_str));
 		ft_memdel((void**)fracti_str);
@@ -165,12 +152,9 @@ int		preci_float(char **fracti_str, char **deci_str, t_flag flagz)
 			if (i >= 0)
 				(*fracti_str)[i] += 1;
 	if (i == -1)
-	{
-		if (!(new = ft_llutoa(ft_po(2, 0))))
+		if (!(new = ft_llutoa(ft_po(2, 0)))
+			|| !(*deci_str = ft_str_add(deci_str, &new, 3)))
 			return (-1);
-		if (!(*deci_str = ft_str_add(deci_str, &new, 3)))
-			return (-1);
-	}
 	if (!(*fracti_str = ft_strsub((const char**)fracti_str, 0, F.preci, 1)))
 		return (-1);
 	return (0);

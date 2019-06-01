@@ -99,6 +99,7 @@ char			*ft_octatoa(unsigned long long nbr);
 char			*ft_hexatoa(unsigned long long nbr);
 char			*ft_str_up(char *s);
 char			*ft_strjoinfr(char **s1, char **s2, char option);
-char			*ft_str_add(char **s1, char **s2, int option);
+char			*ft_str_add(char **s1, char **s2, char option);
+void			*ft_free_stropt(char **s1, char **s2, char option);
 
 #endif

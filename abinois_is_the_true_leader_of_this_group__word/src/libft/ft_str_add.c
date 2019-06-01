@@ -55,16 +55,12 @@ static char	*move_to_the_end(int *i, int *j, char *s1, char *s2)
 		(*j)++;
 	x = (*i) > (*j) ? (*i) : (*j);
 	if (!(buf = (char*)malloc(sizeof(char) * x + 1)))
-	{
-		ft_memdel((void**)&s1);
-		ft_memdel((void**)&s2);
-		return (NULL);
-	}
+		return ((char*)ft_free_stropt(&s1, &s2, 3));
 	buf[x--] = '\0';
 	return (buf);
 }
 
-char		*ft_str_add(char **s1, char **s2, int option)
+char		*ft_str_add(char **s1, char **s2, char option)
 {
 	int		i;
 	int		j;
@@ -89,7 +85,6 @@ char		*ft_str_add(char **s1, char **s2, int option)
 		if (!(buf = allocplus(&buf, ret, &x)))
 			break ;
 	}
-	(option == 1 || option == 3) ? ft_memdel((void**)s1) : 0;
-	(option == 2 || option == 3) ? ft_memdel((void**)s2) : 0;
+	ft_free_stropt(s1, s2, option);
 	return (buf);
 }

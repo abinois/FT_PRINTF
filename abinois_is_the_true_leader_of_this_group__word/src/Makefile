@@ -21,7 +21,8 @@ SRC = $(addsuffix .c, \
 
 SRCLIBFT = $(addprefix libft/ft_, $(addsuffix .o, \
 	    hexatoa lltoa llutoa memdel octatoa po putstr strnew strlen \
-	    strsub str_up atoi strjoinfr str_add putnstr memset strncpy strdup))
+	    strsub str_up atoi strjoinfr str_add putnstr memset strncpy strdup \
+		free_stropt))
 
 OBJ = $(SRC:.c=.o)
 

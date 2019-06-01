@@ -44,7 +44,7 @@ char		*check_conv1(const char *fmt, t_flag flagz, int *i, va_list ap)
 
 char		*check_conv2(const char *fmt, t_flag flagz, int *i, va_list ap)
 {
-	else if (fmt[*i] == 'x' || fmt[*i] == 'p')
+	if (fmt[*i] == 'x' || fmt[*i] == 'p')
 	{
 		F.conv = fmt[*i];
 		if (F.conv == 'p')

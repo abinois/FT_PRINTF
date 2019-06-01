@@ -23,7 +23,7 @@ SRC = $(addprefix ft_, $(addsuffix .c, \
 	  strmap strmapi strequ strnequ strsub strjoin strtrim itoa strnrev \
 	  strsplit swap lstnew lstdelone lstdel lstadd lstiter lst_size lstmap \
 	  lst_rev po sqrt putstrclr get_next_line display_file putnstr fili \
-	  llutoa lltoa octatoa hexatoa str_up strjoinfr str_add))
+	  llutoa lltoa octatoa hexatoa str_up strjoinfr str_add free_stropt))
 
 OBJ = $(SRC:.c=.o)
 
