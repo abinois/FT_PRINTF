@@ -27,13 +27,13 @@
 
 typedef struct	s_float
 {
-	char		*mantissa;
 	bool		sign;
 	int			expo;
-	char		*result;
-	char		*fracti_str;
+	char		*mantissa;
 	char		*deci_str;
+	char		*fracti_str;
 	char		*zersp;
+	char		*result;
 }				t_float;
 
 typedef struct	s_flag
