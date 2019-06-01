@@ -32,7 +32,7 @@ char	*malloc_str_d(t_flag flagz, va_list ap)
 	if (F.nb > 0 && (F.plus || F.sp) && F.field < lmax)
 		lmax++;
 	if (!(res = ft_strnew(lmax)))
-		return (ft_free_stropt(&toa), &res, 1);
+		return (ft_free_stropt(&toa, &res, 1));
 	return ((res = fill_str_d(F, lmax, &toa, res)));
 }
 
@@ -56,7 +56,7 @@ char	*malloc_str_ou(t_flag flagz, va_list ap)
 	if (F.field > lmax)
 		lmax = F.field;
 	if (!(res = ft_strnew(lmax)))
-		return (ft_free_stropt(&toa), &res, 1);
+		return (ft_free_stropt(&toa, &res, 1));
 	return ((res = fill_str_ou(F, lmax, &toa, res)));
 }
 
@@ -78,7 +78,7 @@ char	*malloc_str_xp(t_flag flagz, va_list ap)
 	if (F.field > lmax)
 		lmax = F.field;
 	if (!(res = ft_strnew(lmax)))
-		return (ft_free_stropt(&toa), &res, 1);
+		return (ft_free_stropt(&toa, &res, 1));
 	return ((res = fill_str_xp(F, lmax, &toa, res)));
 }
 

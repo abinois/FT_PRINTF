@@ -17,13 +17,13 @@
 
 int		main(int argc, char **argv)
 {
-	int		ftrv;
-	int		rv;
-	long double	a = 9.99;
-	//int		longo = 4040;
+	int			ftrv;
+	int			rv;
+	long double	a;
 
 	(void)argc;
 	(void)argv;
+	a = 9.99;
 	ft_putstr("____ ftprintf ____\n");
 	ftrv = ft_printf("%.1Lfet voila\n", a);
 	printf("Return value = %d\n", ftrv); 
