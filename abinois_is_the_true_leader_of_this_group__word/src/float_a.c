@@ -27,15 +27,14 @@ char	*over_63(t_float *infloat, char **res, int x, int i)
 		return (NULL);
 	buffer[0] = '1';
 	while (++x <= (int)I->expo - i)
-		if (!(buffer = str_times_two(&buffer)))
+		if (!(buffer = str_times_two(&buffer, 0, 0)))
 			return (NULL);
 	x = 0;
 	while (i >= 0)
-	{
 		if ((I->mantissa)[i--] == '1')
 		{
 			while (x-- > 0)
-				if (!(buffer = str_times_two(&buffer)))
+				if (!(buffer = str_times_two(&buffer, 0, 0)))
 					return (NULL);
 			if (!(*res = ft_str_add(&buffer, res, 2)))
 				return (NULL);
@@ -43,7 +42,6 @@ char	*over_63(t_float *infloat, char **res, int x, int i)
 		}
 		else
 			x++;
-	}
 	ft_memdel((void **)&buffer);
 	return (*res);
 }
@@ -57,13 +55,12 @@ char	*deci_float(t_float *infloat, long double nb)
 
 	x = 0;
 	i = 0;
+	if (!(res = ft_memset(ft_strnew(1), 48, 1)) && nb > -1 && nb < 1)
+		return (res);
 	while ((int)I->expo - i > 0 && i < 63)
 		i++;
-	if (!(res = ft_strnew(1)))
-		return (NULL);
-	res[0] = '0';
 	i++;
-	while (--i >= 0 && (int)I->expo - i <= 63 && nb < 1 && nb > -1)
+	while (--i >= 0 && (int)I->expo - i <= 63)
 		if ((I->mantissa)[i] == '1')
 		{
 			if (!(llutoa = ft_llutoa(ft_po(2, (int)I->expo - i))))
@@ -71,8 +68,9 @@ char	*deci_float(t_float *infloat, long double nb)
 			if (!llutoa || !(res = ft_str_add(&res, &llutoa, 3)))
 				return (NULL);
 		}
-	if (i >= 0 && (int)I->expo - i > 63 && !(res = over_63(I, &res, x, i)))
-		return (NULL);
+	if (i >= 0 && (int)I->expo - i > 63)
+		if (!(res = over_63(I, &res, x, i)))
+			return (NULL);
 	return (res);
 }
 
@@ -111,7 +109,7 @@ int		fracti_algo(char **buffer, char **res, int *x)
 	zer = "0";
 	while ((*x)-- > 0)
 	{
-		if (!(*buffer = str_by_two(buffer)))
+		if (!(*buffer = str_by_two(buffer, 0, -1)))
 		{
 			ft_memdel((void**)res);
 			return (-1);

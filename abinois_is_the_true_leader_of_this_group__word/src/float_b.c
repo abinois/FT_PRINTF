@@ -13,23 +13,15 @@
 #include "libft/libft.h"
 #include <stdlib.h>
 
-char	*str_times_two(char **str)
+char	*str_times_two(char **str, char ret, int i)
 {
-	int		i;
 	int		x;
 	char	*new;
-	char	ret;
 
 	i = ft_strlen(*str);
-	ret = 0;
 	x = (*str)[0] - '0' >= 5 ? i-- + 1 : i--;
-	if (!(new = (char*)malloc(sizeof(char) * x + 1)))
-	{
-		ft_memdel((void**)str);
-		return (NULL);
-	}
-	new[x] = '\0';
-	new[0] = '1';
+	if (!(new = ft_memset(ft_strnew(x), '1', 1)))
+		return (ft_free_stropt(str, &new, 1));
 	while (i >= 0 && --x >= 0)
 	{
 		if ((new[x] = ((*str)[i--] - '0') * 2 + ret) > 9)
@@ -45,48 +37,34 @@ char	*str_times_two(char **str)
 	return (new);
 }
 
-char	*str_by_two(char **str)
+char	*str_by_two(char **str, char ret, int i)
 {
 	char	*new;
 	int		deci;
-	int		ret;
 	char	*final;
-	int		i;
 
 	new = "0";
 	if (!(new = ft_strjoinfr(str, &new, 1)))
 		return (NULL);
-	if (!(final = (char*)malloc(sizeof(char) * (ft_strlen(new) + 1))))
-	{
-		ft_memdel((void**)str);
-		ft_memdel((void**)&new);
-		return (NULL);
-	}
-	ret = 0;
-	i = -1;
+	if (!(final = ft_strnew(ft_strlen(new) + 1)))
+		return (ft_free_stropt(str, &new, 3));
 	while (new[++i])
 	{
 		deci = (new[i] - '0') / 2 + ret;
 		final[i] = deci + '0';
 		ret = ((new[i] - '0') * 5) % 10;
 	}
-	final[i] = '\0';
-	ft_memdel((void**)str);
-	ft_memdel((void**)&new);
+	ft_free_stropt(str, &new, 3);
 	return (final);
 }
 
-char	*get_mantissa(long double dbl)
+char	*get_mantissa(long double dbl, int i, size_t size)
 {
 	uint8_t	*nb;
 	char	*binary;
-	int		i;
-	size_t	size;
 	uint8_t	mask;
 
 	nb = (uint8_t*)&dbl;
-	i = 0;
-	size = 65;
 	if (!(binary = (char *)malloc(sizeof(char) * size)))
 		return (NULL);
 	binary[--size] = '\0';

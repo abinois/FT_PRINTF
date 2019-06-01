@@ -88,9 +88,9 @@ char			*fracti_float(t_float *infloat, int i);
 int				fracti_algo(char **buffer, char **res, int *x);
 int				preci_float(char **fracti_str, char **deci_str, t_flag flagz);
 
-char			*str_times_two(char **str);
-char			*str_by_two(char **str);
-char			*get_mantissa(LD dbl);
+char			*str_times_two(char **str, char ret, int i);
+char			*str_by_two(char **str, char ret, int i);
+char			*get_mantissa(LD dbl, int i, size_t size);
 int16_t			get_exponent(LD dbl);
 
 char			*p_sign_float(char **str, t_flag flagz, t_float *infloat);

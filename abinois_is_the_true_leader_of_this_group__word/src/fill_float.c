@@ -19,7 +19,7 @@ char		*get_f_start(t_float **infloat, LD *nb, VL ap, t_flag flagz)
 	if (!(*I = reset_float(*I)))
 		return (NULL);
 	*nb = check_f_flagz(F, ap);
-	if (!((*I)->mantissa = get_mantissa(*nb)))
+	if (!((*I)->mantissa = get_mantissa(*nb, 0, 65)))
 		return (free_float(I));
 	(*I)->expo = get_exponent(*nb);
 	(*I)->sign = *nb >= 0 ? false : true;

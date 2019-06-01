@@ -31,12 +31,8 @@ char	*malloc_str_d(t_flag flagz, va_list ap)
 		lmax = F.nb < 0 ? F.preci + 1 : F.preci;
 	if (F.nb > 0 && (F.plus || F.sp) && F.field < lmax)
 		lmax++;
-	if (!(res = (char *)malloc(sizeof(char) * (lmax + 1))))
-	{
-		ft_memdel((void**)&toa);
-		return (NULL);
-	}
-	res[lmax] = '\0';
+	if (!(res = ft_strnew(lmax)))
+		return (ft_free_stropt(&toa), &res, 1);
 	return ((res = fill_str_d(F, lmax, &toa, res)));
 }
 
@@ -59,12 +55,8 @@ char	*malloc_str_ou(t_flag flagz, va_list ap)
 		lmax = F.preci;
 	if (F.field > lmax)
 		lmax = F.field;
-	if (!(res = (char *)malloc(sizeof(char) * (lmax + 1))))
-	{
-		ft_memdel((void**)&toa);
-		return (NULL);
-	}
-	res[lmax] = '\0';
+	if (!(res = ft_strnew(lmax)))
+		return (ft_free_stropt(&toa), &res, 1);
 	return ((res = fill_str_ou(F, lmax, &toa, res)));
 }
 
@@ -85,11 +77,8 @@ char	*malloc_str_xp(t_flag flagz, va_list ap)
 		lmax = F.hash ? F.preci + 2 : F.preci;
 	if (F.field > lmax)
 		lmax = F.field;
-	if (!(res = (char *)malloc(sizeof(char) * (lmax + 1))))
-	{
-		ft_memdel((void**)&toa);
-		return (NULL);
-	}
+	if (!(res = ft_strnew(lmax)))
+		return (ft_free_stropt(&toa), &res, 1);
 	return ((res = fill_str_xp(F, lmax, &toa, res)));
 }
 
@@ -105,9 +94,8 @@ char	*malloc_str_s(t_flag flagz, va_list ap)
 		lmax = F.preci < lmax ? F.preci : lmax;
 	if (F.field > lmax)
 		lmax = F.field;
-	if (!(res = (char *)malloc(sizeof(char) * (lmax + 1))))
+	if (!(res = ft_strnew(lmax)))
 		return (NULL);
-	res[lmax] = '\0';
 	return ((res = fill_str_s(F, lmax, toa, res)));
 }
 
@@ -121,12 +109,11 @@ char	*malloc_str_c(t_flag flagz, va_list ap, char option)
 	c = option == 1 ? '%' : (char)va_arg(ap, UI);
 	i = 0;
 	lmax = F.field > 1 ? F.field : 1;
-	if (!(res = (char *)malloc(sizeof(char) * (lmax + 1))))
+	if (!(res = ft_strnew(lmax)))
 		return (NULL);
-	res[lmax] = '\0';
 	if (F.minus)
 	{
-		res[i++] = c == 0 ? -1 : c;
+		res[i++] = (c == 0 ? -1 : c);
 		while (i < F.field)
 			res[i++] = ' ';
 	}
@@ -134,7 +121,7 @@ char	*malloc_str_c(t_flag flagz, va_list ap, char option)
 	{
 		while (F.field > 1 && i < F.field - 1)
 			res[i++] = (F.zer ? '0' : ' ');
-		res[i] = c;
+		res[i] = (c == 0 ? -1 : c);
 	}
 	return (res);
 }
