@@ -61,6 +61,11 @@ char			*put_sp(t_flag flagz, size_t *c, size_t lmax, char *res);
 int				print__return(va_list ap, char **buf);
 char			*reput_backzer(char **str);
 
+void			fill_colors(char **color);
+int				what_color(char *buf, int i);
+int				return_value(char *);
+void			put_color_printf(char *buf, int x);
+
 void			reset_flagz(t_flag *flagz);
 char			*p_sign(t_flag *flagz, char *res, size_t *i);
 char			*p_toa(char *toa, char *res, size_t *c);

@@ -17,10 +17,10 @@ LIBFT = libft/libft.a
 
 SRC = $(addsuffix .c, \
 	buffer convert flag float_a float_b cast_arg malloc_str fill_str \
-	ft_printf tools tools2 fill_float floatools)
+	ft_printf tools tools2 fill_float floatools color)
 
 SRCLIBFT = $(addprefix libft/ft_, $(addsuffix .o, \
-	    hexatoa lltoa llutoa memdel octatoa po putstr strnew strlen \
+	    hexatoa lltoa llutoa memdel octatoa po putstr strnew strlen strncmp\
 	    strsub str_up atoi strjoinfr str_add putnstr memset strncpy strdup \
 		free_stropt))
 
