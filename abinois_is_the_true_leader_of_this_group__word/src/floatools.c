@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 16:48:32 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/31 18:13:05 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/03 10:26:58 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int			get_zersp(t_float *infloat, t_flag flagz)
 	F.field = F.field > z ? F.field - z : 0;
 	if (F.field)
 	{
-		ft_putstr("LOL\n");
 		if (!(I->zersp = (char*)malloc(sizeof(char) * (F.field + 1))))
 			return (-1);
 		i = 0;

@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 13:23:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/31 18:30:15 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/03 11:55:55 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ char			*fill_str_d(t_flag flagz, size_t lmax, char **toa, char *res);
 char			*fill_str_ou(t_flag flagz, size_t lmax, char **toa, char *res);
 char			*fill_str_xp(t_flag flagz, size_t lmax, char **toa, char *res);
 char			*fill_str_s(t_flag flagz, size_t lmax, char *toa, char *res);
-char			*fill_nomin_xp(t_flag flagz, size_t l_nb, char *res, size_t *c);
+void			fill_nomin_xp(t_flag flagz, size_t l_nb, char **res, size_t *c);
 
 long long		check_d_i_flagz(t_flag flagz, VL ap);
 ULL				check_poux_flagz(t_flag flagz, VL ap);

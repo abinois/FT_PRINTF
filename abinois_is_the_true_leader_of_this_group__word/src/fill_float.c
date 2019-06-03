@@ -6,13 +6,12 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 16:45:46 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/31 17:35:47 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/03 10:26:30 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "ft_printf.h"
-#include <stdio.h>
 
 char		*get_f_start(t_float **infloat, LD *nb, VL ap, t_flag flagz)
 {

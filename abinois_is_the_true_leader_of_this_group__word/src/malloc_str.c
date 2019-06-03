@@ -6,14 +6,13 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 13:06:44 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/29 13:40:06 by abinois          ###   ########.fr       */
+/*   Updated: 2019/06/03 13:07:44 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "ft_printf.h"
 #include "libft/libft.h"
-#include <stdio.h>
 
 char	*malloc_str_d(t_flag flagz, va_list ap)
 {
@@ -25,6 +24,8 @@ char	*malloc_str_d(t_flag flagz, va_list ap)
 	if (!(toa = ft_lltoa(F.nb)))
 		return (NULL);
 	lmax = ft_strlen(toa);
+	if (F.nb == 0 && F.preci == 0 && F.dot == true)
+		lmax = 0;
 	if (F.field > lmax)
 		lmax = F.field;
 	if (F.preci >= F.field && F.preci > lmax)
@@ -33,6 +34,8 @@ char	*malloc_str_d(t_flag flagz, va_list ap)
 		lmax++;
 	if (!(res = ft_strnew(lmax)))
 		return (ft_free_stropt(&toa, &res, 1));
+	if (F.nb == 0 && F.preci == 0 && F.dot == true)
+		return (res);;
 	return ((res = fill_str_d(F, lmax, &toa, res)));
 }
 
@@ -47,6 +50,10 @@ char	*malloc_str_ou(t_flag flagz, va_list ap)
 	if (!(toa = (F.conv == 'o' ? ft_octatoa(nb) : ft_llutoa(nb))))
 		return (NULL);
 	lmax = ft_strlen(toa);
+	if (F.conv == 'o' && nb == 0)
+		F.hash = 0;
+	if (nb == 0 && F.preci == 0 && F.dot == true)
+		lmax = 0;
 	if (F.conv == 'o' && F.hash)
 		lmax++;
 	if (F.conv == 'o' && F.preci > lmax)
@@ -71,8 +78,12 @@ char	*malloc_str_xp(t_flag flagz, va_list ap)
 	if (!(toa = ft_hexatoa(nb)))
 		return (NULL);
 	lmax = ft_strlen(toa);
+	if (nb == 0 && F.conv == 'x')
+		F.hash = false;
 	if ((F.conv == 'x' && F.hash) || F.conv == 'p')
 		lmax += 2;
+	if (nb == 0 && F.preci == 0 && F.dot == true && F.conv == 'x')
+		lmax = 0;
 	if (F.preci > lmax)
 		lmax = F.hash ? F.preci + 2 : F.preci;
 	if (F.field > lmax)

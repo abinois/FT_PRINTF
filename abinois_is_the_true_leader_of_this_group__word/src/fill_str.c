@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 16:55:42 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/28 16:57:15 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/03 11:57:09 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,31 +68,30 @@ char	*fill_str_ou(t_flag flagz, size_t lmax, char **toa, char *res)
 	return (res);
 }
 
-char	*fill_nomin_xp(t_flag flagz, size_t l_nb, char *res, size_t *c)
+void	fill_nomin_xp(t_flag flagz, size_t l_nb, char **res, size_t *c)
 {
 	if (F.zer && !(F.dot) && F.field > l_nb)
 	{
 		if (F.hash)
-			res = p_toa("0x", res, c);
+			*res = p_toa("0x", *res, c);
 		while (*c < F.field - l_nb)
-			res[(*c)++] = '0';
+			(*res)[(*c)++] = '0';
 	}
 	else
 	{
 		if (F.field > F.preci && F.field > l_nb)
 			while (*c < F.field - (F.preci > l_nb ? F.preci : l_nb))
-				res[(*c)++] = ' ';
+				(*res)[(*c)++] = ' ';
 		if (F.hash)
 		{
 			if (*c >= 2)
 				(*c) -= 2;
 			else
 				(*c) -= *c;
-			res = p_toa("0x", res, c);
+			*res = p_toa("0x", *res, c);
 		}
-		res = p_zer(F.preci, res, c, l_nb);
+		*res = p_zer(F.preci, *res, c, l_nb);
 	}
-	return (res);
 }
 
 char	*fill_str_xp(t_flag flagz, size_t lmax, char **toa, char *res)
@@ -112,8 +111,9 @@ char	*fill_str_xp(t_flag flagz, size_t lmax, char **toa, char *res)
 	}
 	else
 	{
-		fill_nomin_xp(F, l_nb, res, &c);
-		res = p_toa(*toa, res, &c);
+		fill_nomin_xp(F, l_nb, &res, &c);
+		if (!(F.dot && F.preci == 0 && (*toa)[0] == '0'))
+			res = p_toa(*toa, res, &c);
 	}
 	ft_memdel((void**)toa);
 	return (res);
