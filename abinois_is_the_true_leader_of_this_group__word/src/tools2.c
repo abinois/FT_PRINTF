@@ -12,7 +12,6 @@
 
 #include "libft/libft.h"
 #include "ft_printf.h"
-#include <stdio.h>
 
 char	*put_sp(t_flag flagz, size_t *c, size_t lmax, char *res)
 {
@@ -42,7 +41,6 @@ int		print__return(va_list ap, char **buf)
 	x = ft_strlen(*buf);
 	reput_backzer(buf);
 	put_color_printf(*buf, x);
-	printf("bangbang\n");
 	ft_memdel((void**)buf);
 	va_end(ap);
 	return (rv);

@@ -31,8 +31,8 @@ void	fill_colors(char **color)
 	color[12] = "\033[34m";
 	color[13] = "\033[35m";
 	color[14] = "\033[36m";
-	color[15] = "\033[0m";
-	color[16] = "\033[37m";
+	color[15] = "\033[30m";
+	color[16] = "\033[0m";
 }
 
 int		what_color(char *buf, int i)
@@ -72,7 +72,7 @@ void	put_color_printf(char *buf, int x)
 	int		i;
 	int		k;
 	int		c;
-	char	*color[15];
+	char	*color[17];
 
 	fill_colors(color);
 	i = -1;
@@ -81,9 +81,8 @@ void	put_color_printf(char *buf, int x)
 		k = 0;
 		while ((i + k) < x && buf[i + k] != '{')
 			k++;
-		printf("k = %d\n", k);
 		if (k)
-			ft_putnstr(buf + i, k);
+			write(1, buf + i, k);
 		i += k;
 		if (i < x && buf[i] == '{' && (c = what_color(buf, i)) >= 0)
 		{
@@ -91,9 +90,7 @@ void	put_color_printf(char *buf, int x)
 			while (buf[i] != '}')
 				i++;
 		}
+		else if (i < x && buf[i] == '{')
+			write(1, buf + i, 1);
 	}
-	printf("yes\n");
-	printf("k = %d\n", k);
-	printf("i = %d\n", i);
-	printf("x = %d\n", x);
 }
