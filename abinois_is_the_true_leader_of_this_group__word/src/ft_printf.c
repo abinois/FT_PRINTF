@@ -6,44 +6,51 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 13:14:02 by edillenb          #+#    #+#             */
-/*   Updated: 2019/06/04 11:26:50 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/04 18:19:57 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "ft_printf.h"
 
-int		ft_printf(const char *fmt, ...)
+static int	jgagnedeslignes(va_list ap, const char *fmt, int *im, char **buf)
 {
-	va_list		ap;
-	t_flag		flagz;
-	int			m;
-	int			i;
-	char		*buf;
-	char		*arg;
+	char	*arg;
+	t_flag	flagz;
 
-	i = 0;
-	m = 0;
-	buf = NULL;
-	va_start(ap, fmt);
-	while (fmt[i])
-		if (fmt[i++] == '%')
+	while (fmt[im[0]])
+		if (fmt[im[0]++] == '%')
 		{
-			if (m_or_percent(&m, &buf, fmt, &i) == -1)
+			if (m_or_percent(&(im[1]), buf, fmt, &(im[0])) == -1)
 				return (-1);
-			if (m == 0)
+			if (im[1] == 0)
 			{
-				if (!(arg = check_all(fmt, &F, &i, ap)))
+				if (!(arg = check_all(fmt, &F, &(im[0]), ap)))
 					return (-1);
-				if (!(buf = arg_to_buf(&buf, &arg)))
+				if (!(*buf = arg_to_buf(buf, &arg)))
 					return (-1);
 			}
 			else
-				m = 0;
+				im[1] = 0;
 		}
 		else
-			m++;
-	if (!(buf = m_to_buf(&m, buf, fmt, i)))
+			im[1]++;
+	if (!(*buf = m_to_buf(&(im[1]), *buf, fmt, im[0])))
+		return (-1);
+	return (0);
+}
+
+int			ft_printf(const char *fmt, ...)
+{
+	va_list	ap;
+	char	*buf;
+	int		im[2];
+
+	buf = NULL;
+	im[0] = 0;
+	im[1] = 0;
+	va_start(ap, fmt);
+	if (jgagnedeslignes(ap, fmt, im, &buf) == -1)
 		return (-1);
 	return (print_return(ap, &buf));
 }
