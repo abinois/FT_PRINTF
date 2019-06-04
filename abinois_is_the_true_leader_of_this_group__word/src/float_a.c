@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 16:39:36 by edillenb          #+#    #+#             */
-/*   Updated: 2019/06/03 10:23:40 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/04 15:52:48 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*fracti_float(t_float *infloat, int i)
 	buffer = ft_strnew(1);
 	if (!(res = ft_strnew(1)))
 		ft_memdel((void**)&buffer);
-	if (!res || !buffer)	
+	if (!res || !buffer)
 		return (NULL);
 	buffer[0] = '5';
 	res[0] = '0';

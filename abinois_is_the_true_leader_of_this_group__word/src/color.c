@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 14:11:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/06/04 10:37:03 by abinois          ###   ########.fr       */
+/*   Updated: 2019/06/04 15:52:26 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,18 @@ int		return_value(char *buf)
 {
 	int		x;
 	int		i;
+	int		c;
 
 	x = 0;
 	i = -1;
 	while (buf[++i])
 	{
-		if (buf[i] == '{' && what_color(buf, i) >= 0)
+		if (buf[i] == '{' && (c = what_color(buf, i)) >= 0)
+		{
+			x += c < 7 ? 5 : 4;
 			while (buf[i] != '}')
 				i++;
+		}
 		else
 			x++;
 	}

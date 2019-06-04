@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 16:45:46 by abinois           #+#    #+#             */
-/*   Updated: 2019/06/03 10:26:30 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/04 15:59:31 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,8 @@ char		*get_float(t_flag flagz, va_list ap)
 		if (!(get_f_zer(I, F)))
 			return (NULL);
 	}
-	else
-		if (!(get_f_else(I, F)))
-			return (NULL);
+	else if (!(get_f_else(I, F)))
+		return (NULL);
 	result = ft_strdup(I->result);
 	free_float(&I);
 	return (result);

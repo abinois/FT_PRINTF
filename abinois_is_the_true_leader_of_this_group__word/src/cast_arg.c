@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 16:53:38 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/28 16:55:06 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/04 14:56:33 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ ULL			check_poux_flagz(t_flag flagz, va_list ap)
 {
 	ULL	number;
 
-	if (F.conv == 'p')
+	if (F.conv == 'p' || F.conv == 'U')
 		return ((number = va_arg(ap, ULL)));
 	if (F.l)
 		return ((number = va_arg(ap, unsigned long)));

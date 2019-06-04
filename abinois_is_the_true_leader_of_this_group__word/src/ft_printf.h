@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 13:23:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/06/03 11:55:55 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/04 15:52:19 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,17 @@ typedef struct	s_flag
 int				ft_printf(const char *fmt, ...);
 
 char			*put_sp(t_flag flagz, size_t *c, size_t lmax, char *res);
-int				print__return(va_list ap, char **buf);
+int				print_return(va_list ap, char **buf);
 char			*reput_backzer(char **str);
 
 void			fill_colors(char **color);
 int				what_color(char *buf, int i);
-int				return_value(char *);
+int				return_value(char *buf);
 void			put_color_printf(char *buf, int x);
 
 void			reset_flagz(t_flag *flagz);
 char			*p_sign(t_flag *flagz, char *res, size_t *i);
-char			*p_toa(char *toa, char *res, size_t *c);
+char			*p_toa(char *toa, char *res, size_t *c, t_flag flagz);
 char			*p_zer(size_t flag, char *res, size_t *c, size_t l_nb);
 char			*put_hash(char *res, size_t *c, t_flag flagz, size_t l_nb);
 
@@ -109,7 +109,7 @@ char			*get_f_zer(t_float *infloat, t_flag flagz);
 char			*get_f_else(t_float *infloat, t_flag flagz);
 char			*get_float(t_flag flagz, VL ap);
 
-char			*malloc_str_c(t_flag flagz, VL ap, char option);
+char			*malloc_str_c(t_flag flagz, VL ap, char option, char x);
 char			*malloc_str_s(t_flag flagz, VL ap);
 char			*malloc_str_xp(t_flag flagz, VL ap);
 char			*malloc_str_ou(t_flag flagz, VL ap);
@@ -119,7 +119,7 @@ char			*fill_str_d(t_flag flagz, size_t lmax, char **toa, char *res);
 char			*fill_str_ou(t_flag flagz, size_t lmax, char **toa, char *res);
 char			*fill_str_xp(t_flag flagz, size_t lmax, char **toa, char *res);
 char			*fill_str_s(t_flag flagz, size_t lmax, char *toa, char *res);
-void			fill_nomin_xp(t_flag flagz, size_t l_nb, char **res, size_t *c);
+char			*fill_nomin_xp(t_flag flagz, size_t l_nb, char *res, size_t *c);
 
 long long		check_d_i_flagz(t_flag flagz, VL ap);
 ULL				check_poux_flagz(t_flag flagz, VL ap);

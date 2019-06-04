@@ -6,11 +6,12 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 13:59:28 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/09 15:15:23 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/03 16:26:31 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "libft.h"
 
 static int		ft_count(long long nbr)
 {
@@ -38,7 +39,11 @@ char			*ft_lltoa(long long nbr)
 	int			n;
 
 	if (nbr == -9223372036854775807 - 1)
-		return ("-9223372036854775808");
+	{
+		if (!(tab = ft_strdup("-9223372036854775808")))
+			return (NULL);
+		return (tab);
+	}
 	n = ft_count(nbr);
 	neg = nbr < 0 ? -1 : 1;
 	if (!(tab = (char*)malloc(sizeof(*tab) * n + 1)))

@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 16:48:32 by abinois           #+#    #+#             */
-/*   Updated: 2019/06/03 10:26:58 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/04 16:07:42 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,15 @@ char		*p_sign_float(char **str, t_flag flagz, t_float *infloat)
 	{
 		if (!(new = ft_strjoinfr(&(sign[0]), str, 2)))
 			return (NULL);
-		ft_memdel((void**)str);
 	}
 	else if (F.plus)
 	{
 		if (!(new = ft_strjoinfr(&(sign[1]), str, 2)))
 			return (NULL);
-		ft_memdel((void**)str);
 	}
 	else if (F.sp)
-	{
 		if (!(new = ft_strjoinfr(&(sign[2]), str, 2)))
 			return (NULL);
-		ft_memdel((void**)str);
-	}
 	*str = NULL;
 	return (new);
 }

@@ -6,13 +6,12 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 14:37:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/05/31 19:00:01 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/04 16:01:45 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft/libft.h"
-#include <stdio.h>
 
 char	*m_to_buf(int *m, char *buf, const char *fmt, int i)
 {
@@ -21,7 +20,7 @@ char	*m_to_buf(int *m, char *buf, const char *fmt, int i)
 
 	if (!buf && !(buf = ft_strnew(0)))
 		return (NULL);
-	if (!(tmpsub = ft_strsub(&fmt, i - *m , *m, 0)))
+	if (!(tmpsub = ft_strsub(&fmt, i - *m, *m, 0)))
 	{
 		ft_memdel((void**)&buf);
 		return (NULL);
@@ -68,7 +67,7 @@ char	*arg_to_buf(char **buf, char **arg)
 	if (!(*buf) && (!(*buf = ft_strnew(0))))
 	{
 		ft_memdel((void**)arg);
-			return (NULL);
+		return (NULL);
 	}
 	if (!(tmpjoin = ft_strjoinfr(buf, arg, 3)))
 		return (NULL);

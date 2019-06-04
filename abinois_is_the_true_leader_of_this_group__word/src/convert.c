@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:31:29 by abinois           #+#    #+#             */
-/*   Updated: 2019/06/03 10:22:29 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/04 15:59:49 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@ char		*check_conv1(const char *fmt, t_flag flagz, int *i, va_list ap)
 	}
 	else if (fmt[*i] == 'd' || fmt[*i] == 'i')
 	{
+		F.conv = 'd';
 		(*i)++;
 		return (malloc_str_d(F, ap));
 	}
-	else if (fmt[*i] == 'o' || fmt[*i] == 'u')
+	else if (fmt[*i] == 'o' || fmt[*i] == 'u' || fmt[*i] == 'U')
 	{
 		F.conv = fmt[*i];
 		(*i)++;
@@ -68,9 +69,16 @@ char		*check_conv3(const char *fmt, t_flag flagz, int *i, va_list ap)
 	option = 0;
 	if (fmt[*i] == 'c' || fmt[*i] == '%')
 	{
-		option = fmt[*i] == '%' ? 1 : 0; 
+		option = fmt[*i] == '%' ? 1 : 0;
 		(*i)++;
-		return (malloc_str_c(F, ap, option));
+		return (malloc_str_c(F, ap, option, fmt[*i - 1]));
+	}
+	else if (fmt[*i] == 0)
+		return (ft_strnew(0));
+	else
+	{
+		(*i)++;
+		return (malloc_str_c(F, ap, 1, fmt[*i - 1]));
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:28:27 by abinois           #+#    #+#             */
-/*   Updated: 2019/06/03 10:25:07 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/04 16:23:42 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,14 @@
 
 char	*put_sp(t_flag flagz, size_t *c, size_t lmax, char *res)
 {
-	if (F.field > F.preci)
-		while (*c < lmax)
+	if (F.minus)
+	{
+		if (F.field > F.preci)
+			while (*c < lmax)
+				res[(*c)++] = ' ';
+	}
+	else if (F.field > lmax && F.field > F.preci)
+		while (*c < F.field - (F.preci > lmax ? F.preci : lmax))
 			res[(*c)++] = ' ';
 	return (res);
 }
@@ -32,7 +38,7 @@ char	*reput_backzer(char **str)
 	return (*str);
 }
 
-int		print__return(va_list ap, char **buf)
+int		print_return(va_list ap, char **buf)
 {
 	int		rv;
 	int		x;

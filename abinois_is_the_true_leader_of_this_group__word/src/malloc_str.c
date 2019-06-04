@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 13:06:44 by edillenb          #+#    #+#             */
-/*   Updated: 2019/06/03 13:07:44 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/04 15:45:53 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ char	*malloc_str_d(t_flag flagz, va_list ap)
 		lmax++;
 	if (!(res = ft_strnew(lmax)))
 		return (ft_free_stropt(&toa, &res, 1));
-	if (F.nb == 0 && F.preci == 0 && F.dot == true)
-		return (res);;
 	return ((res = fill_str_d(F, lmax, &toa, res)));
 }
 
@@ -50,11 +48,9 @@ char	*malloc_str_ou(t_flag flagz, va_list ap)
 	if (!(toa = (F.conv == 'o' ? ft_octatoa(nb) : ft_llutoa(nb))))
 		return (NULL);
 	lmax = ft_strlen(toa);
-	if (F.conv == 'o' && nb == 0)
-		F.hash = 0;
 	if (nb == 0 && F.preci == 0 && F.dot == true)
 		lmax = 0;
-	if (F.conv == 'o' && F.hash)
+	if (F.conv == 'o' && F.hash && nb != 0)
 		lmax++;
 	if (F.conv == 'o' && F.preci > lmax)
 		lmax = F.hash ? F.preci + 1 : F.preci;
@@ -100,6 +96,8 @@ char	*malloc_str_s(t_flag flagz, va_list ap)
 	size_t	lmax;
 
 	toa = va_arg(ap, char*);
+	if (toa == NULL)
+		toa = "(null)";
 	lmax = ft_strlen(toa);
 	if (F.dot)
 		lmax = F.preci < lmax ? F.preci : lmax;
@@ -110,14 +108,14 @@ char	*malloc_str_s(t_flag flagz, va_list ap)
 	return ((res = fill_str_s(F, lmax, toa, res)));
 }
 
-char	*malloc_str_c(t_flag flagz, va_list ap, char option)
+char	*malloc_str_c(t_flag flagz, va_list ap, char option, char x)
 {
 	char	c;
 	size_t	lmax;
 	char	*res;
 	size_t	i;
 
-	c = option == 1 ? '%' : (char)va_arg(ap, UI);
+	c = option == 1 ? x : (char)va_arg(ap, UI);
 	i = 0;
 	lmax = F.field > 1 ? F.field : 1;
 	if (!(res = ft_strnew(lmax)))

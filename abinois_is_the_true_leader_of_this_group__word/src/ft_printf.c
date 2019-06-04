@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 13:14:02 by edillenb          #+#    #+#             */
-/*   Updated: 2019/05/31 18:49:04 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/04 11:26:50 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,5 @@ int		ft_printf(const char *fmt, ...)
 			m++;
 	if (!(buf = m_to_buf(&m, buf, fmt, i)))
 		return (-1);
-	return (print__return(ap, &buf));
+	return (print_return(ap, &buf));
 }
