@@ -6,7 +6,7 @@
 #    By: edillenb <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/27 16:42:47 by edillenb          #+#    #+#              #
-#    Updated: 2019/05/30 20:30:22 by edillenb         ###   ########.fr        #
+#    Updated: 2019/06/05 15:10:08 by edillenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,9 @@ SRC = $(addsuffix .c, \
 	ft_printf tools tools2 fill_float floatools color)
 
 SRCLIBFT = $(addprefix libft/ft_, $(addsuffix .o, \
-	    hexatoa lltoa llutoa memdel octatoa po putstr strnew strlen strncmp\
-	    strsub str_up atoi strjoinfr str_add putnstr memset strncpy strdup \
-		free_stropt))
+	    hexatoa lltoa llutoa memdel octatoa po putstr_fd strnew strlen strncmp\
+	    strsub str_up atoi strjoinfr str_add memset strncpy strdup free_stropt\
+		bitoa))
 
 OBJ = $(SRC:.c=.o)
 
@@ -38,8 +38,8 @@ all: $(NAME)
 
 $(NAME): $(OBJ) Makefile ft_printf.h
 	@echo "🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 "
-	@echo "🔫                                                               $(MAGENTA)🔫 "
-	@echo "🔫   [ auteurs : abinois ⚡️  edillenb ]$(BLUE)                           🔫 "
+	@echo "🔫                                                               🔫 $(MAGENTA)"
+	@echo "🔫   [ auteurs : abinois ⚡️  edillenb ]                           🔫 $(BLUE)"
 	@echo "🔫                                                               🔫 "
 	@echo "🔫   ._____,   ._____,     ._. .__,      ._. ._______. .______,  🔫 "
 	@echo "🔫   | ._,  \  | ._,  \    |_| |   \     | | |__. .__| | .____|  🔫 "

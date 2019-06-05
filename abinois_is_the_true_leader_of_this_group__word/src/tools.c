@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:28:27 by abinois           #+#    #+#             */
-/*   Updated: 2019/06/04 14:45:16 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/05 11:38:53 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void		reset_flagz(t_flag *flagz)
 	F->bigl = false;
 	F->h = false;
 	F->hh = false;
+	F->b = false;
 	F->conv = 'r';
 	F->nb = 0;
 }

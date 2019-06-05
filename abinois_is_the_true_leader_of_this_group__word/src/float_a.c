@@ -6,14 +6,13 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 16:39:36 by edillenb          #+#    #+#             */
-/*   Updated: 2019/06/04 15:52:48 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/05 14:00:22 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft/libft.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 /*
 ** Get all parts of the float : exponent, mantissa, sign, decimal, fractional.

@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 13:23:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/06/04 15:52:19 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/05 15:13:12 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,14 @@ typedef struct	s_flag
 	bool		bigl;
 	bool		h;
 	bool		hh;
+	bool		b;
 	char		conv;
 	long long	nb;
 }				t_flag;
 
 int				ft_printf(const char *fmt, ...);
+
+int				g_fd;
 
 char			*put_sp(t_flag flagz, size_t *c, size_t lmax, char *res);
 int				print_return(va_list ap, char **buf);
@@ -79,7 +82,7 @@ char			*arg_to_buf(char **buf, char **arg);
 
 void			check_first_flagz(const char *fmt, t_flag *flagz, int *i);
 void			check_l_flagz(const char *fmt, t_flag *flagz, int *i);
-void			check_h_flagz(const char *fmt, t_flag *flagz, int *i);
+void			check_bh_flagz(const char *fmt, t_flag *flagz, int *i);
 void			check_field_preci_flagz(const char *fmt, t_flag *flagz, int *i);
 char			*check_all(const char *fmt, t_flag *flagz, int *i, VL ap);
 

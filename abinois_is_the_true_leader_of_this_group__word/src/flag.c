@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 16:16:20 by abinois           #+#    #+#             */
-/*   Updated: 2019/06/03 14:56:29 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/05 14:42:34 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,13 @@ void	check_l_flagz(const char *fmt, t_flag *flagz, int *i)
 	}
 }
 
-void	check_h_flagz(const char *fmt, t_flag *flagz, int *i)
+void	check_bh_flagz(const char *fmt, t_flag *flagz, int *i)
 {
+	if (fmt[*i] == 'b')
+	{
+		F->b = true;
+		(*i)++;
+	}
 	if (fmt[*i] == 'h')
 	{
 		F->h = true;
@@ -98,7 +103,11 @@ char	*check_all(const char *fmt, t_flag *flagz, int *i, va_list ap)
 		|| fmt[*i] == '#') && fmt[*i])
 		check_first_flagz(fmt, F, i);
 	check_field_dot_flagz(fmt, F, i);
-	check_l_flagz(fmt, F, i);
-	check_h_flagz(fmt, F, i);
+	while ((fmt[*i] == 'L' || fmt[*i] == 'l' || fmt[*i] == 'b'
+		|| fmt[*i] == 'h') && fmt[*i])
+	{
+		check_l_flagz(fmt, F, i);
+		check_bh_flagz(fmt, F, i);
+	}
 	return (check_conv1(fmt, *F, i, ap));
 }

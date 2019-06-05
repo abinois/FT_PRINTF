@@ -6,13 +6,13 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 14:11:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/06/04 15:52:26 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/05 15:13:47 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
+#include "ft_printf.h"
 #include <unistd.h>
-#include <stdio.h>
 
 void	fill_colors(char **color)
 {
@@ -88,15 +88,15 @@ void	put_color_printf(char *buf, int x)
 		while ((i + k) < x && buf[i + k] != '{')
 			k++;
 		if (k)
-			write(1, buf + i, k);
+			write(g_fd, buf + i, k);
 		i += k;
 		if (i < x && buf[i] == '{' && (c = what_color(buf, i)) >= 0)
 		{
-			ft_putstr(color[c + 10]);
+			ft_putstr_fd(color[c + 10], g_fd);
 			while (buf[i] != '}')
 				i++;
 		}
 		else if (i < x && buf[i] == '{')
-			write(1, buf + i, 1);
+			write(g_fd, buf + i, 1);
 	}
 }

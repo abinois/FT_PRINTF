@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 13:06:44 by edillenb          #+#    #+#             */
-/*   Updated: 2019/06/04 15:45:53 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/05 12:07:43 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	*malloc_str_d(t_flag flagz, va_list ap)
 	size_t	lmax;
 
 	F.nb = check_d_i_flagz(flagz, ap);
+	if (F.b)
+		return (ft_bitoa(&(F.nb), sizeof(F.nb)));
 	if (!(toa = ft_lltoa(F.nb)))
 		return (NULL);
 	lmax = ft_strlen(toa);
@@ -45,6 +47,8 @@ char	*malloc_str_ou(t_flag flagz, va_list ap)
 	size_t	lmax;
 
 	nb = check_poux_flagz(F, ap);
+	if (F.b && F.conv == 'u')
+		return (ft_bitoa(&nb, sizeof(nb)));
 	if (!(toa = (F.conv == 'o' ? ft_octatoa(nb) : ft_llutoa(nb))))
 		return (NULL);
 	lmax = ft_strlen(toa);

@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 17:24:14 by abinois           #+#    #+#             */
-/*   Updated: 2019/06/04 15:50:53 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/05 12:07:24 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,6 @@ char			*ft_str_up(char *s);
 char			*ft_strjoinfr(char **s1, char **s2, char option);
 char			*ft_str_add(char **s1, char **s2, char option);
 void			*ft_free_stropt(char **s1, char **s2, char option);
+char			*ft_bitoa(void *input, size_t size);
 
 #endif

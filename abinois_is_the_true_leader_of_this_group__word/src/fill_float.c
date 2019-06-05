@@ -6,18 +6,21 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 16:45:46 by abinois           #+#    #+#             */
-/*   Updated: 2019/06/04 15:59:31 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/05 14:11:22 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "ft_printf.h"
+#include <stdio.h>
 
 char		*get_f_start(t_float **infloat, LD *nb, VL ap, t_flag flagz)
 {
 	if (!(*I = reset_float(*I)))
 		return (NULL);
 	*nb = check_f_flagz(F, ap);
+	if (F.b)
+		return ((*I)->result = ft_bitoa(nb, sizeof(*nb)));
 	if (!((*I)->mantissa = get_mantissa(*nb, 0, 65)))
 		return (free_float(I));
 	(*I)->expo = get_exponent(*nb);
@@ -99,17 +102,17 @@ char		*get_float(t_flag flagz, va_list ap)
 	I = NULL;
 	if (!(get_f_start(&I, &nb, ap, F)))
 		return (NULL);
-	if (F.minus)
+	if (F.minus && !F.b)
 	{
 		if (!(get_f_min(I, F)))
 			return (NULL);
 	}
-	else if (F.zer)
+	else if (F.zer && !F.b)
 	{
 		if (!(get_f_zer(I, F)))
 			return (NULL);
 	}
-	else if (!(get_f_else(I, F)))
+	else if (!F.b && !(get_f_else(I, F)))
 		return (NULL);
 	result = ft_strdup(I->result);
 	free_float(&I);

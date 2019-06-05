@@ -6,14 +6,13 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 16:48:32 by abinois           #+#    #+#             */
-/*   Updated: 2019/06/04 16:07:42 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/05 13:59:41 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "ft_printf.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 char		*p_sign_float(char **str, t_flag flagz, t_float *infloat)
 {

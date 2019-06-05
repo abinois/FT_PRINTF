@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 13:14:02 by edillenb          #+#    #+#             */
-/*   Updated: 2019/06/04 18:19:57 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/05 14:44:29 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int			ft_printf(const char *fmt, ...)
 	buf = NULL;
 	im[0] = 0;
 	im[1] = 0;
+	g_fd = 1;
 	va_start(ap, fmt);
 	if (jgagnedeslignes(ap, fmt, im, &buf) == -1)
 		return (-1);
