@@ -6,7 +6,7 @@
 #    By: edillenb <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/27 16:42:47 by edillenb          #+#    #+#              #
-#    Updated: 2019/06/05 15:10:08 by edillenb         ###   ########.fr        #
+#    Updated: 2019/06/10 11:58:05 by edillenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ CC = gcc
 LIBFT = libft/libft.a
 
 SRC = $(addsuffix .c, \
-	buffer convert flag float_a float_b cast_arg malloc_str fill_str \
-	ft_printf tools tools2 fill_float floatools color)
+	convert flag float_a float_b cast_arg malloc_str fill_str \
+	ft_printf tools fill_float floatools color)
 
 SRCLIBFT = $(addprefix libft/ft_, $(addsuffix .o, \
 	    hexatoa lltoa llutoa memdel octatoa po putstr_fd strnew strlen strncmp\
@@ -36,7 +36,7 @@ NOCOLOR = \033[0m
 
 all: $(NAME)
 
-$(NAME): $(OBJ) Makefile ft_printf.h
+$(NAME): $(OBJ) Makefile ft_printf.h libft/Makefile libft/libft.h $(SRCLIBFT)
 	@echo "🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 "
 	@echo "🔫                                                               🔫 $(MAGENTA)"
 	@echo "🔫   [ auteurs : abinois ⚡️  edillenb ]                           🔫 $(BLUE)"
@@ -53,8 +53,6 @@ $(NAME): $(OBJ) Makefile ft_printf.h
 	@echo "🔫                                                               🔫 "
 	@echo "🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 $(BLACK)"
 	make -C libft
-	@echo "$(BLUE)⚡️ EXTRACTION DES .O . . . . . . . . . . . . .$(YELLOW)"
-	@ar xv $(LIBFT) $(SRCLIBFT)
 	@echo "$(BLUE)⚡️ COMPILATION . . . . . . . . . . . . .$(YELLOW)"
 	$(CC) $(CFLAGS) -c $(SRC)
 	@ar rc $(NAME) $(OBJ) $(SRCLIBFT)

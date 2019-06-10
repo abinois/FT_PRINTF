@@ -6,17 +6,12 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 16:39:36 by edillenb          #+#    #+#             */
-/*   Updated: 2019/06/05 14:00:22 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/10 14:47:04 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft/libft.h"
-#include <stdlib.h>
-
-/*
-** Get all parts of the float : exponent, mantissa, sign, decimal, fractional.
-*/
 
 char	*over_63(t_float *infloat, char **res, int x, int i)
 {
@@ -128,31 +123,30 @@ int		fracti_algo(char **buffer, char **res, int *x)
 	return (0);
 }
 
-int		preci_float(char **fracti_str, char **deci_str, t_flag flagz)
+int		preci_float(char **fracti, char **deci, t_flag flagz, int i)
 {
 	char	*new;
-	int		i;
+	int		p;
 
-	if (ft_strlen(*fracti_str) <= F.preci)
+	if (ft_strlen(*fracti) <= F.preci)
 	{
 		if (!(new = ft_strnew(F.preci)))
 			return (-1);
 		new = (char*)ft_memset(new, '0', F.preci);
-		new = ft_strncpy(new, *fracti_str, ft_strlen(*fracti_str));
-		ft_memdel((void**)fracti_str);
-		*fracti_str = new;
+		new = ft_strncpy(new, *fracti, ft_strlen(*fracti));
+		ft_memdel((void**)fracti);
+		*fracti = new;
 		return (0);
 	}
-	i = F.preci;
-	if ((*fracti_str)[i--] >= '5' && ((*fracti_str)[i] += 1))
-		while ((*fracti_str)[i] > '9' && i >= 0 && ((*fracti_str)[i--] = '0'))
-			if (i >= 0)
-				(*fracti_str)[i] += 1;
-	if (i == -1)
-		if (!(new = ft_llutoa(ft_po(2, 0)))
-			|| !(*deci_str = ft_str_add(deci_str, &new, 3)))
+	p = preci_banks(deci, fracti, i);
+	if (p != 1 && (*fracti)[i] >= '5' && --i >= 0 ? (*fracti)[i] += 1 : 0)
+		while (i >= 0 && (*fracti)[i] > '9' && ((*fracti)[i--] = '0'))
+			i >= 0 ? (*fracti)[i] += 1 : 0;
+	if (i == -1 && p != 2)
+		if (!(new = ft_llutoa(1))
+			|| !(*deci = ft_str_add(deci, &new, 3)))
 			return (-1);
-	if (!(*fracti_str = ft_strsub((const char**)fracti_str, 0, F.preci, 1)))
+	if (!(*fracti = ft_strsub((const char**)fracti, 0, F.preci, 1)))
 		return (-1);
 	return (0);
 }

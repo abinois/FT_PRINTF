@@ -6,11 +6,12 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 13:46:22 by abinois           #+#    #+#             */
-/*   Updated: 2019/06/05 11:28:22 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/10 11:42:40 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
+#include "ft_printf.h"
 #include <stdlib.h>
 
 char	*str_times_two(char **str, char ret, int i)
@@ -82,7 +83,7 @@ char	*get_mantissa(long double dbl, int i, size_t size)
 	return (binary);
 }
 
-int16_t	get_exponent(long double dbl)
+int16_t	get_exponent(long double dbl, t_float **infloat)
 {
 	int16_t	mask;
 	int16_t	*nb;
@@ -90,7 +91,38 @@ int16_t	get_exponent(long double dbl)
 	mask = 32767;
 	nb = (int16_t*)&dbl;
 	nb += 4;
+	if ((-mask & *nb) == -32768 || dbl < 0)
+		(*I)->sign = true;
 	*nb &= mask;
 	*nb -= 16383;
 	return (*nb);
+}
+
+int		preci_banks(char **deci, char **fracti, int i)
+{
+	int		m;
+
+	m = i;
+	if ((*fracti)[m++] == '5')
+	{
+		while ((*fracti)[m] == '0' && (*fracti)[m])
+			m++;
+		if ((*fracti)[m] != '\0' && (*fracti)[m] != '0')
+			return (0);
+		if ((*fracti)[m] == '\0')
+		{
+			if (--i >= 0 && ((*fracti)[i] - '0') % 2 == 1)
+				return (0);
+			if (i >= 0 && ((*fracti)[i] - '0') % 2 == 0)
+				return (1);
+			if (i == -1)
+			{
+				if ((m = ft_strlen(*deci)) && ((*deci)[m - 1] - '0') % 2 == 1)
+					return (0);
+				if (((*deci)[m - 1] - '0') % 2 == 0)
+					return (2);
+			}
+		}
+	}
+	return (0);
 }

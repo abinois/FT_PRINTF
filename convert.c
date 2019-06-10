@@ -6,11 +6,10 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:31:29 by abinois           #+#    #+#             */
-/*   Updated: 2019/06/05 15:08:14 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/10 14:45:47 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
 #include "ft_printf.h"
 #include "libft/libft.h"
 
@@ -88,4 +87,25 @@ char		*check_conv3(const char *fmt, t_flag flagz, int *i, va_list ap)
 		return (malloc_str_c(F, ap, 1, fmt[*i - 1]));
 	}
 	return (NULL);
+}
+
+void		reset_flagz(t_flag *flagz)
+{
+	F->zer = false;
+	F->minus = false;
+	F->sp = false;
+	F->plus = false;
+	F->hash = false;
+	F->field = 0;
+	F->dot = false;
+	F->preci = 0;
+	F->l = false;
+	F->ll = false;
+	F->bigl = false;
+	F->h = false;
+	F->hh = false;
+	F->b = false;
+	F->conv = 'r';
+	F->nb = 0;
+	F->nbou = 0;
 }

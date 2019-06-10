@@ -6,43 +6,25 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:28:27 by abinois           #+#    #+#             */
-/*   Updated: 2019/06/05 11:38:53 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/07 11:58:35 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdbool.h>
-#include <stdlib.h>
 #include "libft/libft.h"
-
-void		reset_flagz(t_flag *flagz)
-{
-	F->zer = false;
-	F->minus = false;
-	F->sp = false;
-	F->plus = false;
-	F->hash = false;
-	F->field = 0;
-	F->dot = false;
-	F->preci = 0;
-	F->l = false;
-	F->ll = false;
-	F->bigl = false;
-	F->h = false;
-	F->hh = false;
-	F->b = false;
-	F->conv = 'r';
-	F->nb = 0;
-}
 
 char		*p_toa(char *toa, char *res, size_t *c, t_flag flagz)
 {
 	size_t	i;
 
 	i = *toa == '-' ? 1 : 0;
-	if (toa[0] == '0' && toa[1] == 0 && ((F.dot && F.preci == 0
-		&& F.conv != 'p') || (F.hash && F.conv == 'o')))
+	if (toa[0] == '0' && toa[1] == 0 && F.dot && F.preci == 0
+			&& F.conv != 'p' && !F.hash)
+	{
+		if ((F.conv == 'o' || F.conv == 'u') && F.field)
+			res[(*c)] = ' ';
 		return (res);
+	}
 	while (toa[i])
 		res[(*c)++] = toa[i++];
 	return (res);
@@ -77,12 +59,28 @@ char		*p_zer(size_t flag, char *res, size_t *c, size_t l_nb)
 char		*put_hash(char *res, size_t *c, t_flag flagz, size_t l_nb)
 {
 	p_zer(F.preci, res, c, l_nb);
-	if (F.conv == 'o')
+	if (F.conv == 'o' && F.hash)
 	{
-		if (F.hash && *c == 0)
+		if (F.preci > l_nb)
+			return (res);
+		if (*c == 0 && F.nbou != 0)
 			res[(*c)++] = '0';
-		else if (F.hash)
+		else if (F.field > l_nb && !(F.dot && !F.preci && F.nbou == 0))
 			res[(*c) - 1] = '0';
 	}
+	return (res);
+}
+
+char		*put_sp(t_flag flagz, size_t *c, size_t lmax, char *res)
+{
+	if (F.minus)
+	{
+		if (F.field > F.preci)
+			while (*c < lmax)
+				res[(*c)++] = ' ';
+	}
+	else if (F.field > lmax && F.field > F.preci)
+		while (*c < F.field - (F.preci > lmax ? F.preci : lmax))
+			res[(*c)++] = ' ';
 	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 16:48:32 by abinois           #+#    #+#             */
-/*   Updated: 2019/06/05 13:59:41 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/07 11:01:55 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_float		*reset_float(t_float *infloat)
 	I->mantissa = NULL;
 	I->sign = false;
 	I->expo = 0;
-	I->result = NULL;
+	I->res = NULL;
 	I->fracti_str = NULL;
 	I->deci_str = NULL;
 	I->zersp = NULL;
@@ -78,16 +78,39 @@ t_float		*reset_float(t_float *infloat)
 
 char		*free_float(t_float **infloat)
 {
-	if ((*I)->mantissa)
-		ft_memdel((void**)&((*I)->mantissa));
-	if ((*I)->result)
-		ft_memdel((void**)&((*I)->result));
-	if ((*I)->fracti_str)
-		ft_memdel((void**)&((*I)->fracti_str));
-	if ((*I)->deci_str)
-		ft_memdel((void**)&((*I)->deci_str));
-	if ((*I)->zersp)
-		ft_memdel((void**)&((*I)->zersp));
+	ft_memdel((void**)&((*I)->mantissa));
+	ft_memdel((void**)&((*I)->res));
+	ft_memdel((void**)&((*I)->fracti_str));
+	ft_memdel((void**)&((*I)->deci_str));
+	ft_memdel((void**)&((*I)->zersp));
 	ft_memdel((void**)I);
 	return (NULL);
+}
+
+char		*inf_or_nan(t_float *infloat, t_flag flagz, char *sp, size_t l)
+{
+	if (I->mantissa[1] == '0' && I->mantissa[2] == '0')
+	{
+		if (I->sign && !(I->res = ft_strdup("-inf")))
+			return (NULL);
+		else if (!(I->sign) && F.plus && !(I->res = ft_strdup("+inf")))
+			return (NULL);
+		else if (!(I->sign) && F.sp && !F.plus && !(I->res = ft_strdup(" inf")))
+			return (NULL);
+		else if (!(I->sign) && !F.plus && !F.sp && !(I->res = ft_strdup("inf")))
+			return (NULL);
+	}
+	else if (!(I->res = ft_strdup("nan")))
+		return (NULL);
+	l = ft_strlen(I->res);
+	if (F.field > l)
+	{
+		if (!(sp = ft_memset(ft_strnew(F.field - l), 32, F.field - l)))
+			return (NULL);
+		if (F.minus && !(I->res = ft_strjoinfr(&(I->res), &sp, 3)))
+			return (NULL);
+		if (!F.minus && !(I->res = ft_strjoinfr(&sp, &(I->res), 3)))
+			return (NULL);
+	}
+	return ("inf_nan");
 }

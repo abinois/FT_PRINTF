@@ -6,11 +6,10 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 13:06:44 by edillenb          #+#    #+#             */
-/*   Updated: 2019/06/05 12:07:43 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/10 14:49:51 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "ft_printf.h"
 #include "libft/libft.h"
 
@@ -32,7 +31,7 @@ char	*malloc_str_d(t_flag flagz, va_list ap)
 		lmax = F.field;
 	if (F.preci >= F.field && F.preci > lmax)
 		lmax = F.nb < 0 ? F.preci + 1 : F.preci;
-	if (F.nb > 0 && (F.plus || F.sp) && F.field < lmax)
+	if (F.nb > 0 && (F.plus || F.sp) && F.field <= ft_strlen(toa))
 		lmax++;
 	if (!(res = ft_strnew(lmax)))
 		return (ft_free_stropt(&toa, &res, 1));
@@ -41,23 +40,22 @@ char	*malloc_str_d(t_flag flagz, va_list ap)
 
 char	*malloc_str_ou(t_flag flagz, va_list ap)
 {
-	ULL		nb;
 	char	*toa;
 	char	*res;
 	size_t	lmax;
 
-	nb = check_poux_flagz(F, ap);
+	F.nbou = check_poux_flagz(F, ap);
 	if (F.b && F.conv == 'u')
-		return (ft_bitoa(&nb, sizeof(nb)));
-	if (!(toa = (F.conv == 'o' ? ft_octatoa(nb) : ft_llutoa(nb))))
+		return (ft_bitoa(&(F.nbou), sizeof(F.nbou)));
+	if (!(toa = (F.conv == 'o' ? ft_octatoa(F.nbou) : ft_llutoa(F.nbou))))
 		return (NULL);
 	lmax = ft_strlen(toa);
-	if (nb == 0 && F.preci == 0 && F.dot == true)
+	if (F.nbou == 0 && F.preci == 0 && F.dot == true)
 		lmax = 0;
-	if (F.conv == 'o' && F.hash && nb != 0)
+	if (F.conv == 'o' && F.hash && F.nbou != 0)
 		lmax++;
 	if (F.conv == 'o' && F.preci > lmax)
-		lmax = F.hash ? F.preci + 1 : F.preci;
+		lmax = F.hash && F.nbou != 0 ? F.preci + 1 : F.preci;
 	if (F.conv == 'u' && F.preci > lmax)
 		lmax = F.preci;
 	if (F.field > lmax)
@@ -80,12 +78,12 @@ char	*malloc_str_xp(t_flag flagz, va_list ap)
 	lmax = ft_strlen(toa);
 	if (nb == 0 && F.conv == 'x')
 		F.hash = false;
+	if (F.preci > lmax)
+		lmax = F.preci;
 	if ((F.conv == 'x' && F.hash) || F.conv == 'p')
 		lmax += 2;
 	if (nb == 0 && F.preci == 0 && F.dot == true && F.conv == 'x')
 		lmax = 0;
-	if (F.preci > lmax)
-		lmax = F.hash ? F.preci + 2 : F.preci;
 	if (F.field > lmax)
 		lmax = F.field;
 	if (!(res = ft_strnew(lmax)))

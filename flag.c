@@ -6,13 +6,12 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 16:16:20 by abinois           #+#    #+#             */
-/*   Updated: 2019/06/05 14:42:34 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/10 14:38:58 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft/libft.h"
-#include <stdbool.h>
 
 void	check_first_flagz(const char *fmt, t_flag *flagz, int *i)
 {
@@ -75,24 +74,32 @@ void	check_bh_flagz(const char *fmt, t_flag *flagz, int *i)
 	}
 }
 
-void	check_field_dot_flagz(const char *fmt, t_flag *flagz, int *i)
+void	check_f_p(const char *fmt, t_flag *flagz, int *i, va_list ap)
 {
-	if (fmt[*i] >= '0' && fmt[*i] <= '9')
+	int		tmp;
+
+	tmp = 0;
+	if (fmt[*i] == '*' && (*i)++)
+		tmp = va_arg(ap, int);
+	else if (fmt[*i] >= '0' && fmt[*i] <= '9')
 	{
-		F->field = ft_atoi(fmt + *i);
+		tmp = ft_atoi(fmt + *i);
 		while (fmt[*i] >= '0' && fmt[*i] <= '9')
 			(*i)++;
 	}
-	if (fmt[*i] == '.')
+	F->field = tmp < 0 ? 0 : tmp;
+	if (fmt[*i] == '.' && (F->dot = true))
 	{
-		F->dot = true;
-		(*i)++;
-		if (fmt[*i] >= '0' && fmt[*i] <= '9')
+		if (fmt[++(*i)] == '*' && (*i)++)
+			tmp = va_arg(ap, int);
+		else if (fmt[*i] >= '0' && fmt[*i] <= '9')
 		{
-			F->preci = ft_atoi(fmt + *i);
+			tmp = ft_atoi(fmt + *i);
 			while (fmt[*i] >= '0' && fmt[*i] <= '9')
 				(*i)++;
 		}
+		F->preci = tmp < 0 ? 0 : tmp;
+		F->dot = tmp < 0 ? false : F->dot;
 	}
 }
 
@@ -102,7 +109,7 @@ char	*check_all(const char *fmt, t_flag *flagz, int *i, va_list ap)
 	while ((fmt[*i] == '0' || fmt[*i] == '-' || fmt[*i] == ' ' || fmt[*i] == '+'
 		|| fmt[*i] == '#') && fmt[*i])
 		check_first_flagz(fmt, F, i);
-	check_field_dot_flagz(fmt, F, i);
+	check_f_p(fmt, F, i, ap);
 	while ((fmt[*i] == 'L' || fmt[*i] == 'l' || fmt[*i] == 'b'
 		|| fmt[*i] == 'h') && fmt[*i])
 	{

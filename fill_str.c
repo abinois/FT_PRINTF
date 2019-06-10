@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 16:55:42 by edillenb          #+#    #+#             */
-/*   Updated: 2019/06/04 16:26:10 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/07 10:56:25 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,22 @@ char	*fill_str_ou(t_flag flagz, size_t lmax, char **toa, char *res)
 	size_t	c;
 
 	l_nb = ft_strlen(*toa);
-	l_nb = F.nb == 0 && F.preci == 0 && F.dot == true ? 0 : l_nb;
 	c = 0;
 	if (F.minus)
 	{
 		p_toa(*toa, put_hash(res, &c, F, l_nb), &c, F);
 		put_sp(F, &c, lmax, res);
 	}
-	else if (F.zer && !(F.dot))
-		p_toa(*toa, p_zer(F.field, res, &c, l_nb), &c, F);
+	else if (F.zer && !F.dot)
+	{
+		p_zer(F.field, res, &c, l_nb);
+		if (F.nbou != 0 || F.preci)
+			put_hash(res, &c, F, l_nb);
+		p_toa(*toa, res, &c, F);
+	}
 	else
 	{
-		if (F.field > l_nb && F.field > F.preci)
-			while (c < F.field - (F.preci > l_nb ? F.preci : l_nb))
-				res[c++] = ' ';
+		put_sp(F, &c, l_nb, res);
 		p_toa(*toa, put_hash(res, &c, F, l_nb), &c, F);
 	}
 	ft_memdel((void**)toa);
@@ -101,8 +103,8 @@ char	*fill_str_xp(t_flag flagz, size_t lmax, char **toa, char *res)
 	size_t	c;
 
 	l_nb = ft_strlen(*toa);
-	l_nb = F.nb == 0 && F.preci == 0 && F.dot == true
-		&& F.conv == 'x' ? 0 : l_nb;
+	l_nb = (*toa)[0] == '0' && (*toa)[1] == '\0' && F.preci == 0
+		&& F.dot == true && F.conv == 'x' ? 0 : l_nb;
 	c = 0;
 	res[lmax] = '\0';
 	if (F.minus)

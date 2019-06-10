@@ -6,13 +6,25 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 14:11:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/06/05 15:13:47 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/06/07 14:27:12 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "ft_printf.h"
 #include <unistd.h>
+#include <limits.h>
+
+char	*reput_backzer(char **str)
+{
+	size_t	i;
+
+	i = -1;
+	while ((*str)[++i])
+		if ((*str)[i] == -1)
+			(*str)[i] = 0;
+	return (*str);
+}
 
 void	fill_colors(char **color)
 {
@@ -73,15 +85,15 @@ int		return_value(char *buf)
 	return (x);
 }
 
-void	put_color_printf(char *buf, int x)
+int		put_color(char *buf, int x, int i)
 {
-	int		i;
 	int		k;
 	int		c;
 	char	*color[19];
 
 	fill_colors(color);
-	i = -1;
+	if (g_fd < 0 || g_fd > OPEN_MAX)
+		return (-1);
 	while (++i < x)
 	{
 		k = 0;
@@ -99,4 +111,5 @@ void	put_color_printf(char *buf, int x)
 		else if (i < x && buf[i] == '{')
 			write(g_fd, buf + i, 1);
 	}
+	return (0);
 }
