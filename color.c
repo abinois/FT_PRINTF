@@ -6,7 +6,7 @@
 /*   By: abinois <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 14:11:19 by abinois           #+#    #+#             */
-/*   Updated: 2019/06/14 14:52:26 by abinois          ###   ########.fr       */
+/*   Updated: 2019/07/03 18:52:35 by abinois          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,31 +38,33 @@ void	fill_colors(char **color)
 	color[7] = "{under}";
 	color[8] = "{reset}";
 	color[9] = "{rev}";
-	color[10] = "error";
-	color[11] = "\033[31m";
-	color[12] = "\033[32m";
-	color[13] = "\033[33m";
-	color[14] = "\033[34m";
-	color[15] = "\033[35m";
-	color[16] = "\033[36m";
-	color[17] = "\033[30m";
-	color[18] = "\033[4m";
-	color[19] = "\033[0m";
-	color[20] = "\033[7m";
+	color[10] = "{blink}";
+	color[11] = "error";
+	color[12] = "\033[31m";
+	color[13] = "\033[32m";
+	color[14] = "\033[33m";
+	color[15] = "\033[34m";
+	color[16] = "\033[35m";
+	color[17] = "\033[36m";
+	color[18] = "\033[30m";
+	color[19] = "\033[4m";
+	color[20] = "\033[0m";
+	color[21] = "\033[7m";
+	color[22] = "\033[5m";
 }
 
 int		what_color(char *buf, int i)
 {
 	int		x;
 	int		a;
-	char	*color[21];
+	char	*color[23];
 
 	fill_colors(color);
 	x = i;
 	a = 0;
-	while (a <= 9 && ft_strncmp(color[a], buf + x, ft_strlen(color[a])))
+	while (a <= 10 && ft_strncmp(color[a], buf + x, ft_strlen(color[a])))
 		a++;
-	return (a == 10 ? -1 : a);
+	return (a == 11 ? -1 : a);
 }
 
 int		return_value(char *buf)
@@ -91,7 +93,7 @@ int		put_color(char *buf, int x, int i)
 {
 	int		k;
 	int		c;
-	char	*color[21];
+	char	*color[23];
 
 	fill_colors(color);
 	if (g_fd < 0 || g_fd > OPEN_MAX)
@@ -106,7 +108,7 @@ int		put_color(char *buf, int x, int i)
 		i += k;
 		if (i < x && buf[i] == '{' && (c = what_color(buf, i)) >= 0)
 		{
-			ft_putstr_fd(color[c + 11], g_fd);
+			ft_putstr_fd(color[c + 12], g_fd);
 			while (buf[i] != '}')
 				i++;
 		}
