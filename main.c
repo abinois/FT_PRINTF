@@ -18,5 +18,7 @@ int		main(void)
 	ft_printf("{orange}ceci est orange\n{reset}");
 	ft_printf("{purple}ceci est purple\n{reset}");
 	ft_printf("{pink}ceci est pink\n{reset}");
+	ft_printf("{kaki}ceci est kaki\n{reset}");
+	ft_printf("{grey}ceci est grey\n{reset}");
 	return (0);
 	}
