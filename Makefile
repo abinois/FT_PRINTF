@@ -50,6 +50,7 @@ all: $(NAME)
 $(NAME): $(LIBFT) $(OBJ)
 	@ar rc $(NAME) $(OBJ) $(SRCLIBFT)
 	@ranlib $(NAME)
+	@echo "\n                 $(BLINK)👌 $(NOCOLOR)$(GREEN)A L L   G O O D $(NOCOLOR)$(BLINK)👌 $(NOCOLOR)"
 	@echo "$(YELLOW)            [ authors : abinois & edillenb ]$(BLUE)"
 	@echo "------------------------------------------------------------- "
 	@echo "  ._____,   ._____,     ._. .__,      ._. ._______. .______,  "
@@ -62,7 +63,6 @@ $(NAME): $(LIBFT) $(OBJ)
 	@echo "  | |       | |    \ \  | | | |     \   |    | |    | |       "
 	@echo "  |_|       |_|     \_\ |_| |_|      \__|    |_|    |_|       "
 	@echo "------------------------------------------------------------- "
-	@echo "                   $(BLINK)👌 $(NOCOLOR)$(GREEN)A L L   G O O D $(NOCOLOR)$(BLINK)👌 $(NOCOLOR)"
 
 -include $(DEP)
 
