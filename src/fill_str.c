@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft/libft.h"
+#include "libft.h"
 
 char	*fill_str_d(t_flag flagz, size_t lmax, char **toa, char *res)
 {
@@ -38,7 +38,7 @@ char	*fill_str_d(t_flag flagz, size_t lmax, char **toa, char *res)
 		put_sp(F, &c, l_nb, res);
 		p_toa(*toa, p_zer(F.preci, p_sign(&F, res, &c), &c, l_nb), &c, F);
 	}
-	ft_memdel((void**)toa);
+	ft_memdel((void**)toa, 0);
 	return (res);
 }
 
@@ -66,7 +66,7 @@ char	*fill_str_ou(t_flag flagz, size_t lmax, char **toa, char *res)
 		put_sp(F, &c, l_nb, res);
 		p_toa(*toa, put_hash(res, &c, F, l_nb), &c, F);
 	}
-	ft_memdel((void**)toa);
+	ft_memdel((void**)toa, 0);
 	return (res);
 }
 
@@ -120,7 +120,7 @@ char	*fill_str_xp(t_flag flagz, size_t lmax, char **toa, char *res)
 		if (!(F.dot && F.preci == 0 && (*toa)[0] == '0'))
 			p_toa(*toa, res, &c, F);
 	}
-	ft_memdel((void**)toa);
+	ft_memdel((void**)toa, 0);
 	return (res);
 }
 

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft/libft.h"
+#include "libft.h"
 
 char		*check_conv1(const char *fmt, t_flag flagz, int *i, va_list ap)
 {

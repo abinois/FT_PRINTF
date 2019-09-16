@@ -11,13 +11,10 @@
 # **************************************************************************** #
 
 NAME = libftprintf.a
-CFLAGS = -Wall -Werror -Wextra
-CC = gcc
-LIBFT = libft/libft.a
 
-SRC = $(addsuffix .c, \
-	convert flag float_a float_b cast_arg malloc_str fill_str \
-	ft_printf tools fill_float floatools color)
+SRC = $(addprefix $(SRCDIR)/, $(addsuffix .c, \
+		convert flag float_a float_b cast_arg malloc_str fill_str \
+		ft_printf tools fill_float floatools color))
 
 SRCLIBFT = $(addprefix libft/ft_, $(addsuffix .o, \
 	    hexatoa lltoa llutoa memdel octatoa po putstr_fd strnew strlen strncmp\
@@ -25,55 +22,72 @@ SRCLIBFT = $(addprefix libft/ft_, $(addsuffix .o, \
 		bitoa))
 
 OBJ = $(SRC:.c=.o)
+DEP = $(SRC:.c=.d)
 
-GREEN = \033[01;32m
-BLUE = \033[01;34m
-RED = \033[01;31m
-YELLOW = \033[01;33m
+SRCDIR = src
+LIBFT = libft/libft.a
+INC = -I include -I libft
+CFLAGS = -Wall -Werror -Wextra
+CC = gcc $(INC) $(CFLAGS)
+
+GREEN = \033[32m
+BLUE = \033[34m
+RED = \033[31m
+YELLOW = \033[33m
 MAGENTA = \033[35m
+CYAN = \033[36m
 BLACK = \033[30m
+UNDER = \033[4m
+BLINK = \033[5m
+REVERSE = \033[7m
 NOCOLOR = \033[0m
+
+NB_FILE = $(words $(SRC))
+CPT = 1
 
 all: $(NAME)
 
-$(NAME): $(OBJ) Makefile ft_printf.h libft/Makefile libft/libft.h $(SRCLIBFT)
-	@echo "🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 "
-	@echo "🔫                                                               🔫 $(MAGENTA)"
-	@echo "🔫   [ auteurs : abinois ⚡️  edillenb ]                           🔫 $(BLUE)"
-	@echo "🔫                                                               🔫 "
-	@echo "🔫   ._____,   ._____,     ._. .__,      ._. ._______. .______,  🔫 "
-	@echo "🔫   | ._,  \  | ._,  \    |_| |   \     | | |__. .__| | .____|  🔫 "
-	@echo "🔫   | |  \  | | |  \  |   ._. | |\ \    | |    | |    | |       🔫 "
-	@echo "🔫   | |   | | | |   | |   | | | | \ \   | |    | |    | |__.    🔫 "
-	@echo "🔫   | |__/ /  | |__/ /    | | | |  \ \  | |    | |    | .__|    🔫 "
-	@echo "🔫   | .___/   |  ___ \    | | | |   \ \ | |    | |    | |       🔫 "
-	@echo "🔫   | |       | |   \ \   | | | |    \ \| |    | |    | |       🔫 "
-	@echo "🔫   | |       | |    \ \  | | | |     \   |    | |    | |       🔫 "
-	@echo "🔫   |_|       |_|     \_\ |_| |_|      \__|    |_|    |_|       🔫 "
-	@echo "🔫                                                               🔫 "
-	@echo "🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 $(BLACK)"
-	make -C libft
-	@echo "$(BLUE)⚡️ COMPILATION . . . . . . . . . . . . .$(YELLOW)"
-	$(CC) $(CFLAGS) -c $(SRC)
+$(NAME): $(LIBFT) $(OBJ)
 	@ar rc $(NAME) $(OBJ) $(SRCLIBFT)
 	@ranlib $(NAME)
-	@echo "$(GREEN)TOUT EST ---------------------------> OK$(NOCOLOR)"
+	@echo "$(YELLOW)            [ authors : abinois & edillenb ]$(BLUE)"
+	@echo "------------------------------------------------------------- "
+	@echo "  ._____,   ._____,     ._. .__,      ._. ._______. .______,  "
+	@echo "  | ._,  \  | ._,  \    |_| |   \     | | |__. .__| | .____|  "
+	@echo "  | |  \  | | |  \  |   ._. | |\ \    | |    | |    | |       "
+	@echo "  | |   | | | |   | |   | | | | \ \   | |    | |    | |__.    "
+	@echo "  | |__/ /  | |__/ /    | | | |  \ \  | |    | |    | .__|    "
+	@echo "  | .___/   |  ___ \    | | | |   \ \ | |    | |    | |       "
+	@echo "  | |       | |   \ \   | | | |    \ \| |    | |    | |       "
+	@echo "  | |       | |    \ \  | | | |     \   |    | |    | |       "
+	@echo "  |_|       |_|     \_\ |_| |_|      \__|    |_|    |_|       "
+	@echo "------------------------------------------------------------- "
+	@echo "                   $(BLINK)👌 $(NOCOLOR)$(GREEN)A L L   G O O D $(NOCOLOR)$(BLINK)👌 $(NOCOLOR)"
+
+-include $(DEP)
+
+$(SRCDIR)/%.o : $(SRCDIR)/%.c Makefile
+	@echo "\033[K$(BLUE)Compilation of file$(NOCOLOR) [$(CPT) / $(NB_FILE)] : $(GREEN)$<\033[A$(NOCOLOR)"
+	$(eval CPT=$(shell echo $$(($(CPT) + 1))))
+	@gcc $(CFLAGS) $(INC) -MMD -MP -c $< -o $@ 
+
+$(LIBFT) : force
+	@make -C libft
+force :
 
 clean:
-	make clean -C libft
-	@echo "$(BLUE)⚡️ SUPPR DES .O . . . . . . . . . .$(RED)"
-	rm -f $(OBJ)
-	@echo "$(GREEN)TOUT EST ---------------------------> OK$(NOCOLOR)"
+	@make clean -C libft
+	@rm -f $(OBJ)
+	@echo "$(MAGENTA)SUPPR  $(YELLOW)OBJ $(MAGENTA): $(GREEN) OK !$(NOCOLOR)"
+	@rm -f $(DEP)
+	@echo "$(MAGENTA)SUPPR  $(YELLOW)DEP $(MAGENTA): $(GREEN) OK !$(NOCOLOR)"
+	@echo "$(GREEN)PRINTF CLEAN : 👌 $(NOCOLOR)"
 
 fclean: clean
-	make fclean -C libft
-	@echo "$(BLUE)⚡️ SUPPR DU .A . . . . . . . .$(RED)"
-	rm -f $(NAME)
-	@echo "$(GREEN)TOUT EST ---------------------------> OK$(BLACK)"
+	@make fclean -C libft
+	@echo "$(MAGENTA)SUPPR  $(YELLOW)EXE$(MAGENTA): $(RED)$(NAME)$(NOCOLOR)"
+	@rm -rf $(NAME)
 
 re: fclean all
-	@echo "🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫  $(BLUE)ET C'EST REPARTI ! 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 "
-	@echo "$(BLUE)⚡️ RELINK . . . . . . . . . . . . . . ."
-	@echo "$(GREEN)TOUT EST ---------------------------> OK$(NOCOLOR)"
 
 .PHONY: all clean fclean re

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+#include "libft.h"
 #include "ft_printf.h"
 
 char		*m_to_buf(int *m, char *buf, const char *fmt, int i)
@@ -24,7 +24,7 @@ char		*m_to_buf(int *m, char *buf, const char *fmt, int i)
 	{
 		if (!(tmpsub = ft_strsub(&fmt, i - *m, *m, 0)))
 		{
-			ft_memdel((void**)&buf);
+			ft_memdel((void**)&buf, 0);
 			return (NULL);
 		}
 		if (!(tmpjoin = ft_strjoinfr(&buf, &tmpsub, 3)))
@@ -41,7 +41,7 @@ char		*arg_to_buf(char **buf, char **arg)
 
 	if (!(*buf) && (!(*buf = ft_strnew(0))))
 	{
-		ft_memdel((void**)arg);
+		ft_memdel((void**)arg, 0);
 		return (NULL);
 	}
 	if (!(tmpjoin = ft_strjoinfr(buf, arg, 3)))
@@ -58,7 +58,7 @@ int			print_return(va_list ap, char **buf)
 	x = ft_strlen(*buf);
 	reput_backzer(buf);
 	put_color(*buf, x, -1);
-	ft_memdel((void**)buf);
+	ft_memdel((void**)buf, 0);
 	va_end(ap);
 	return (rv);
 }

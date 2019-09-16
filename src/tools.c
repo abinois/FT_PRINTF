@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft/libft.h"
+#include "libft.h"
 
 char		*p_toa(char *toa, char *res, size_t *c, t_flag flagz)
 {

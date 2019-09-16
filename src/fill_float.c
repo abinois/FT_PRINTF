@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+#include "libft.h"
 #include "ft_printf.h"
 
 char		*get_f_start(t_float **infloat, LD *nb, VL ap, t_flag flagz)

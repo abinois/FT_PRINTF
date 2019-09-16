@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft/libft.h"
+#include "libft.h"
 
 void	check_first_flagz(const char *fmt, t_flag *flagz, int *i)
 {

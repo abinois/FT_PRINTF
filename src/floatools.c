@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+#include "libft.h"
 #include "ft_printf.h"
 #include <stdlib.h>
 
@@ -78,12 +78,12 @@ t_float		*reset_float(t_float *infloat)
 
 char		*free_float(t_float **infloat)
 {
-	ft_memdel((void**)&((*I)->mantissa));
-	ft_memdel((void**)&((*I)->res));
-	ft_memdel((void**)&((*I)->fracti_str));
-	ft_memdel((void**)&((*I)->deci_str));
-	ft_memdel((void**)&((*I)->zersp));
-	ft_memdel((void**)I);
+	ft_memdel((void**)&((*I)->mantissa), 0);
+	ft_memdel((void**)&((*I)->res), 0);
+	ft_memdel((void**)&((*I)->fracti_str), 0);
+	ft_memdel((void**)&((*I)->deci_str), 0);
+	ft_memdel((void**)&((*I)->zersp), 0);
+	ft_memdel((void**)I, 0);
 	return (NULL);
 }
 

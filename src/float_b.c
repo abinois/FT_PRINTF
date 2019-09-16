@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+#include "libft.h"
 #include "ft_printf.h"
 #include <stdlib.h>
 
@@ -34,7 +34,7 @@ char	*str_times_two(char **str, char ret, int i)
 			ret = 0;
 		new[x] += '0';
 	}
-	ft_memdel((void**)str);
+	ft_memdel((void**)str, 0);
 	return (new);
 }
 

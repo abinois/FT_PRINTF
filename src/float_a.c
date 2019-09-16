@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft/libft.h"
+#include "libft.h"
 
 char	*over_63(t_float *infloat, char **res, int x, int i)
 {
@@ -36,7 +36,7 @@ char	*over_63(t_float *infloat, char **res, int x, int i)
 		}
 		else
 			x++;
-	ft_memdel((void **)&buffer);
+	ft_memdel((void **)&buffer, 0);
 	return (*res);
 }
 
@@ -58,7 +58,7 @@ char	*deci_float(t_float *infloat, long double nb)
 		if ((I->mantissa)[i] == '1')
 		{
 			if (!(llutoa = ft_llutoa(ft_po(2, (int)I->expo - i))))
-				ft_memdel((void**)&res);
+				ft_memdel((void**)&res, 0);
 			if (!llutoa || !(res = ft_str_add(&res, &llutoa, 3)))
 				return (NULL);
 		}
@@ -78,7 +78,7 @@ char	*fracti_float(t_float *infloat, int i)
 		i++;
 	buffer = ft_strnew(1);
 	if (!(res = ft_strnew(1)))
-		ft_memdel((void**)&buffer);
+		ft_memdel((void**)&buffer, 0);
 	if (!res || !buffer)
 		return (NULL);
 	buffer[0] = '5';
@@ -92,7 +92,7 @@ char	*fracti_float(t_float *infloat, int i)
 		}
 		else
 			x++;
-	ft_memdel((void**)&buffer);
+	ft_memdel((void**)&buffer, 0);
 	return (res);
 }
 
@@ -104,21 +104,12 @@ int		fracti_algo(char **buffer, char **res, int *x)
 	while ((*x)-- > 0)
 	{
 		if (!(*buffer = str_by_two(buffer, 0, -1)))
-		{
-			ft_memdel((void**)res);
-			return (-1);
-		}
+			return (ft_memdel((void**)res, -1));
 		if (!(*res = ft_strjoinfr(res, &zer, 1)))
-		{
-			ft_memdel((void**)buffer);
-			return (-1);
-		}
+			return (ft_memdel((void**)buffer, -1));
 	}
 	if (!(*res = ft_str_add(buffer, res, 2)))
-	{
-		ft_memdel((void**)buffer);
-		return (-1);
-	}
+		return (ft_memdel((void**)buffer, -1));
 	*x = 1;
 	return (0);
 }
@@ -134,7 +125,7 @@ int		preci_float(char **fracti, char **deci, t_flag flagz, int i)
 			return (-1);
 		new = (char*)ft_memset(new, '0', F.preci);
 		new = ft_strncpy(new, *fracti, ft_strlen(*fracti));
-		ft_memdel((void**)fracti);
+		ft_memdel((void**)fracti, 0);
 		*fracti = new;
 		return (0);
 	}

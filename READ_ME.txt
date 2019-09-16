@@ -12,8 +12,8 @@
 
 ----------------------------------------------------------------
 
-This project's purpose is to remake the printf function of stdlib.
-Check out the school Subject.pdf file.
+This project's purpose is to remake the standard printf function of the stdlib.
+Check out the school's Subject.pdf file for more infos.
 
 It is litteraly the same, but with bonuses such as :
 
@@ -45,4 +45,5 @@ examples :
 		- rev		(reverse the color -> white on black : black on white)
 		- reset		(close all and set to default : white)
 
+This project has been done by abinois & edillenb.
 👌 enjoy:)
